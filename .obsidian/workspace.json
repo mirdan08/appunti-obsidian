@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "75aa0df654bf21ae",
+        "id": "1d8ff32c81160533",
         "type": "tabs",
         "children": [
           {
-            "id": "305e7aeb01693e00",
+            "id": "5ef5db4fee6f686e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DM/Data mining.md",
+                "file": "Unipi notes.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "DM/Data mining.md",
+                "file": "Unipi notes.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "DM/Data mining.md",
+                "file": "Unipi notes.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "DM/Data mining.md"
+                "file": "Unipi notes.md"
               }
             }
           },
@@ -154,11 +154,19 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "0e0328fd38b37474",
+  "active": "5ef5db4fee6f686e",
   "lastOpenFiles": [
-    "AS/Smart Applications.md",
+    "IR/IR.md",
+    "Unipi notes.md",
+    "README.md",
     "ISPR/ISPR.md",
+    "Pasted image 20240610164637.png",
+    "midterm4.md",
+    "ISPR/Untitled",
+    "Pasted image 20240610174219.png",
+    "Pasted image 20240610180501.png",
     "DM/Data mining.md",
+    "AS/Smart Applications.md",
     "HLT/HLT.md",
     "HLT/Hugging face course.md",
     "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 22 2 2024 c3e6f701512c49ebb50cb5f35441e4f9/Untitled 7.png",
@@ -169,12 +177,8 @@
     "IR",
     "AS",
     "DM",
-    "Pasted image 20240610174219.png",
     "Pasted image 20240610173628.png",
-    "Pasted image 20240610164637.png",
-    "midterm4.md",
     "Pasted image 20240610180515.png",
-    "Pasted image 20240610180501.png",
     "SPM/SPM.md",
     "VIa15756",
     "SPM/SPM b44e342ebdc74ad1b16c6cb03f4a14e0/lez 22 2 2024 4db33a627f8e48a5b05d984281f7f85a",
@@ -184,7 +188,6 @@
     "SPM/SPM b44e342ebdc74ad1b16c6cb03f4a14e0",
     "SPM",
     "Nuova cartella",
-    "ccb13b01-05d8-4fc3-b526-bbb36c875fdf_Export-7aaa8030-81e9-42e4-8ba5-6516c65fff0a.zip",
     "HLT 09d7260404a5422c921cd124b88e7458/lez 27 2 2024 - 5 03 2024 4daf886729c74bb28457c95479c7f4ce.md",
     "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 27 2 2024 - 5 03 2024 4daf886729c74bb28457c95479c7f4ce.md",
     "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 26 2 2024 d2551ab4a44c4af68b67daafaa78ce4d.md",
