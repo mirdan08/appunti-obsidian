@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "Homepage.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "Homepage.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "Homepage.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "Homepage.md"
               }
             }
           },
@@ -156,18 +156,20 @@
   },
   "active": "5ef5db4fee6f686e",
   "lastOpenFiles": [
-    "Unipi notes.md",
     "README.md",
-    "IR/IR.md",
+    "SPM/Parallel & Distributed Systems.md",
+    "ISPR/Intelligent Systems for Pattern Recognition.md",
+    "IR/Information retrival.md",
+    "HLT/Human Languages & technologies.md",
     "DM/Data mining.md",
-    "ISPR/ISPR.md",
+    "AS/Smart Applications.md",
+    "Homepage.md",
+    "Unipi.md",
     "Pasted image 20240610164637.png",
     "midterm4.md",
     "ISPR/Untitled",
     "Pasted image 20240610174219.png",
     "Pasted image 20240610180501.png",
-    "AS/Smart Applications.md",
-    "HLT/HLT.md",
     "HLT/Hugging face course.md",
     "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 22 2 2024 c3e6f701512c49ebb50cb5f35441e4f9/Untitled 7.png",
     "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 22 2 2024 c3e6f701512c49ebb50cb5f35441e4f9/Untitled 5.png",
@@ -179,7 +181,6 @@
     "DM",
     "Pasted image 20240610173628.png",
     "Pasted image 20240610180515.png",
-    "SPM/SPM.md",
     "VIa15756",
     "SPM/SPM b44e342ebdc74ad1b16c6cb03f4a14e0/lez 22 2 2024 4db33a627f8e48a5b05d984281f7f85a",
     "SPM/SPM b44e342ebdc74ad1b16c6cb03f4a14e0/lez 20 2 2024 7e1a4c0fb3d74d05a259a2e8072e3e6a",
