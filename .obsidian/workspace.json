@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "Unipi notes.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "Unipi notes.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "Unipi notes.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "Unipi notes.md"
               }
             }
           },
@@ -156,16 +156,16 @@
   },
   "active": "5ef5db4fee6f686e",
   "lastOpenFiles": [
+    "README.md",
     "Unipi notes.md",
     "IR/IR.md",
-    "README.md",
+    "DM/Data mining.md",
     "ISPR/ISPR.md",
     "Pasted image 20240610164637.png",
     "midterm4.md",
     "ISPR/Untitled",
     "Pasted image 20240610174219.png",
     "Pasted image 20240610180501.png",
-    "DM/Data mining.md",
     "AS/Smart Applications.md",
     "HLT/HLT.md",
     "HLT/Hugging face course.md",
