@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Homepage.md",
+                "file": "AS/Smart Applications.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Homepage.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +101,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Homepage.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +122,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Homepage.md"
-              }
+              "state": {}
             }
           },
           {
@@ -154,16 +150,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "5ef5db4fee6f686e",
+  "active": "fdf1eec148f323a1",
   "lastOpenFiles": [
+    "power consumption.md",
+    "AS/Smart Applications.md",
+    "Homepage.md",
     "README.md",
     "SPM/Parallel & Distributed Systems.md",
     "ISPR/Intelligent Systems for Pattern Recognition.md",
     "IR/Information retrival.md",
     "HLT/Human Languages & technologies.md",
     "DM/Data mining.md",
-    "AS/Smart Applications.md",
-    "Homepage.md",
     "Unipi.md",
     "Pasted image 20240610164637.png",
     "midterm4.md",
