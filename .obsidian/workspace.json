@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "AS/Smart Applications.md",
+                "file": "AS/power consumption.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "AS/power consumption.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -101,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "AS/power consumption.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -122,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "AS/power consumption.md"
+              }
             }
           },
           {
@@ -150,17 +154,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "fdf1eec148f323a1",
+  "active": "5ef5db4fee6f686e",
   "lastOpenFiles": [
-    "power consumption.md",
     "AS/Smart Applications.md",
+    "DM/Data mining.md",
+    "AS/power consumption.md",
     "Homepage.md",
     "README.md",
     "SPM/Parallel & Distributed Systems.md",
     "ISPR/Intelligent Systems for Pattern Recognition.md",
     "IR/Information retrival.md",
     "HLT/Human Languages & technologies.md",
-    "DM/Data mining.md",
     "Unipi.md",
     "Pasted image 20240610164637.png",
     "midterm4.md",
