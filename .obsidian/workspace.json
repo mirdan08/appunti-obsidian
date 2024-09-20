@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "1d8ff32c81160533",
+        "id": "1ccf92da00ad3a10",
         "type": "tabs",
         "children": [
           {
-            "id": "5ef5db4fee6f686e",
+            "id": "99a9c1b43923fbe6",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Homepage.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Homepage.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Homepage.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Homepage.md"
-              }
+              "state": {}
             }
           },
           {
@@ -154,8 +146,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "5ef5db4fee6f686e",
+  "active": "fdf1eec148f323a1",
   "lastOpenFiles": [
+    "Homepage.md",
     "README.md",
     "SPM/Parallel & Distributed Systems.md",
     "ISPR/Intelligent Systems for Pattern Recognition.md",
@@ -163,7 +156,6 @@
     "HLT/Human Languages & technologies.md",
     "DM/Data mining.md",
     "AS/Smart Applications.md",
-    "Homepage.md",
     "Unipi.md",
     "Pasted image 20240610164637.png",
     "midterm4.md",
