@@ -56,19 +56,19 @@
             }
           },
           {
-            "id": "ffa4b0c712f01a62",
+            "id": "14a9d60300086063",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "conflict-files-obsidian-git.md",
+                "file": "AS/Lez. 2 24-09-2024.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -118,8 +118,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "334d59c5a726196e",
@@ -135,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "DM/lectures notes/Lez.2 24-09-2024.md",
+                "file": "AS/Lez. 2 24-09-2024.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -152,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "DM/lectures notes/Lez.2 24-09-2024.md",
+                "file": "AS/Lez. 2 24-09-2024.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -175,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "DM/lectures notes/Lez.2 24-09-2024.md"
+                "file": "AS/Lez. 2 24-09-2024.md"
               }
             }
           },
@@ -204,10 +203,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "10913e4e02f5adda",
+  "active": "14a9d60300086063",
   "lastOpenFiles": [
-    "AS/KPIs.md",
     "DM/lectures notes/Lez.2 24-09-2024.md",
+    "AS/Lez. 2 24-09-2024.md",
+    "DM/lectures notes/images/Pasted image 20240924120221.png",
+    "DM/lectures notes/images/Pasted image 20240924120156.png",
+    "DM/lectures notes/images/Pasted image 20240924115805.png",
+    "DM/lectures notes/images/Pasted image 20240924115259.png",
+    "DM/lectures notes/images/Pasted image 20240924113635.png",
+    "DM/lectures notes/images/Pasted image 20240924111957.png",
+    "AS/KPIs.md",
     "AS/images/Pasted image 20240924085316.png",
     "AS/images",
     "DM/lectures notes/Lez.1 20-09-2024.md",
@@ -229,13 +235,7 @@
     "midterm4.md",
     "ISPR/Untitled",
     "Pasted image 20240610174219.png",
-    "Pasted image 20240610180501.png",
     "HLT/Hugging face course.md",
-    "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 22 2 2024 c3e6f701512c49ebb50cb5f35441e4f9/Untitled 7.png",
-    "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 22 2 2024 c3e6f701512c49ebb50cb5f35441e4f9/Untitled 5.png",
-    "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 22 2 2024 c3e6f701512c49ebb50cb5f35441e4f9/Untitled 3.png",
-    "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 22 2 2024 c3e6f701512c49ebb50cb5f35441e4f9/Untitled 1.png",
-    "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 22 2 2024 c3e6f701512c49ebb50cb5f35441e4f9/Untitled.png",
     "IR",
     "AS",
     "DM",
@@ -250,7 +250,6 @@
     "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 22 2 2024 c3e6f701512c49ebb50cb5f35441e4f9.md",
     "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 20 2 2023 453f226eb96f45afb47b3e43f9cdb4a1.md",
     "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 19 02 2024 3a3aa470520e4d52877ba3fbf258bcf8.md",
-    "HLT 09d7260404a5422c921cd124b88e7458/lez 26 2 2024 d2551ab4a44c4af68b67daafaa78ce4d.md",
-    "HLT 09d7260404a5422c921cd124b88e7458/lez 22 2 2024 c3e6f701512c49ebb50cb5f35441e4f9.md"
+    "HLT 09d7260404a5422c921cd124b88e7458/lez 26 2 2024 d2551ab4a44c4af68b67daafaa78ce4d.md"
   ]
 }
