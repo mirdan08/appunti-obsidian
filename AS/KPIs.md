@@ -19,3 +19,13 @@ An indicator is a numerical values linked to some process/business objective and
 A scorecard is a set of indicators grouped according to rules:
 - indicators are normalized w.r.t. their properties and represented in a hierarchical structure to contribute to the performance of their container. The contribution is weighted by its relevance for their container.
 A container 
+
+
+- modellazione dei KPI dipendenza da gruppo 1
+	- algoritmi di calcoli dei KPI
+	- KPI dinamici ?
+- cache necessaria (?)
+	- vincoli di tempo?
+	
+- forniamo dati come? API rest?
+ 
