@@ -8,79 +8,31 @@
         "type": "tabs",
         "children": [
           {
-            "id": "e62ec326c50572d9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DM/Data mining.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "acdd8a257a9f0d2c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DM/lectures notes/Lez.1 20-09-2024.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "3edd874eebc03c57",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "AS/KPIs.md",
+                "file": "AS/KPI engine.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "10913e4e02f5adda",
+            "id": "67a69ae46834811d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DM/lectures notes/Lez.2 24-09-2024.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "14a9d60300086063",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "AS/KPIs.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "ced150376354ef0d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DM/lectures notes/Lez. 3 26-09-2024.md",
+                "file": "AS/lez. 2-10-2024.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -130,8 +82,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "334d59c5a726196e",
@@ -147,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "DM/lectures notes/Lez. 3 26-09-2024.md",
+                "file": "AS/lez. 2-10-2024.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -164,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "DM/lectures notes/Lez. 3 26-09-2024.md",
+                "file": "AS/lez. 2-10-2024.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -187,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "DM/lectures notes/Lez. 3 26-09-2024.md"
+                "file": "AS/lez. 2-10-2024.md"
               }
             }
           },
@@ -216,32 +167,35 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "ced150376354ef0d",
+  "active": "fdf1eec148f323a1",
   "lastOpenFiles": [
+    "AS/KPI engine.md",
+    "AS/lez. 2-10-2024.md",
+    "AS/KPIs.md",
+    "DM/Data mining.md",
+    "DM/lectures notes/Lez.1 20-09-2024.md",
+    "DM/lectures notes/Lez.2 24-09-2024.md",
+    "DM/lectures notes/Lez. 3 26-09-2024.md",
+    "DM/lectures notes/Lez. 5 27-9-2024.md",
+    "AS/Smart Applications.md",
+    "DM/lectures notes/Lez. 4 1-10-2024.md",
+    "DM/lectures notes/images/Pasted image 20241001092540.png",
     "DM/lectures notes/images/Pasted image 20240926143521.png",
     "DM/lectures notes/images/Pasted image 20240926143420.png",
     "DM/lectures notes/images/Pasted image 20240926143338.png",
     "DM/lectures notes/images/Pasted image 20240926143158.png",
-    "AS/KPIs.md",
-    "DM/lectures notes/Lez. 3 26-09-2024.md",
     "AS/power consumption.md",
-    "AS/Smart Applications.md",
     "AS/lectures",
     "AS/lectures/Lez. 2 24-09-2024.md",
-    "DM/lectures notes/Lez.2 24-09-2024.md",
     "DM/lectures notes/images/Pasted image 20240924120221.png",
     "DM/lectures notes/images/Pasted image 20240924120156.png",
     "DM/lectures notes/images/Pasted image 20240924115805.png",
     "DM/lectures notes/images/Pasted image 20240924115259.png",
     "DM/lectures notes/images/Pasted image 20240924113635.png",
-    "DM/lectures notes/images/Pasted image 20240924111957.png",
-    "AS/images/Pasted image 20240924085316.png",
     "AS/images",
-    "DM/lectures notes/Lez.1 20-09-2024.md",
     "DM/lectures notes/images",
     "conflict-files-obsidian-git.md",
     "DM/lectures notes",
-    "DM/Data mining.md",
     "Homepage.md",
     "README.md",
     "SPM/Parallel & Distributed Systems.md",
@@ -260,9 +214,6 @@
     "SPM/SPM b44e342ebdc74ad1b16c6cb03f4a14e0/lez 22 2 2024 4db33a627f8e48a5b05d984281f7f85a.md",
     "SPM/SPM b44e342ebdc74ad1b16c6cb03f4a14e0/lez 20 2 2024 7e1a4c0fb3d74d05a259a2e8072e3e6a.md",
     "HLT 09d7260404a5422c921cd124b88e7458/lez 27 2 2024 - 5 03 2024 4daf886729c74bb28457c95479c7f4ce.md",
-    "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 27 2 2024 - 5 03 2024 4daf886729c74bb28457c95479c7f4ce.md",
-    "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 26 2 2024 d2551ab4a44c4af68b67daafaa78ce4d.md",
-    "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 22 2 2024 c3e6f701512c49ebb50cb5f35441e4f9.md",
-    "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 20 2 2023 453f226eb96f45afb47b3e43f9cdb4a1.md"
+    "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 27 2 2024 - 5 03 2024 4daf886729c74bb28457c95479c7f4ce.md"
   ]
 }
