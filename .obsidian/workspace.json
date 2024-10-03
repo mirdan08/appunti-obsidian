@@ -30,9 +30,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "567307698531c201",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DM/lectures notes/lez.6 3-10-2024.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -82,7 +94,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "334d59c5a726196e",
@@ -98,7 +111,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "AS/lez. 2-10-2024.md",
+                "file": "DM/lectures notes/lez.6 3-10-2024.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +128,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "AS/lez. 2-10-2024.md",
+                "file": "DM/lectures notes/lez.6 3-10-2024.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +151,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "AS/lez. 2-10-2024.md"
+                "file": "DM/lectures notes/lez.6 3-10-2024.md"
               }
             }
           },
@@ -167,9 +180,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "fdf1eec148f323a1",
+  "active": "567307698531c201",
   "lastOpenFiles": [
+    "DM/lectures notes/images/Pasted image 20241003150713.png",
+    "DM/lectures notes/images/Pasted image 20241003144908.png",
+    "DM/lectures notes/images/Pasted image 20241003144435.png",
+    "DM/lectures notes/images/Pasted image 20241003144424.png",
+    "DM/lectures notes/images/Pasted image 20241003143508.png",
+    "DM/lectures notes/images/Pasted image 20241003143014.png",
+    "DM/lectures notes/images/Pasted image 20241003142906.png",
     "AS/KPI engine.md",
+    "DM/lectures notes/lez.6 3-10-2024.md",
     "AS/lez. 2-10-2024.md",
     "AS/KPIs.md",
     "DM/Data mining.md",
@@ -183,15 +204,9 @@
     "DM/lectures notes/images/Pasted image 20240926143521.png",
     "DM/lectures notes/images/Pasted image 20240926143420.png",
     "DM/lectures notes/images/Pasted image 20240926143338.png",
-    "DM/lectures notes/images/Pasted image 20240926143158.png",
     "AS/power consumption.md",
     "AS/lectures",
     "AS/lectures/Lez. 2 24-09-2024.md",
-    "DM/lectures notes/images/Pasted image 20240924120221.png",
-    "DM/lectures notes/images/Pasted image 20240924120156.png",
-    "DM/lectures notes/images/Pasted image 20240924115805.png",
-    "DM/lectures notes/images/Pasted image 20240924115259.png",
-    "DM/lectures notes/images/Pasted image 20240924113635.png",
     "AS/images",
     "DM/lectures notes/images",
     "conflict-files-obsidian-git.md",
@@ -212,8 +227,6 @@
     "VIa15756",
     "SPM/SPM b44e342ebdc74ad1b16c6cb03f4a14e0/lez 22 2 2024 4db33a627f8e48a5b05d984281f7f85a",
     "SPM/SPM b44e342ebdc74ad1b16c6cb03f4a14e0/lez 22 2 2024 4db33a627f8e48a5b05d984281f7f85a.md",
-    "SPM/SPM b44e342ebdc74ad1b16c6cb03f4a14e0/lez 20 2 2024 7e1a4c0fb3d74d05a259a2e8072e3e6a.md",
-    "HLT 09d7260404a5422c921cd124b88e7458/lez 27 2 2024 - 5 03 2024 4daf886729c74bb28457c95479c7f4ce.md",
-    "HLT/HLT 09d7260404a5422c921cd124b88e7458/lez 27 2 2024 - 5 03 2024 4daf886729c74bb28457c95479c7f4ce.md"
+    "SPM/SPM b44e342ebdc74ad1b16c6cb03f4a14e0/lez 20 2 2024 7e1a4c0fb3d74d05a259a2e8072e3e6a.md"
   ]
 }
