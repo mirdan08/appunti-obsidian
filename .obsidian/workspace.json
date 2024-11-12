@@ -16,7 +16,9 @@
                 "file": "AS/KPI engine.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "KPI engine"
             }
           },
           {
@@ -25,10 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "AS/lez. 2-10-2024.md",
+                "file": "AS/lectures/lez. 2-10-2024.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "lez. 2-10-2024"
             }
           },
           {
@@ -37,14 +41,224 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DM/lectures notes/lez.6 3-10-2024.md",
+                "file": "AS/Smart Applications.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "Smart Applications"
+            }
+          },
+          {
+            "id": "c4083dedc9b39268",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "AS/lectures/Lez. 24-09-2024.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Lez. 24-09-2024"
+            }
+          },
+          {
+            "id": "5fa8527cdb38f859",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "AS/lectures/lez. 2-10-2024.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "lez. 2-10-2024"
+            }
+          },
+          {
+            "id": "0dd31b2915a0280d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DM/lectures notes/Lez. 15-10-2024.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Lez. 15-10-2024"
+            }
+          },
+          {
+            "id": "09d8347bcd053030",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DM/Data mining.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Data mining"
+            }
+          },
+          {
+            "id": "211bfe2bcdc2fe6c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DM/lectures notes/lez. 17-10-2024.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "lez. 17-10-2024"
+            }
+          },
+          {
+            "id": "fa6817b5f6ee8fc8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DM/lectures notes/Lez. 24-10-2024.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Lez. 24-10-2024"
+            }
+          },
+          {
+            "id": "2df55af969bb16d1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DM/lectures notes/Lez. 25-10-2024.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Lez. 25-10-2024"
+            }
+          },
+          {
+            "id": "d403a5c6e4f429c7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DM/lectures notes/Lez. 29-10-2024.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Lez. 29-10-2024"
+            }
+          },
+          {
+            "id": "d8d375ff4ad6ee93",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DM/lectures notes/Lez. 5-11-2024.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Lez. 5-11-2024"
+            }
+          },
+          {
+            "id": "7df4dc7dc584e57f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DM/lectures notes/Lez. 7-11-2024.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Lez. 7-11-2024"
+            }
+          },
+          {
+            "id": "23704ae8cad71f09",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.7.5"
+              },
+              "icon": "lucide-file",
+              "title": "Release Notes 1.7.5"
+            }
+          },
+          {
+            "id": "3ce19719da2d38e4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Untitled.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Untitled"
+            }
+          },
+          {
+            "id": "b4523926347b76b7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "AS/README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
+          },
+          {
+            "id": "7587d18d868aeb43",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "smart application report for milestone 1.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "smart application report for milestone 1"
+            }
+          },
+          {
+            "id": "030e24ccac976c32",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "AS/Lez. 12-11-2024.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Lez. 12-11-2024"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 17
       }
     ],
     "direction": "vertical"
@@ -64,7 +278,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
             }
           },
           {
@@ -79,7 +295,9 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "Search"
             }
           },
           {
@@ -87,15 +305,16 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "334d59c5a726196e",
@@ -111,7 +330,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "DM/lectures notes/lez.6 3-10-2024.md",
+                "file": "AS/lectures/lez. 17-10-2024.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +338,9 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for lez. 17-10-2024"
             }
           },
           {
@@ -128,10 +349,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "DM/lectures notes/lez.6 3-10-2024.md",
+                "file": "AS/lectures/lez. 17-10-2024.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from lez. 17-10-2024"
             }
           },
           {
@@ -142,7 +365,9 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
-              }
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
             }
           },
           {
@@ -151,8 +376,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "DM/lectures notes/lez.6 3-10-2024.md"
-              }
+                "file": "AS/lectures/lez. 17-10-2024.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of lez. 17-10-2024"
             }
           },
           {
@@ -160,7 +387,9 @@
             "type": "leaf",
             "state": {
               "type": "git-view",
-              "state": {}
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
             }
           }
         ],
@@ -180,53 +409,53 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "567307698531c201",
+  "active": "030e24ccac976c32",
   "lastOpenFiles": [
-    "DM/lectures notes/images/Pasted image 20241003150713.png",
-    "DM/lectures notes/images/Pasted image 20241003144908.png",
-    "DM/lectures notes/images/Pasted image 20241003144435.png",
-    "DM/lectures notes/images/Pasted image 20241003144424.png",
-    "DM/lectures notes/images/Pasted image 20241003143508.png",
-    "DM/lectures notes/images/Pasted image 20241003143014.png",
-    "DM/lectures notes/images/Pasted image 20241003142906.png",
-    "AS/KPI engine.md",
-    "DM/lectures notes/lez.6 3-10-2024.md",
-    "AS/lez. 2-10-2024.md",
-    "AS/KPIs.md",
+    "smart application report for milestone 1.md",
+    "AS/Lez. 12-11-2024.md",
+    "AS/README.md",
+    "README.pdf",
+    "AS/images/image.png",
+    "Untitled.md",
+    "DM/lectures notes/images/Pasted image 20241107152959.png",
+    "DM/lectures notes/images/Pasted image 20241107152825.png",
+    "DM/lectures notes/images/Pasted image 20241107144955.png",
+    "DM/lectures notes/images/Pasted image 20241107144419.png",
+    "DM/lectures notes/images/Pasted image 20241107144122.png",
+    "DM/lectures notes/images/Pasted image 20241107144017.png",
+    "DM/lectures notes/images/Pasted image 20241107143316.png",
+    "DM/lectures notes/images/Pasted image 20241107143137.png",
+    "DM/lectures notes/images/Pasted image 20241107142906.png",
+    "DM/lectures notes/Lez. 5-11-2024.md",
+    "DM/lectures notes/Lez. 7-11-2024.md",
+    "DM/lectures notes/Lez. 29-10-2024.md",
+    "DM/lectures notes/Lez. 25-10-2024.md",
+    "DM/lectures notes/Lez. 24-10-2024.md",
+    "DM/lectures notes/lez. 17-10-2024.md",
     "DM/Data mining.md",
+    "AS/lectures/lez. 17-10-2024.md",
+    "DM/lectures notes/Lez. 15-10-2024.md",
+    "DM/lectures notes/lez.6 3-10-2024.md",
+    "AS/lectures/Lez. 15-10-2024.md",
+    "AS/lectures/lez. 2-10-2024.md",
+    "AS/lectures/Lez. 24-09-2024.md",
+    "AS/lectures/images",
+    "AS/lectures/Lez. 9-10-2024.md",
+    "AS/Smart Applications.md",
+    "AS/KPI engine.md",
+    "AS/KPIs.md",
     "DM/lectures notes/Lez.1 20-09-2024.md",
     "DM/lectures notes/Lez.2 24-09-2024.md",
     "DM/lectures notes/Lez. 3 26-09-2024.md",
     "DM/lectures notes/Lez. 5 27-9-2024.md",
-    "AS/Smart Applications.md",
     "DM/lectures notes/Lez. 4 1-10-2024.md",
-    "DM/lectures notes/images/Pasted image 20241001092540.png",
-    "DM/lectures notes/images/Pasted image 20240926143521.png",
-    "DM/lectures notes/images/Pasted image 20240926143420.png",
-    "DM/lectures notes/images/Pasted image 20240926143338.png",
-    "AS/power consumption.md",
     "AS/lectures",
-    "AS/lectures/Lez. 2 24-09-2024.md",
     "AS/images",
     "DM/lectures notes/images",
-    "conflict-files-obsidian-git.md",
     "DM/lectures notes",
-    "Homepage.md",
-    "README.md",
-    "SPM/Parallel & Distributed Systems.md",
-    "ISPR/Intelligent Systems for Pattern Recognition.md",
-    "IR/Information retrival.md",
-    "HLT/Human Languages & technologies.md",
-    "Unipi.md",
-    "midterm4.md",
     "ISPR/Untitled",
-    "HLT/Hugging face course.md",
     "IR",
     "AS",
-    "DM",
-    "VIa15756",
-    "SPM/SPM b44e342ebdc74ad1b16c6cb03f4a14e0/lez 22 2 2024 4db33a627f8e48a5b05d984281f7f85a",
-    "SPM/SPM b44e342ebdc74ad1b16c6cb03f4a14e0/lez 22 2 2024 4db33a627f8e48a5b05d984281f7f85a.md",
-    "SPM/SPM b44e342ebdc74ad1b16c6cb03f4a14e0/lez 20 2 2024 7e1a4c0fb3d74d05a259a2e8072e3e6a.md"
+    "DM"
   ]
 }
