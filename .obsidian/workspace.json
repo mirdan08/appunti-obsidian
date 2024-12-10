@@ -69,12 +69,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "AS/lectures/Lez..md",
+                "file": "Paper presentation.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Lez."
+              "title": "Paper presentation"
             }
           }
         ],
@@ -134,7 +134,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "334d59c5a726196e",
@@ -231,6 +232,13 @@
   },
   "active": "da79909449215793",
   "lastOpenFiles": [
+    "DM/notes on paper P9.xopp",
+    "images/Pasted image 20241207125552.png",
+    "images/Pasted image 20241207122947.png",
+    "images/Pasted image 20241207122909.png",
+    "images/Pasted image 20241206152548.png",
+    "images",
+    "Paper presentation.md",
     "DM/lectures notes/Lez. 26-11-2024.md",
     "AS/lectures/Lez..md",
     "DM/lectures notes/lez. 21-11-2024.md",
@@ -248,10 +256,6 @@
     "DM/lectures notes/images/Pasted image 20241107144955.png",
     "DM/lectures notes/images/Pasted image 20241107144419.png",
     "DM/lectures notes/images/Pasted image 20241107144122.png",
-    "DM/lectures notes/images/Pasted image 20241107144017.png",
-    "DM/lectures notes/images/Pasted image 20241107143316.png",
-    "DM/lectures notes/images/Pasted image 20241107143137.png",
-    "DM/lectures notes/images/Pasted image 20241107142906.png",
     "DM/lectures notes/Lez. 5-11-2024.md",
     "DM/lectures notes/Lez. 7-11-2024.md",
     "DM/lectures notes/Lez. 29-10-2024.md",
@@ -267,15 +271,12 @@
     "AS/lectures/Lez. 24-09-2024.md",
     "AS/lectures/images",
     "AS/lectures/Lez. 9-10-2024.md",
-    "AS/Smart Applications.md",
-    "AS/KPI engine.md",
     "AS/lectures",
     "AS/images",
     "DM/lectures notes/images",
     "DM/lectures notes",
     "ISPR/Untitled",
     "IR",
-    "AS",
-    "DM"
+    "AS"
   ]
 }
