@@ -48,9 +48,21 @@
               "icon": "lucide-file",
               "title": "Lez.  19-2-2025"
             }
+          },
+          {
+            "id": "772f008d91957e5a",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.8.7"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.8.7"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -107,8 +119,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "334d59c5a726196e",
@@ -203,15 +214,19 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "fdf1eec148f323a1",
+  "active": "772f008d91957e5a",
   "lastOpenFiles": [
+    "RB/images/Pasted image 20250219104618.png",
+    "RB/images/Pasted image 20250219104428 1.png",
+    "RB/images/Pasted image 20250219104428.png",
+    "RB/images/Pasted image 20250219102947.png",
+    "RB/images/Pasted image 20250219102405.png",
     "RB/images/Pasted image 20250219100701.png",
     "RB/images/Pasted image 20250219095716.png",
     "RB/images/Pasted image 20250219095606.png",
     "RB/images/Pasted image 20250219095440.png",
     "RB/images/Pasted image 20250219095324.png",
     "RB/images/Pasted image 20250219094852.png",
-    "RB/images/Pasted image 20250219094727.png",
     "RB/images",
     "SPM(2)/SPM-note/SPM notes.md",
     "RB/Lez.  19-2-2025.md",
@@ -224,10 +239,6 @@
     "SPM(2)",
     "SPM/Untitled",
     "DM/notes on paper P9.xopp",
-    "images/Pasted image 20241207125552.png",
-    "images/Pasted image 20241207122947.png",
-    "images/Pasted image 20241207122909.png",
-    "images/Pasted image 20241206152548.png",
     "images",
     "AS/lectures/Lez..md",
     "DM/lectures notes/Lez. 15-11-2024.md",

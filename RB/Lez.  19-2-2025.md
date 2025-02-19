@@ -46,3 +46,31 @@ We have a more refined definition of this part:
 Joints are set of two surfaces that can slide keeping contact one to the another, the link between the two it the DOF of the robot, links are enumerated and link 0 is the support base and origin of the reference coordinates frame for robot motion.
 ![[Pasted image 20250219100701.png]]
 bserve that a link can have more degrees of freedom, it can revolute (R), slide (P), it con rotate (H), it can be cylindrical(C), universal (U) and spherical (S).
+
+The most commonly used are the revolutional and the primastic ones.
+
+![[Pasted image 20250219102405.png]]
+
+a robot manipulator is nothing more then a link of revolutonal and prismatic robots.
+It is a open kinematic chain, the sequence of rigid elements or links connected with revolute or translational oints actuated by a motor.
+
+we have various kinds depending on their type, see the image below
+
+![[Pasted image 20250219102947.png]]
+
+The joint space is the space in which the $q$ vector of joint variables are defined its dimension is indicated with $N$, and it contains an element for each joint defining it's rotation.
+
+$x=(p,\Phi)^T$ is a value in the cartesian space which  defies the end-effector position an it's dimension is indicated with $M$. And $p$ is the cartesian coordinates while $\Phi$ is the orientation of the end effector.
+for $p$ you have $(x,y,z)$ coordinates while for $\Phi$ you have $(roll,pitch,yaw)$,thus $x=(x,y,z,roll,pitch,yaw)$. 
+The *robot workspace* is the region described by the origin and the end effector is when the robot joints execute all possible motions.
+
+In robotics it is essential to be able to reconstruct the end position and angulation of a certain movement on a certain robot, o do so we need a *reference frame* thta allows us to build the kinematic chain needed.
+![[Pasted image 20250219104428.png]]
+differented reference frames , represented as $\{a\}$ in the image above, give a reference to reconstruct the position $p$, whatever reerence we use is ok we just need to have stationary position.
+![[Pasted image 20250219104618.png]]
+such reference frame is stationary,$\{s\}$, and can be used to describe the distance from other reference frames that are used to describe the distance from other non-stationary reernce frames, $\{b\}$ , that are attached to a moving rigid body. we don't need stuff like the center of mass.
+
+We can derive the body-frame origin $p$ and we can express it as 
+$$
+p=p_x\hat{x}_s + p_y\hat{y}_s
+$$
