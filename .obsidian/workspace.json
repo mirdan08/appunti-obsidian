@@ -41,44 +41,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DM/lectures notes/lez. 21-11-2024.md",
+                "file": "RB/Lez.  19-2-2025.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "lez. 21-11-2024"
-            }
-          },
-          {
-            "id": "8bb8f66a6872623b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DM/lectures notes/Lez. 26-11-2024.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Lez. 26-11-2024"
-            }
-          },
-          {
-            "id": "da79909449215793",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Paper presentation.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Paper presentation"
+              "title": "Lez.  19-2-2025"
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -97,7 +69,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -230,18 +203,33 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "da79909449215793",
+  "active": "fdf1eec148f323a1",
   "lastOpenFiles": [
+    "RB/images/Pasted image 20250219100701.png",
+    "RB/images/Pasted image 20250219095716.png",
+    "RB/images/Pasted image 20250219095606.png",
+    "RB/images/Pasted image 20250219095440.png",
+    "RB/images/Pasted image 20250219095324.png",
+    "RB/images/Pasted image 20250219094852.png",
+    "RB/images/Pasted image 20250219094727.png",
+    "RB/images",
+    "SPM(2)/SPM-note/SPM notes.md",
+    "RB/Lez.  19-2-2025.md",
+    "RB",
+    "DM/lectures notes/lez. 21-11-2024.md",
+    "SPM(2)/SPM-note",
+    "DM/lectures notes/Lez. 26-11-2024.md",
+    "SPM(2)/lez.  18-2-2025.md",
+    "Paper presentation.md",
+    "SPM(2)",
+    "SPM/Untitled",
     "DM/notes on paper P9.xopp",
     "images/Pasted image 20241207125552.png",
     "images/Pasted image 20241207122947.png",
     "images/Pasted image 20241207122909.png",
     "images/Pasted image 20241206152548.png",
     "images",
-    "Paper presentation.md",
-    "DM/lectures notes/Lez. 26-11-2024.md",
     "AS/lectures/Lez..md",
-    "DM/lectures notes/lez. 21-11-2024.md",
     "DM/lectures notes/Lez. 15-11-2024.md",
     "DM/lectures notes/Lez. 14-11-2024.md",
     "AS/lectures/Lez. 14-11-2024.md",
@@ -249,13 +237,7 @@
     "smart application report for milestone 1.md",
     "AS/README.md",
     "README.pdf",
-    "AS/images/image.png",
     "Untitled.md",
-    "DM/lectures notes/images/Pasted image 20241107152959.png",
-    "DM/lectures notes/images/Pasted image 20241107152825.png",
-    "DM/lectures notes/images/Pasted image 20241107144955.png",
-    "DM/lectures notes/images/Pasted image 20241107144419.png",
-    "DM/lectures notes/images/Pasted image 20241107144122.png",
     "DM/lectures notes/Lez. 5-11-2024.md",
     "DM/lectures notes/Lez. 7-11-2024.md",
     "DM/lectures notes/Lez. 29-10-2024.md",
@@ -267,16 +249,7 @@
     "DM/lectures notes/Lez. 15-10-2024.md",
     "DM/lectures notes/lez.6 3-10-2024.md",
     "AS/lectures/Lez. 15-10-2024.md",
-    "AS/lectures/lez. 2-10-2024.md",
-    "AS/lectures/Lez. 24-09-2024.md",
     "AS/lectures/images",
-    "AS/lectures/Lez. 9-10-2024.md",
-    "AS/lectures",
-    "AS/images",
-    "DM/lectures notes/images",
-    "DM/lectures notes",
-    "ISPR/Untitled",
-    "IR",
-    "AS"
+    "AS/lectures"
   ]
 }
