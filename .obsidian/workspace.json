@@ -48,20 +48,6 @@
               "icon": "lucide-file",
               "title": "Robotics"
             }
-          },
-          {
-            "id": "772f008d91957e5a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "RB/Lez.  19-2-2025.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Lez.  19-2-2025"
-            }
           }
         ],
         "currentTab": 2
@@ -205,7 +191,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 422.5
+    "width": 423.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -219,19 +205,19 @@
   },
   "active": "512082d6e2efff39",
   "lastOpenFiles": [
+    "RB/images/Pasted image 20250220105655.png",
+    "RB/images/Pasted image 20250220102621.png",
+    "RB/images/Pasted image 20250220102605.png",
+    "RB/images/Pasted image 20250220095535.png",
+    "RB/images/Pasted image 20250220094612.png",
+    "RB/images/Pasted image 20250220093426.png",
+    "RB/images/Pasted image 20250220090402.png",
+    "RB/images/Pasted image 20250220090307.png",
+    "RB/Lez.  19-2-2025.md",
     "RB/images/Pasted image 20250219230128.png",
     "RB/images/Pasted image 20250219220457.png",
     "RB/images/Pasted image 20250219215534.png",
-    "RB/images/Pasted image 20250219214647.png",
-    "RB/Lez.  19-2-2025.md",
     "RB/Robotics.md",
-    "RB/images/Pasted image 20250219104618.png",
-    "RB/images/Pasted image 20250219104428 1.png",
-    "RB/images/Pasted image 20250219104428.png",
-    "RB/images/Pasted image 20250219102947.png",
-    "RB/images/Pasted image 20250219102405.png",
-    "RB/images/Pasted image 20250219100701.png",
-    "RB/images/Pasted image 20250219095716.png",
     "RB/images",
     "SPM(2)/SPM-note/SPM notes.md",
     "RB",

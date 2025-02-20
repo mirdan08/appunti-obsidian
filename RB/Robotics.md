@@ -85,17 +85,131 @@ The *cartesian space* is where $x=(p,\Phi)^T$ resides and it defines the end-eff
 The *robot workspace* is the region described by the origin and the end effector is when the robot joints execute all possible motions.
 
 ![[Pasted image 20250219230128.png]]
-This the PUMA robot manipulator, here we have two main subgroups wihch are the support structure  and the wrist in this case we have 6 joint with a shoulder a trunk which offsets the shoulder and the base frame point.
+This the PUMA robot manipulator, here we have two main subgroups wihch are the support structure  and the wrist in this case we have 6 joint with a shoulder a trunk which offsets the shoulder and the base frame point and affect the end effector position, and also the wrist position.
 
-The *Robot workspace* indicates the region described by the origin of the end effector
+The *Robot workspace* indicates the region described by the origin of the end effector when robot joints execute all possible motions
+The *Reachable workspace* is the region that can be reached by the end-effector with at least one orientation.
+The *Dextrous workspace* is the region that the end-effector can reach with more than one orientation.
 
-In robotics it is essential to be able to reconstruct the end position and angulation of a certain movement on a certain robot, o do so we need a *reference frame* thta allows us to build the kinematic chain needed.
+Such worksaces are all depending on link lengths and joint ranges of motion, an axemple can be seen in the image below.
+
+![[Pasted image 20250220090307.png]]
+
+For a robot ARM-types ca be of different kinds, below you can see various types
+
+![[Pasted image 20250220090402.png]]
+
+## Representing position and orientation
+
+A point $p\in \mathbb{R}^n$ can be represented as a vector from the reference frame point $\{a\}$ origin to $p$ with the vector $p_a$ . We can have different reference frames in the image below we can see $\{a\}$ and $\{b\}$, for each of them we have unit coordinates $\hat{x},\hat{y}$ .
 ![[Pasted image 20250219104428.png]]
-differented reference frames , represented as $\{a\}$ in the image above, give a reference to reconstruct the position $p$, whatever reerence we use is ok we just need to have stationary position.
-![[Pasted image 20250219104618.png]]
-such reference frame is stationary,$\{s\}$, and can be used to describe the distance from other reference frames that are used to describe the distance from other non-stationary reernce frames, $\{b\}$ , that are attached to a moving rigid body. we don't need stuff like the center of mass.
+different reference frames , represented as $\{a\}$ in the image above, give a reference to reconstruct the position $p$, whatever reference we use is ok we just need to have stationary position.
 
-We can derive the body-frame origin $p$ and we can express it as 
+Reference frames can be placed anywhere to have a valid representation of the space in our case we assume to have always a single stationary frame called *fixed frame* denoted with $\{s\}$ also called *space frame*. We can also assume that at least one frame has been attached to a rigid moving body, it is called *body frame* and is denoted with $\{b\}$ and is always assumed to be attached to a rigid body. In the image below we see an example with the fixed frame being static and fixed from which the axes of the space are originating and then we have the second point which can also be represented as the vector $p$ and it is assumed to be attached to an L-shaped body, in this case it also has an angle $\theta$.
+Also note that the body frame is attached to some important point of the body but it is not necessary.
+![[Pasted image 20250219104618.png]]
+such reference frame is stationary,$\{s\}$, and can be used to describe the distance from other reference frames that are used to describe the distance from other non-stationary reference frames, $\{b\}$ , that are attached to a moving rigid body. we don't need stuff like the center of mass but it can be useful.
+## Rigid body motions in the plane
+The body-frame origin $p$ can be expressed as: 
 $$
 p=p_x\hat{x}_s + p_y\hat{y}_s
 $$
+Now we want to descrbe the unit vectors used for the orientation of the body which are $\hat{x}_b,\hat{y}_b$ to do so we can use the following formulas 
+
+$$
+\hat{x}_b= \cos \theta \hat{x}_s + \sin \theta \hat{y}_s 
+$$
+
+$$
+\hat{y}_b= - \cos \alpha \hat{x}_s + \sin \alpha \hat{y}_s 
+$$
+It becomes clearer when you use a raphical explanation of the formulas, take the following intutions :
+![[Pasted image 20250220093426.png]]
+
+The $\cos$ indicates the horizontal component of the unit vectors and $\sin$ indicates the vertical component, their sum allows you to obtain the the respectve unit vectors and you also have their orientation with simple trigonometric formulas where $$\alpha=(\pi -\frac{\pi}{2}-\theta)=\frac{\pi}{2}-\theta$$
+so in this case it's a just 90 degrees rotation of $\theta$ and a rotation of $\alpha$ degrees of the unit vectors of the reference frame. From this you can take out $\alpha$ from $\hat{y}_b$, since $\cos(\frac{\pi}{2}-\theta)=sin(\theta)$ and $\sin(\frac{\pi}{2}-\theta)=\cos(\theta)$ you have that
+$$
+\hat{y}_b=- \sin \theta \hat{x}_s+\cos \theta \hat{y}_s
+$$
+and in case $\Theta=0$ we have that 
+
+$$
+\hat{x}_b=\cos(0)\hat{x}_s+\sin(0)\hat{y}_s=1*\hat{x}_s+0*\hat{y}_s=\hat{x}_s
+$$
+$$
+\hat{y}_b=-\sin(0)\hat{x}_s+\cos(0)\hat{y}_s=0*\hat{x}_s+1*\hat{y}_s=\hat{y}_s
+$$
+so this is the situation now:
+![[Pasted image 20250220094612.png]]
+So orientation can be described using only $\theta$  relatively to the fixed frame while the position $p$  expresses the position w.r.t. the reference frame and is just a column vector:
+$$
+p=\begin{bmatrix}
+p_x\\p_y
+\end{bmatrix}
+$$
+we can also use a rotation matrix $P$ to have the same result:
+$$
+P=[\hat{x}_b\text{ }\hat{y}_b]=\begin{bmatrix}
+\cos \theta & - \sin \theta \\
+\sin \theta & \cos \theta
+\end{bmatrix}
+$$
+for P we have that: 1. each column must be a unit vetor 2. the two columns must be orthogonal and 3. the remaining DOF is parametrized by $\theta$  as happens with $P$.
+
+So the pair $(P,p)$ provides a description of the orientation and position of $\{b\}$ w.r.t. $\{s\}$ and can be expressed as $(P,p): \{ s \rightarrow b \}$.
+
+Ok now we have a framewor for such cases, say ou have the following situation
+![[Pasted image 20250220095535.png]]
+
+For the previous notation $(Q,q): \{ c \rightarrow b \}$ and $(P,p): \{ b \rightarrow s \}$ in the image above.
+So here we have a single reference frame and two body frames, we can convert from a body frame to another in this case we want $\{c\}$ relative to $\{ s\}$  and we can have it by converting $Q$ to the reference frame, to do so $R=PQ$ and $r=Pq+p$ and now we have $(R,r):\{c \rightarrow s\}$.
+### 3D rigid body motions in the plane
+We need to define also orientation and axes direction in 3D, we say that a space is right-handed when we have it organized lke in the image below
+
+![[Pasted image 20250220102605.png]]
+
+While a rotation is said to be positve when it rotates going left like in the image below.
+![[Pasted image 20250220102621.png]]
+
+
+All our reference frames are right-handed and the unit axes $\{\hat{x},\hat{y},\hat{z}\}$ and always satisfy $\hat{x} \times \hat{y} = \hat{z}$ the fixed frame has unit axes $\{\hat{x}_s,\hat{y}_s,\hat{z}_s\}$ while for a body frame we have the unit axes
+
+$$
+\begin{bmatrix}
+\hat{x}_b \\ \hat{y}_b \\\hat{z}_b
+\end{bmatrix}= R
+\begin{bmatrix}
+\hat{x}_s \\ \hat{y}_s \\\hat{z}_s
+\end{bmatrix}
+$$
+the $p$ vector from the fixed frame has now the formulation:
+$$
+p=
+\begin{bmatrix}
+p_1\\p_2\\p_3
+\end{bmatrix}
+=p_1\hat{x}_s+p_2\hat{y}_s+p_3\hat{z}_s
+$$
+and $R$ is expressed as:
+$$
+R=\begin{bmatrix}
+r_{11} &r_{12} &r_{13} \\
+r_{21} &r_{22} &r_{23} \\
+r_{31} &r_{32} &r_{33} \\
+
+\end{bmatrix}=
+\begin{bmatrix}
+\hat{x}_b&\hat{y}_b&\hat{z}_b
+\end{bmatrix}
+$$
+
+in 3D a description of the rigid body's position and orientation is described by 12 parameters defined by $p \in \mathbb{R}^3$ and $R \in \mathbb{R}^{3 \times 3}$ where each oftheir values can vary.
+
+![[Pasted image 20250220105655.png]]
+
+
+A rotation matrix can:
+- represent an orientation
+- change reference frame in which a vector or a another frame is represented
+- rotate a vector or a frame
+
