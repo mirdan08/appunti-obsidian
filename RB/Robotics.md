@@ -332,4 +332,16 @@ Basically higher levels subsume lower ones and level work in an independent and 
 ![[Pasted image 20250224230104.png]]
 Here each level is a behaviourm detail we can see below:
 ![[Pasted image 20250224230519.png]]
-Each behaviour has input and output lines, the output lines of a behaviour can be connected to input and output lines of other behaviours, an input signal can be suppressed and replaced with the signal that suppressed it while an output signal can be inhibited
+Each behaviour has input and output lines, the output lines of a behaviour can be connected to input and output lines of other behaviours, an input signal can be suppressed and replaced with the signal that suppressed it while an output signal can be inhibited.
+
+One way of handling behaviours is using *potential field behaviours*, here vectors represented behaviours and vector summation combines vectors from different behaviours to produce an emergent behaviour.
+
+### hybrid paradigm
+Here robot behaviour has plan to some degree that interferees between SENSE and ACT as represented in the imagee below
+![[Pasted image 20250225220842.png]]
+In the hybrid paradigm directives go to a hybrid SENSE-ACT primitive that produces then actuator commands.
+
+We have a PLAN primitive the has only the strategic and tactical level, the strategic planner makes long-term plans by identifying the sequence of sub-tasks needed to reach the goal and it provides results for the tactical planner which then initializes and monitors the behaviours by coordinating them in time. Thus you now have the situation described in he image below.
+![[Pasted image 20250225221610.png]]
+This can actually take many forms.
+![[Pasted image 20250225221639.png]]
