@@ -212,7 +212,81 @@ A rotation matrix can:
 - represent an orientation
 - change reference frame in which a vector or a another frame is represented
 - rotate a vector or a frame
+![[Pasted image 20250225223021.png]]
+We assume a fixed frame space $\{s\}$ which is aligned with $\{a\}$ the orientations of the three frames can be written as 
+$$
+R_a=\begin{bmatrix}
+1&0&0\\
+0&1&0\\
+0&0&1\\
+\end{bmatrix},R_b=\begin{bmatrix}
+0&-1&0\\
+1&0&0\\
+0&0&1\\
+\end{bmatrix},
+R_c=\begin{bmatrix}
+0&-1&0\\
+0&0&-1\\
+1&0&0\\
+\end{bmatrix}
+$$
 
+in those frames we can write the location of a point $p$ is written as 
+$$
+p_a=\begin{bmatrix}
+1\\1\\0
+\end{bmatrix},
+p_b=\begin{bmatrix}
+1\\-1\\0
+\end{bmatrix},
+p_c=\begin{bmatrix}
+0\\-1\\-1
+\end{bmatrix}
+$$
+
+Rotations are considered positive when the revolve around the selected axis in a count-clockwise manner when looking the the perspective in the iamge below.
+
+![[Pasted image 20250225223240.png]]
+
+When rotating we can look first at the rotation around a single axis-x in this case we get that x and x' (the result of rotating) are collinear while the other ar obtained by just rotating the reference frame x-y-z for the angle $\alpha$.
+![[Pasted image 20250225223856.png]]
+
+A rotational displacement can be described by an homogenous transformation matrix, the first three rows of the matrix corespond to x , y and z of the reference frame while the first three columns refere to the x'-y'-z' axes of the rotated frame, the upper 3x3 matrix is the rotation matrix $H$ and are the cosines o the angles between the axes given by corresponding column and row
+
+$$
+Rot(x,\alpha)=\begin{bmatrix}
+\cos 0 &\cos 90 &\cos 90 &0\\
+\cos 90 &\cos \alpha &\cos (90+\alpha) &0\\
+\cos 90 &\cos (90 - \alpha) &\cos \alpha &0\\
+ 0 & 0 & 0 &1\\
+\end{bmatrix}=\begin{bmatrix}
+\cos 0 & 0 & 0 &0\\
+0 &\cos \alpha & -\sin \alpha &0\\
+0 & \sin \alpha &\cos \alpha &0\\
+ 0 & 0 & 0 &1\\
+\end{bmatrix}
+$$
+
+This is a useful exercise to better understand rotation matrices, we can do the same thing with y imposing that $y=y'$ and then that
+$$
+x=x'\cos \beta + z' \sin \beta
+$$
+$$
+z=-x'\sin \beta + z' \cos \beta
+$$
+This takes the form of the following matrix
+
+$$
+Rot(y,\beta)=\begin{bmatrix}
+\cos \beta & 0 & \sin \beta & 0 \\
+0 & 1 & 0 & 0 \\
+-\sin \beta & 0 & \cos \beta & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
+$$
+The situation is as described in the image below
+
+![[Pasted image 20250225225740.png]]
 
 
 # Robot behaviour
