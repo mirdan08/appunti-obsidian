@@ -473,7 +473,32 @@ $$
 ## The Universal Robot Description Format
 
 The URDFs an XML file format used by the Robot Operating System to describe kinematics, inertial properties and link of geometric robots in a tree manner.
+The URDFdescribes joints and links of a robot:
+- Joints: it's used to connect two links a parent link and a child link. A joint can be of different types that are the types we already discussed. 
+  Each one has an *origin frame* that defines a position and orientation of the child link frame relative to the parent link frame when the joint variable is zero and we have join which is on the joint's axis.
+  Each Joint has a 3-axis vector, a unit vector expressed i the child link frame which is in the direction of positive rotation for a revolute joint or positive translation for a prismatic joint.
+- Links: we define mass properties, the elements of a link among the others also include its mass, an origin frame that defies position and orientation of a frame at the link's center of mass relative to its joint frame and an inertia matrix relative to the link center of mass frame.
+A URDF file can represent any robot with a tree structure including serial-chain robot arms and hands.
 
+## The Denavit-Hartenberg representation
+the D-H representation is an approach to forward kinematics to attach reference frames to each link of the open chain and then derive the forward kinematics frm the knowledge of the relative displacement between adjacent link frames. We use the matrix based method for describing the the relations between adjacent links, the D-H representation consists of homogenous 4x4 transformation matrices which represent the reference frame w.r.t. the previous link. the position of the end effector can be expressed in the base frame coordinates.
+![[Pasted image 20250226220955.png]]
+This is the model in question.
+
+For link we have 4 geomtric parameters associated to each link:
+- 2 describe relative position of adjacent link(the joint parameters)
+- 2 describe the link structure
+On those geometric parametrs depend the homogenous transformation matrices but only one set is known, we have a joint rotation axis defined by the 2 links connected by the joint. For each axes we have 2 normal lines defined one for each link.
+
+![[Pasted image 20250226221851.png]]
+
+From the kinematics POV a link keeps a fixed cofiguration between 2 joits, he structre of link $i$ is characterized with the length and the angle of the rotation axis of join $i$.
+In the picture above:
+- $a_i$ = minimum distance along the comon normal line between two joint axes, **LINK LENGHT**
+- $\alpha_i$ which is the angle between two joint axes on a plane normal to $a_i$. called **TWIST**
+- The position of the $i$-th link w.r.t. the $(i-1)$-th link can be expressedby measuringthe distance an the angle between two adjacent links. 
+- The distance $d_i$ = distance between normal lines along the $(i-1)$-th joint axis, called **LINK OFFSET**
+- $\theta_i$ = angle between two normal lines on a pan of the normal axis, called **JOINT ANGLE**.
 
 # Robot behaviour
 
