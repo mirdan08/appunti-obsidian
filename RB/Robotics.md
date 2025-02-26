@@ -288,6 +288,192 @@ The situation is as described in the image below
 
 ![[Pasted image 20250225225740.png]]
 
+We can then use the complete formulation for the three axes and get a sequence of rotations around axes $R$.
+![[Pasted image 20250226093057.png]]
+And the rotation matrix combining them is defined as
+
+$$R=R_{x,\alpha}R_{y,\phi}R_{z,\theta}$$
+We can use a rotation matrix $R$ to represent a body frame $\{b\}$ in the fixed frame $\{s\}$ and a vector $p$ which represent the origin of $\{b\}$ in $\{s\}$, instead o identifying $R$ and $p$ we package them into a matrix 
+$$
+T=\begin{bmatrix}
+R & p \\
+0&1\\
+\end{bmatrix}=
+\begin{bmatrix}
+r_{11}&r_{12}&r_{13}&p_1\\
+r_{21}&r_{22}&r_{23}&p_2\\
+r_{31}&r_{32}&r_{33}&p_3\\
+0&0&0&1\\
+\end{bmatrix}
+$$
+And its inverse is also a transformation matrix 
+$$
+T^{-1}=\begin{bmatrix}
+R&p\\
+0&1
+\end{bmatrix}^{-1}
+=\begin{bmatrix}
+R^T & -R^Tp\\
+0 & 1 \\
+\end{bmatrix}
+$$
+
+and also the product of a transformation matrix is a transformation matrix.
+
+we can also pack translation into a matrix too
+
+$$
+T_{tran}=\begin{bmatrix}
+1&0&0&dx\\
+0&1&0&dy\\
+0&0&1&dz\\
+0&0&0&1\\
+\end{bmatrix}
+$$
+It can be used to obtain the coordinates of a point w.rt. different points in space by just multypling it.
+
+$$P_{xyz}=T_{tran}P_{vuw}$$
+![[Pasted image 20250226095833.png]]
+
+The image above explains well the concept.
+
+As for transformation composition we can do that through matrix multiplication
+
+$$^AT_C=^AT_B\ ^AT_C$$
+![[Pasted image 20250226100347.png]]
+## Robot arm kinematics
+
+We can use *kinematics* to make a robot arm move, we have to ways of doing that:
+- Direct kinematics: computing the end-effector position in the cartesian space given the robot position in the joint space.
+- Inverse kinematics: compute the joint positions to obtain a desired position of the end effector.
+![[Pasted image 20250226100821.png]]
+
+In the direct approach for a given robot arm and a vector of joint angles $q$ and link geometric parameters find the position and orientation of end effector or mathematical sense find the vectorial non linear function $K$ s.t.
+
+$$
+x=K(q)
+$$
+In inverse kinematics for the given robot arm with a desired position and orientation of the end effector w.r.t. reference coordinate frame find the corresponding joint variables.
+In thi case find a non-linear vectorial function 
+$$
+q=K^{-1}(x)
+$$
+
+Basically you either find the joint variables rom the desired point or find he the result point from the joint variable.
+
+Since ne number of DOFS s higher than the one needed to characterize the joint space, such number of redundancy is obtained as $R=N-M$, thise means multiple solutions at the cost of control and computational complexity.
+
+Inverse kinematics show a series of problems to deal with:
+- non linar equations
+- not always possible to fin an analytical solutions
+- solutions can be multiple,infinite or not possible for give arm kinematica structures, their existence is grante if the desired position and orientation belong the the dextrous workspace of the robot.
+
+Direct kinematics are quite easy to grasp, just use the homogenous matrices you have seen before the multily them to get the result, see the image bew for an example
+
+![[Pasted image 20250226104027.png]]
+
+A homogenous transformation matrix can be either used to describe the pose of a frame w.r.t. a reference frame or the displacement of a frame into a new pose. The difference is given by interpretation, for the first case the upper-left 3x3 matrix is the orientation of the object while the riht hand 3x1 column describes the position, for the second case the matrix corresponds to a rotation and the riht-hand column is the translation.
+![[Pasted image 20250226120359.png]]
+This is an example to obtain the rotation matrix switch from a reference to another nad we can see that it is justthe combination of various rotations toruh an inhomogenous matrix.
+
+We can start by studying the geometric manipulator model.
+
+We have  matrix $^O H_3 = (^O H_1 D_1)(^1 H_2D_2)(2^ H_3 D_3)$ with matrices $^O H_1,^O H_2,^O H_3,$ that describe the pose of ech joint rame w.r.t. the preceding frame. 
+![[Pasted image 20250226121047.png]]
+This is the kind of robo we are working with.
+
+We an start by analyzing wht is happening within the parenthesis
+
+$$
+^O H_1 D_1 = \begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & l_1 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+c1 & -s1 & 0 & 0 \\
+s1 & c1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}=
+\begin{bmatrix}
+c1 & -s1 & 0 & 0 \\
+s1 & c1 & 0 & 0 \\
+0 & 0 & 1 & l_1 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
+$$
+$$
+\sin(\theta_1)=s1,\cos(\theta_1)=c1
+$$
+We undestand that the $D_1$ matrix represents rotation around the positive $z_1$ axis and the product is the displacement and pose and displacement of the first joint.
+
+For the second joint w have a rotation around the $z_2$ axis.
+
+$$
+^O H_2 D_2 = \begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & l_2 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+c2 & -s2 & 0 & 0 \\
+s2 & c2 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}=
+\begin{bmatrix}
+c1 & -s1 & 0 & 0 \\
+s1 & c1 & 0 & l_2 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
+$$
+And it still is a rotation like before just on a different xis, now we see a translaton for a change
+
+$$
+^O H_3 D_3 = \begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & l_3 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & -d_3 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}=
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & l_3 \\
+0 & 0 & 1 & -d_3 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
+$$
+
+All those combined give the following result
+
+$$
+^O H_3 = \begin{bmatrix}
+c12 & -s12 & 0 & -l_3s12  -l_2s1\\
+s12 & -s12 & 0 & -l_3c12 -l_2c1\\
+0 & 0 & 1 & -l_1 - d_3\\
+0 & 0 & 0 & 1\\
+\end{bmatrix}
+$$
+with $$
+c12= \cos (\theta_1 + \theta_2)=c1c2-s1s2
+$$
+$$
+s12= \sin (\theta_1 + \theta_2)=s1c2+c1s2
+$$
+## The Universal Robot Description Format
+
+The URDFs an XML file format used by the Robot Operating System to describe kinematics, inertial properties and link of geometric robots in a tree manner.
+
 
 # Robot behaviour
 
