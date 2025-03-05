@@ -630,3 +630,188 @@ We have a PLAN primitive the has only the strategic and tactical level, the stra
 ![[Pasted image 20250225221610.png]]
 This can actually take many forms.
 ![[Pasted image 20250225221639.png]]
+
+# Sensors
+
+In this section we take care of sensors and perception and sensors in general.
+
+The first thing we define is a *transducer* which transforms energy of a kind into a energy of another kid and can work as both sensor and actuator, a *sensor* is a device sensitive to physical quantities and transforms them into a measurable and transferable signal by means of a transducer.
+
+## Sensor's fundamental properties
+There are quite a lot of properties useful to describe and understand for a sensor.
+- transfer function: it is the relation between quantity of measure and output of the sensor.
+- calibration:measuring outputs for known quantities , it can also be a *calibration cycle* where we do a trial to see the whole working range of a sensor usually divided into a part with increasing values and a part with decreasing values.
+- hysteresis: a sensor might have for the same input value diverse outputs which depends on the fact that the input value can either increase or decrease while varying. It is measured as the maximum difference between two output curves of the sensor during the calibration cycle, epxressed as % maximum value for he transfer function see the image below.
+![[Pasted image 20250305093729.png]]
+- accuracy: is the maximum error between actual values and measured values by the sensors
+- repeatability: when the same input values applies to a sensors we can have variability in output such variability is called *repeatability*.
+Accuracy and repeatability are actually correlated and are used to evaluate a sensors capability.
+
+![[Pasted image 20250305094234.png]]
+
+For  $x_m=\text{average value}$ and $x_v=\text{actual value}$ we can express accuracy as 
+$$accuracy=100(x_m-x_v)/x_v$$
+so we just measure how much dispersion a sensor can have.
+
+- resolution: is the minimum variation of the input which gives a variation of the output of the sensor.
+- sensitiveness: a small variation in input causes small variation in output, this measure is the ratio between input and output variation.
+- noise. is the amount of signal in the sensor output which is not given by the input
+- stability: how much the sensor can epp its working characteristics for a long time, it either long,medium or short.
+There are much more parameters
+
+## Sensor's role in a robot
+
+The sensor's have two different roles:
+- Perception of external state *(extroception)*: measure variable to characterize the working environment
+- Perception of the internal state *(proprioception)* : measured variables in the internal system used to control the robot e.g. joint position.
+Simple example with two wheeled robot
+![[Pasted image 20250305095242.png]]
+
+## position sensors
+We can start by examining position sensors
+### switches
+
+mechanical switches are the most simple ones with binart data that is either contact or no contact.
+
+![[Pasted image 20250305095443.png]]
+
+applications robotics are for impact sensors, contact sensors and endstop sensors for manipulator joints.
+
+### optical encoders
+Measures the angular rotation of a shaft/axle
+
+![[Pasted image 20250305095606.png]]
+This is what we are working with, basically in the image the motor revolves around the axles, we have a slotted disk attached to the axle and an emitter shooting a signal to a detector interrupted periodically by the disk,by this mean we can deduce motor rotation velocity.
+
+Motors themselves can have different configurations depending on where the sensor is placed, see the image below to understand better.
+
+![[Pasted image 20250305100024.png]]
+
+We have a motor and a reducer that reduces the number of rotation of an axle from original motor generating movement, a sensor can be placed:
+- before motor+reducer and knows the rotation of the original motor.
+- after motor+reducer where it knows the final joint rotation.
+In the image above you also see some variable to take car of, basically we want to model the relation ships between the join angular position and the actual motor position.
+the relationship is expressed as $$\theta=\frac{\theta_m}{k}$$ and we can also consider the sensor error, remember it is expressed as 
+$$
+\frac{d\theta}{d\theta_m}=\frac{1}{k} \implies d\theta=\frac{1}{k}d\theta_m
+$$
+The sensor error is reduced by a factor $k$.
+
+The actual rotation is obtained by counting pulses and knowing the number of disks steps and is just the angle betwen different agular positon of out joint, more specifically we can see the situation described before as
+
+![[Pasted image 20250305102613.png]]
+
+Now for 
+- $q=\text{joint angular position}$
+- $\theta=\text{join position in encoder steps}$
+- $k=\text{motor reduction ratio}$
+- $R=\text{encoder resolution=\# of steps per turn}$  
+$$
+q=\frac{\theta \times 360^o}{R \times k}
+$$
+And the frequency of the pulse train is proportional to angular velocity.
+As for the joint angula positon $\theta$ and $R$ determine the percentage of rotation done then $360^o$ converts it to degrees, finally k applies the reduction of rotation by the reducer.
+
+### absolute encoders
+
+We can have a absolute rotation angle and each position is uniquely determined
+
+![[Pasted image 20250305105528.png]]
+
+this is the optical disk used, it has
+- k photoswitches
+- k code tracks
+- and can represent $2^k$ different orientations with an angular resolution of $360^o / 2^k$ 
+
+This is a photo for the actual piece mounted on a motor
+
+![[Pasted image 20250305110315.png]]
+
+In this case the absolute encoder is mounted before motor+reducer.
+
+Positions are encoded through fixed sensors and follow the positive track motion from 0 to 360 degrees as in the image below.
+
+![[Pasted image 20250305111738.png]]
+
+As you can see each position is uniquely determined, we use the gray code to obtain the position as reported in the table below
+![[Pasted image 20250305111858.png]]
+
+the special thing is that only two consecutive position have a different character basically.
+
+We can see an example below
+
+![[Pasted image 20250305112303.png]]
+
+### potentiometers
+
+We need to understand first some electronic basics
+
+
+![[Pasted image 20250305112508.png]]
+This is the classical tension applied to a circuit with a resistor with a certain direction given the positive ad negative signs and current by flowing in that direction and a resistor in the circuit.
+These components are tied by the following relationship 
+$$
+v=Ri
+$$
+
+A potentiometer is just a variable resistor 
+![[Pasted image 20250305112742.png]]
+We have a resistance, 3 endpoints and a movable sliders, by moving he slider by hand we actually vary the Variable Voltage Output  in the sensor i.e. the output voltage, the working principle is that the output varies w.r.t. the resistance applied that is more or less present in the circuit.
+
+We divided the full resistance elelment into $L_T$ and $R_T$ ,where $L_T$ is the part left out and $R_T$ the one present. The influenced part is also divided in $L_1$ and $R_1$ .
+The relationship betwen them is 
+$$
+\frac{L_1}{R_1}=\frac{L_T}{R_T}
+$$
+
+we have the full tension $v_{ref}=R_Ti$ between endpoint 1 and 3 and we measure the output tension $v_{out}=R_1i$ . Also the relation between the $L$ components is that of a proportion expressed as below.
+
+$$
+L_1=L_T\frac{R_1}{R_T}=L_T\frac{v_{out}}{v_{ref}}
+$$
+
+# Robotic middlewares and ROS
+
+We have a lot of diverse platform components for platforms that compose them depending on the kind of personal device
+
+![[Pasted image 20250305092244.png]]
+
+Basically we have the hardware that allow the SO to run which gives the user the possiblity to have an application and the dev to develop an application. For robot an application is some kind of interaction in the physical world, thw So is ROS and other parts while  HW is obsvious.
+
+A platform is then divided into SW and HW platform.
+
+a SW robot platform includes a lot of tools used to develop application programs such as:
+- HW abstraction
+- low-level device
+- control
+- sensing,recognition
+- SLAM
+- navigation
+- manipulaton and package management
+- libraries
+- debugging
+A robot SW platform gives an HW abstraction that combined with SW platforms allows us to develop application programs using software platforms without knowing the HW.
+
+![[Pasted image 20250305092735.png]]
+This is the part we are talking about for now.
+
+a robot SW platform gives us 
+- reusability
+- communication
+- availability of support for dev tools
+- active community
+## Robot Operating System
+
+ROS is a meta OS meaning that it performs scheduling loading monitoring and uses a virtualization layer between applications and distributed computing resources, it acts as a middleware and uses an existing SO, thus meta SO and not SO.
+
+ROS focuses on code reuse maxmization in robotics, we have a set of useful characteristics:
+ - distributed process
+ - package management
+ - public repository + APIs
+ - different languages to program
+## Yet Another Robot Platform
+YARP is a set of libraries, protocols and tools to keep modules and devices to decouple them and like ROS is a meta OS and and has the same objective. 
+It is composed by the following components:
+- OS: the interface with the OS to support easy data streaming, written to be OS neutral using the opensource ACE (ADAPTIVE Communication Environment) library portable across a very broad range of environments and inehrits portability, almost entirely written in C++.
+- sig: signal processing tasks to interface with common used libraries
+- dev: interfaces with comon devices used in robotics as framegrabbers digital cameras etc.etc.
