@@ -843,3 +843,12 @@ Communication can occur between:
 - two ports
 - a port and a name server
 - a name server and an external entity
+
+To communicate there must be a Connection betwen them, the connections involvig a certain port can be crete destroyed or queired by commuication between the external entity and that port, usually done by sending "port commands" using the YARP connection protocol.
+
+Ports comunicate with the name server using the "YARP name server protocol"  and such comunication method is used to create.remove,and query registrations.
+
+Here you can see an example of a YARP network
+
+![[Pasted image 20250315113944.png]]
+
