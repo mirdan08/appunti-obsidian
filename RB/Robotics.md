@@ -815,3 +815,31 @@ It is composed by the following components:
 - OS: the interface with the OS to support easy data streaming, written to be OS neutral using the opensource ACE (ADAPTIVE Communication Environment) library portable across a very broad range of environments and inehrits portability, almost entirely written in C++.
 - sig: signal processing tasks to interface with common used libraries
 - dev: interfaces with comon devices used in robotics as framegrabbers digital cameras etc.etc.
+in YARP we have a nameserverwhich serves the purpose of maintaining a list of all YARP ports and how to connect to them like a ROS master.
+
+The name is a YARP port usually named "/root" all other programs communicate with the name serer thorugh this port. It is abstracted away using YARP library calls but sometime client don't use yarp libraries thus the need.
+
+Conecting to it is like connecting ot any other port but we need to find the name server and socket port number, an idea is o siply fix the name server on a known machine or you have the server record its contact informaation in config file and other YARP programs will check it to see hwo to reach the name serer if it doesn't work use multicast to discover such server.
+
+A *Port* is an object that can read and write values to peer objects spread throughtout a network of computers and it is possible to create, add and remove connections either from that progra, the command line or another program, ports are speacialized into streaming communciation such as camera images or motor commands and you can swithc networks progtocls for the conections without changing a single line of code. The YARP library supports transmission of a stream of user data across varius protocls or other means like shared memory insulating a user of the library from the detals of the netowrk tecnolgoy.
+
+We use *Connections* to make named entities called *Ports* communicatetogehter they forma YARP networkwhere ports are a nodes and connectons are dgs.
+
+Ports want to move *Content* which is sequences of bytes representing user data, from one thread to another across pocess and machine boundaries, the flow of data can be manipulated an montored externally. A por can send *Content* from a thread to another or across machine boundaries and process boundaries and glow o data can be manipulated and monitored externally. A part can send Content to any other Port and can receive Content from any other number o other ports, if one port is configured to send content the have a Connecton which can be freely added or removed.
+
+The YARP name sere tracks information bout ports, it indexes the information by name like a DNS , to communicate with a port the porperties of that port need to beknown the YARP name server offers a conveniente place to store thee propertiesso that only the name ofthe port is needed to recover them.
+
+A YARP network is made of he following entities:
+1. a set of orts
+2. a set of connections
+3. a set of names
+4. a name server
+5. a set of registrations
+Each port has its unique name, each connecion has a source port and a target port, eachport maintains a list of all connections for which it is the target port. 
+
+In the netowrk we have a single name server and the name server maintains a list of registrations each registration contais ifomration abotu a single port identified by the name.
+
+Communication can occur between:
+- two ports
+- a port and a name server
+- a name server and an external entity
