@@ -635,9 +635,32 @@ This can actually take many forms.
 
 In this section we take care of sensors and perception and sensors in general.
 
-The first thing we define is a *transducer* which transforms energy of a kind into a energy of another kid and can work as both sensor and actuator, a *sensor* is a device sensitive to physical quantities and transforms them into a measurable and transferable signal by means of a transducer.
+Sensors allow for two kind of perceptions:
+- Proprioception: measure variables internal to the system e.g. joint position
+- Extroception: measure variables from the working environment e.g. dstance,force etc.etc.
 
+They aim at building an internal model of the model and robot itself, such models influences robot's brain complexity.
+
+## transducers
+
+The first thing we define is a *transducer* which transforms energy of a kind into a energy of another kid and can work as both sensor and actuator, a *sensor* is a device sensitive to physical quantities and transforms them into a measurable and transferable signal by means of a transducer. It acts as both sensor and actuator ad can be of two types:
+- Passive transducer: requires external energy for energy conversion.
+- Active transducer: convert directly input energy in output without external energy sources.
+Based on the kind on input,output and auxiliary energy we can classify transducers:
+- Radiant: intensity,frequency,polarization and phase.
+- Mechanical: position, velocity, dimension, compliance an force.
+- Thermal: temperature, gradient of temperature and heat.
+- Electrical: voltage, current, resistivity and capacity.
+- Magnetic: field intensity, flow density and permeability.
+- chemical: concentrations, crystal structure and aggregation state.
+all these kinds types of energy can be either input,output or auxiliary
 ## Sensor's fundamental properties
+
+A sensor is then defined as a device sensitive to physical quantities that can tranaform it in a transferable signal by means of a transducer, it inherits transducers properties and can be classified as:
+- proprio or extero ceptive
+- active or passive
+- w.r.t. a physical quantity
+
 There are quite a lot of properties useful to describe and understand for a sensor.
 - transfer function: it is the relation between quantity of measure and output of the sensor.
 - calibration:measuring outputs for known quantities , it can also be a *calibration cycle* where we do a trial to see the whole working range of a sensor usually divided into a part with increasing values and a part with decreasing values.
@@ -657,7 +680,47 @@ so we just measure how much dispersion a sensor can have.
 - sensitiveness: a small variation in input causes small variation in output, this measure is the ratio between input and output variation.
 - noise. is the amount of signal in the sensor output which is not given by the input
 - stability: how much the sensor can epp its working characteristics for a long time, it either long,medium or short.
-There are much more parameters
+There are much more parameters.
+
+This is just an introduction well see in detail
+
+### resolution & sensitivity
+With **resolution** we mean the smallest amount of change we can detect in the input that can be detected and accurately indicated by the sensor.
+With **sensitivity** we measure the change in output relative to a unit change in the input i.e. the measured quantity.
+
+![[Pasted image 20250325104535.png]]
+
+Here we see batter what happens, the sensitivity is the distance between the two values between the two consecutive steps i.e. the unit change in the input.
+### Sensor calibration
+Sensors need to be calibrated, the **calibration** is a procedure where we measure sensor's output for known quantities.
+
+We do a **calibration cycle** is the trials that overs the whole working range of a sensor, we have two parts:
+1. one with increasing values
+2. one with decreasing values
+Below we see an example of cycle results for a linear fitting experiment
+
+![[Pasted image 20250325105123.png]]
+This is the measurement of a temperature sensor showing value results at the variation of temperature related to the voltage output with a linear fit, in this case relationship is linear and is quite easy to describe and understand.
+The curve generated is the *calibration curve*  and it used to measure **linearity**
+### Linearity
+The linearity is measured as the maximum difference expressed in % of the maximum value between characteristic curve and the reference line.
+
+The linearity is referred to the static calibration plot of the curves obtained when we show output and input amplitude under static conditions, its degree of resemblance to a straight line is the linearity.
+![[Pasted image 20250325111707.png]]
+
+the ideal response here is the reference line and he actual response is the response of the parameter. Basically the more we have linearity the easier it is to invert the relationship and obtained back the measured parameter when using the sensor.
+
+### Hysteresis
+If a sensor has hysteresis we have that for the same input value output varies, we measure it as the difference between the two output curves of the sensor during the calibration cycle and is expressed as a % of the maximum value for the transfer function
+
+![[Pasted image 20250325112103.png]]
+Usually it happens for variations of sensors in he full cycle of measurement.
+
+### repeatability and stability
+We use **repeatability** to see how much our sensor is reliable over time, it is defined as deviation between measurements in sequence when the tested object approaches the same value form the same direction each time usually expressed as percentage in the sensor range.
+
+The **stability** is how much a sensor can keep its working characteristics over time , usually classified as wither *short*,*medium* or *long* w.r.t. the time.
+
 
 ## Sensor's role in a robot
 
@@ -769,6 +832,26 @@ we have the full tension $v_{ref}=R_Ti$ between endpoint 1 and 3 and we measure 
 $$
 L_1=L_T\frac{R_1}{R_T}=L_T\frac{v_{out}}{v_{ref}}
 $$
+### Hall effect sensors
+this kind of sensor uses the *hall-effect principle*: where a current $I$ flows it is immersed in a magnetic field of intensity $B$ and voltage $V$ which originate in the direction normal both to current field and to the magnetic field.
+
+![[Pasted image 20250325113300.png]]
+
+such principle is used in much more complicated stuff like gloves and so on
+![[Pasted image 20250325114018.png]]
+
+the issue is that we don't get much more data thanthe direction of movement or the activation or not of the sensor or the fact that movement is happening with some degree of intensity.
+
+### Time of flight measurement
+
+We use sensor to gain a sense of ditance from a transducer to an object, this is the situation we are working with
+![[Pasted image 20250325114841.png]]
+
+Our transducer emits a pulse , the pulse is the reflected and echoed back at the transducer. by measuring the distance between these  three events we gain information on the distance.
+In formulas this is expressed as 
+$$d=\frac{t_ev}{2}$$
+where 
+$$v=\text{avg speed of signals emitted},t_e=\text{time between signal emitted and echo arrived}$$
 
 # Robotic middlewares and ROS
 
