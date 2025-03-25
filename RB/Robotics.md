@@ -852,6 +852,28 @@ In formulas this is expressed as
 $$d=\frac{t_ev}{2}$$
 where 
 $$v=\text{avg speed of signals emitted},t_e=\text{time between signal emitted and echo arrived}$$
+Such technology can be used for ultrasound sensors .
+
+![[Pasted image 20250325221848.png]]
+
+These are some examples of ultrasound where we can use the logic from before to estimate the distance.
+
+### Laser range sensors
+
+We can user laser waves to measure ranges, in particular we put a pin-hole in short range finding sensors, we use a linear photo-diode as an array detector. The range from a sensor to the object is afunction of th position nd the maximum detected light along the array
+
+![[Pasted image 20250325223523.png]]
+
+
+
+![[Pasted image 20250325223726.png]]
+
+### Proximity sensors
+
+We basically detect an object in a spatial neighborhood with no distance measurement:
+- passive proximity sensors: detect perturbations of the environment
+- active proximity sensors: emit signals and get it back
+
 
 # Robotic middlewares and ROS
 
@@ -934,4 +956,19 @@ Ports comunicate with the name server using the "YARP name server protocol"  and
 Here you can see an example of a YARP network
 
 ![[Pasted image 20250315113944.png]]
+
+# Navigation
+
+As of now we know that we can assume the robot to be placed in the space, but we need to be sure of how to locate the root in the space.
+
+we want a reference coordinate system, a first idea would be to place it in space as below.
+![[Pasted image 20250325234012.png]]
+ the second approach is the use the robot itself.
+ ![[Pasted image 20250325234041.png]]
+ 
+
+in the second case we just treat everything relatively to robot and usa polar coordinates to represent ostacles, see the iamge below for an example.
+
+![[Pasted image 20250325234203.png]]
+
 
