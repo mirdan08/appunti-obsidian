@@ -971,4 +971,166 @@ in the second case we just treat everything relatively to robot and usa polar co
 
 ![[Pasted image 20250325234203.png]]
 
+We can also transform using polar coordinates to switch at will from world reference and robot reference frame in the velocity space
 
+![[Pasted image 20250326093536.png]]
+
+The navigation problem can be stated as reaching a final position from a starting position in geometric/sensory terms while avoiding obstacles.
+
+The way we can tackle this is with these instruments:
+- Localization: we have a geometric position $(x,y,\theta)$ in an absolute reference system or sensory state in the robot environment.
+- Maps/Models: formalization and representation of an environment
+- Planning: planning robot movements in the environment
+
+### Maps
+A map can be of two kinds:
+- Metric/Geometric Maps: they represent the objects in the world using their size and coordinates in the absolute reference frame
+- Topological Maps: the represent the objects in the world on the basis of their characteristics and relations among them
+
+The relevant known methods are occupancy grids and geometric descriptions. 
+For the occupancy grid the environment is represented on a bidimensional grid usually in a cell fashion where we discretize the world in a simple grid of swaures, see below:
+
+![[Pasted image 20250326094800.png]]
+
+Grids can have a fixed size  like above and below
+
+![[Pasted image 20250326094954.png]]
+or variable size to for more accuracy
+
+![[Pasted image 20250326095029.png]]
+
+In the geometric description instead we get an environment represented with geometrical means like segments,obstacles and free space
+![[Pasted image 20250326095219.png]]
+
+As for topological maps we have the environment defined in terms of points of interest for the robot and relations among points of interest and the relations between them.
+We say a an object to be a *point of interest* when it is relevant to the navigation or the task of the robot.
+A point of interest is either define by a position in the robot space or a sensory state.
+![[Pasted image 20250326095938.png]]
+we can combine a metric map with object recognition and get a meaningful oject labeling for locations on the map.
+![[Pasted image 20250326100113.png]]
+
+An easy to understand example for a complex home cis mapping the home envronemnt with points of intereset, first map the in the space
+![[Pasted image 20250326100209.png]]
+enumerate rooms and for each room number walls clock wise and for each wall number the points clockwise.
+![[Pasted image 20250326100232.png]]
+finally we get our graph of relationsships.
+![[Pasted image 20250326100307.png]]
+
+We can also mix the geometrical and map approaches 
+
+![[Pasted image 20250326100542.png]]
+
+## planning
+
+We now deal with path planning after describin the enviroment around us, the objective is the one described from before, in this case we start a fro a configuration to reach another and avoid obstacles in the mean time.
+
+A simple way of doing so is to consider the robot size, increase the object size virtually and treat the root as a point .
+![[Pasted image 20250326100815.png]]
+
+Planning is roughly divide into:
+- planning of the path: find the trajectory s.t. they avoid obstacles and reach the goal configuration.
+- following of the path: execute the trajectory and avoid unexpected obstacles.
+
+The configuration reachable from the robot are called *robot space* indicated as $C_{space}$ , in this space the robot is a point and obstacles are represented and occupy a ragion called $C_{obstacle}$ while the free region is called $C_{free}$ the path is a trajectory betwen two configs $q_{init}$ and $q_{goal}$ in $C_{space}$ and it belongs to $C_{free}$.
+
+Path planning is done in three ways
+### Roadmaps
+We connect points in the free space in a network, called *roadmap* made of unidimensional curves in the free space. We just want to connect them along this roadmap.
+
+In the Roadmap we can use two methods:
+- the visibility graph
+- and the Voronoi diagram
+
+#### Visibility graph
+Here we take a visibility graph $G$ whose nodes are the intitial configurations $q_{init}$ and $q_{goal}$ and all vertxes of  the polygons which represent obstales in the map, the edges of $G$ are all the segments that  connect wo nodes in G and don't intersect with obstacle polygons.
+![[Pasted image 20250326102121.png]]
+
+A wight can be associated to the edges and corresponding to the distance between the nodes that they connect, a path from start anf stop is found in the graph with alogirthm for minimum paths wihich minimizes the distance.
+
+#### Voronoi diagram
+
+We define free confiurations in teh free space as equidistant from the obstacle region, if the obstacles are polygons the disgram consists ofa finte set of segments and parabolic curves i.e. our roadmap.
+![[Pasted image 20250326102427.png]]
+
+We then find a path the goes along those curves to reach our end goal.
+
+### Cell decomposition
+
+It consists of decomposing the free space in regions, named cells, s.t. a path netween to adjacent ones is found and the map represened is called connectivity graph. Two nodes are connecte iff the twocells tha they repsent are connected.
+![[Pasted image 20250326102856.png]]
+
+In this case we just use the vertexes to draw vertical lines, each line stops whe nit encounters an obstacle or a wall, when this is one we can treat each one as a nodes in a graph and get our connectivity graph, in the map we can calculate the path and the result of this rocess is a sequence of cells called *canal*, the final path is obtained by taking the mid point of the cell boundaries.
+![[Pasted image 20250326103220.png]]#
+### potential fields
+
+The robot si a point in space that moves under the influence of an artificial potential produced by the goal configuration and obstacles, the final configuration hsa an attractive potential which pulls the robot towad the goal and obtacles have a repulsive potential which pushes the robot away from them. By summing attractive and repulsive potentials we generate a foce moving the robot toward the goals while avoiding obstacles.
+
+![[Pasted image 20250326103839.png]]
+
+![[Pasted image 20250326103858.png]]
+ This is the examples we where toaking about, now we go deeper on potential fields.
+We take differentiable potential function $U$ with local minima in $q_{goal}$ , we then pick two function 
+$$
+U(q)_{att}=\text{attractive potential function},U(q)_{rep}=\text{repulsive potential function}
+$$
+And our final potential function then becomes
+$$
+U(q)=U(q)_{att}+U(q)_{rep}
+$$
+and for point in space the motion of direction is given by
+$$
+F(q)=-\nabla U(q)=-\nabla U(q)_{att}-\nabla U(q)_{rep}=\begin{bmatrix} \frac{\delta U}{\delta x} \\ \frac{\delta U}{\delta y}  \end{bmatrix}
+$$
+
+
+We need to pick attractive potential, with the requiremnt to have a local minima in $q_{goal}$.
+The function we use is the parabolic potential.
+$$
+U(q)_{att}=\frac{1}{2}k_{att}\rho^2_{goal}(q)
+$$
+With $\rho_{goal}(q)=||q-q_{goal}||$ i.e. the distance from the goal.
+
+and 
+$$F_{att}(q)=-\nabla U(q)_{att}=- k_{att} (q-q_{goal})$$
+Now for the repulsive potential we want a protective barrier around the obstacle region to avoid robot contact with the obstacles and not affect it when it is far from obastacles.
+
+$$
+U(q)_{rep}=\begin{cases}
+\frac{1}{2}k_{rep}( \frac{1}{\rho(q)}-\frac{1}{\rho_0} )^2 \text{ if } p(q)\le \rho_0\\\\
+0 \text{ otherwise}
+\end{cases}
+$$
+with $\rho(q)=\text{minimum distance from the object.}$
+
+Now we can place the desired goal and its obstacles with the potential we just discussed, for the current robot confiuration just:
+1. sum total force vectors $F(q)$ generate by the potential fields
+2. set desired robot velocity $(v,w)$ proportional to $F(q)$.
+
+We can have local minimias occuring when repulsive forces nullifies the attractive force in points different from the goal.
+
+### Path planning
+
+Now we deal with path planning, it differs depending on the representation of space we use.
+For topological maps:
+- find path in the graph
+- translate it into instructions
+### Path following
+Now we have to stick to our plan, this is the diagram
+![[Pasted image 20250326111319.png]]
+
+The result of the planning in a series of points in space $(x_1,y_1,\theta_1),\dots,(x_n,y_n,\theta_n)$ , we find trajecotry and time laws that the robot will follow between each couple of points and te controller makes the robot execute such trajectory.
+
+![[Pasted image 20250326111536.png]]
+We use a trajecotory planner to actually follow the the sequence of points, Its is just an interpolation of points 
+![[Pasted image 20250326111657.png]]
+
+Now we deal with the hardware architecture of a mobile robot.
+
+![[Pasted image 20250326112332.png]]
+
+
+The actuatore control has two ways of controlling the actuators:
+- position control: setting a position to reach, and it is the rbot finding acclerations and velocities to actally set motors to reach the desired positions
+- velocity contrls: it consists in setting a velocity and an acceleration to the wheel motors
+![[Pasted image 20250326112914.png]]
+This is te Proportional, Integrative and Derivaive control, as we see this is just the 
