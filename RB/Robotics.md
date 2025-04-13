@@ -1134,3 +1134,45 @@ The actuatore control has two ways of controlling the actuators:
 - velocity contrls: it consists in setting a velocity and an acceleration to the wheel motors
 ![[Pasted image 20250326112914.png]]
 This is te Proportional, Integrative and Derivaive control, as we see this is just the 
+
+
+# Neural robot brain
+
+We can use a nerual network to learn a function for direct or inverse kinematic.
+![[Pasted image 20250327215407.png]]
+
+Basically we can learn a function that learns either joint angles from end effector position or another hat does viceversa, of course the most difficult one is the inverse kinematics since we need to define joint angles from end effector that could be way more and is difficult to predict basically for a lot of configurations we have the same end effector and the network will not be able to generalize to that.
+
+We can teach the network to do a certain position by just ding random deltas to the joints movements which could be a way to make learn a movement but we don't control it.
+
+So in short we create a dataset of $<\text{joint\_positions},\text{effector\_positions}>$ using direct kinematics and use effector position as a way to predict the joint positions, we go ass follows.
+
+![[Pasted image 20250331161833.png]]
+
+this is the situation we are dealing with where the netowrk structure is unknown.
+
+Such learning method is always possible, in the case of "soft continuum robots" we can exploit the relation between cable tendion and end effector position to control the robot tip.
+
+The robot is shown in the image below
+
+![[Pasted image 20250331162314.png]]
+
+Te soft arm is controlled by learning the inverse model that allows us to control the end effector position through the cable tension, we can collect points and exploit approximation capability capability of the NN as for the rigid robots.
+
+![[Pasted image 20250331162507.png]]
+
+A neural network can be used to solve such problem and thus we mode the relation as 
+$$
+x = f(q)
+$$
+With $x \in \mathbb{R}^m$ which is the orientation and postion vector of the robot and $q \in \mathbb{R}^n$ which is the joint vector and $f$ is a surjective function.
+
+We can develop a local representation by linearizing the function on a point $q^o$ and we get 
+$$
+\delta x = J(q^o)\delta q
+$$
+With $J(q^o)$ which is the jacobian at point $q^o$ and we have the infinitesimal changes $\delta x$ and $\delta q$ in $x$ and $q$. The differential IK method involves generating a set of  $(\delta x, \delta q, q)$ and learn a mapping that is 
+$$
+(\delta x,q^o)
+$$
+
