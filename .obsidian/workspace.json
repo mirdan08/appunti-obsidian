@@ -48,6 +48,20 @@
               "icon": "lucide-file",
               "title": "Robotics"
             }
+          },
+          {
+            "id": "772f008d91957e5a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "RB/Lez.  19-2-2025.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Lez.  19-2-2025"
+            }
           }
         ],
         "currentTab": 2
@@ -124,7 +138,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "AS/lectures/lez. 17-10-2024.md",
+                "file": "RB/Robotics.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -134,7 +148,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for lez. 17-10-2024"
+              "title": "Backlinks for Robotics"
             }
           },
           {
@@ -191,7 +205,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 423.5
+    "width": 422.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -203,19 +217,21 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "512082d6e2efff39",
+  "active": "fdf1eec148f323a1",
   "lastOpenFiles": [
-    "CL/NeurIPS-2020-bootstrap-your-own-latent-a-new-approach-to-self-supervised-learning-Paper.xopp~",
-    "RB/images/Pasted image 20250331162507.png",
-    "RB/images/Pasted image 20250331162314.png",
-    "RB/images/Pasted image 20250331161833.png",
-    "RB/images/Pasted image 20250327215407.png",
-    "RB/images/Pasted image 20250326112914.png",
-    "RB/images/Pasted image 20250326112332.png",
-    "RB/images/Pasted image 20250326111657.png",
-    "RB/images/Pasted image 20250326111536.png",
-    "RB/images/Pasted image 20250326111319.png",
-    "RB/images/Pasted image 20250326103858.png",
+    "RB/images/Pasted image 20250413163617.png",
+    "RB/images/Pasted image 20250413160407.png",
+    "RB/images/Pasted image 20250413145756.png",
+    "RB/images/Pasted image 20250413145735.png",
+    "RB/images/Pasted image 20250413145230.png",
+    "RB/images/Pasted image 20250413144632.png",
+    "RB/images/Pasted image 20250413144423.png",
+    "RB/images/Pasted image 20250413144327.png",
+    "RB/images/Pasted image 20250413143532.png",
+    "RB/images/Pasted image 20250413143402.png",
+    "RB/images/Pasted image 20250413143221.png",
+    "CL/NeurIPS-2020-bootstrap-your-own-latent-a-new-approach-to-self-supervised-learning-Paper.xopp",
+    "CL",
     "RB/Lez.  19-2-2025.md",
     "RB/Robotics.md",
     "RB/images",
@@ -248,8 +264,6 @@
     "DM/Data mining.md",
     "AS/lectures/lez. 17-10-2024.md",
     "DM/lectures notes/Lez. 15-10-2024.md",
-    "DM/lectures notes/lez.6 3-10-2024.md",
-    "AS/lectures/images",
-    "AS/lectures"
+    "DM/lectures notes/lez.6 3-10-2024.md"
   ]
 }
