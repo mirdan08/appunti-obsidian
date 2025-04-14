@@ -1366,4 +1366,101 @@ With polynomial coffiecents $a_{0,k},a_{1,k},b_{0,k},b_{1,k},b_{2,k}$ to be dete
 ![[Pasted image 20250413163617.png]]
 basically the first case is the linear interpolation between points and the second case in the quadratic interpolation whch maintain the correspondence with linear interpolations.
 
+## Motion control in joint space
 
+We use such interpolation methods from before to move the end-effector from $x_i$ to $x_d$ without taking into account the trajectory. The final position is just tranformed into the joint space as $q_d$ with the the inverse kinematic transformation as $q_d=K^{-1}(x_d)$ , the same goes for $x_i$ and then we move the current positon $q_i$ to the desired position $q_d$.
+
+![[Pasted image 20250414091250.png]]
+
+This is the general robot control scheme, starting from the trajectory planning we can use the inverse kinematics to convert the desired $x_r$ from operational space  into the joint space equivalent $q_r$then we feed this into. 
+In this tage the trajecotry  of the end effector in the operational space is not predictable due to the non linear effects of direct kinematics.
+
+On the other end of the pipeline we have the $x$ vector describing the actual pose of the end effector usually made of six variables i.e. 
+$$
+x=[x\text{ }y\text{ }z\text{ }\phi\text{ }\theta\text{ }\psi]^T
+$$
+the position is determined by the the vector from the origin of the world coordiate fram eto the robot end point. while orientation is determined by the usual three variables:
+- $\phi$ is the the variable around the $z$ axis
+- $\theta$ is the variable around the $y$ axis
+- $\psi$ is the variable around the $x$ axis
+
+The loop for us "closes" with $q$ which is the joint coordinates given back by the robot, the result is fed to the sensors which measure if it is correct w.r.t. the real world position and then we can calculate the results as $\tilde{q}=q_r-q$  which is fed to the control, we can compare basically $q_r$ with the actual joint configuration by the difference.
+
+The control block will then output the final $u$ value which is fed to the actuators that enforce the forces or torques necessary for the robot motion.
+
+
+The interesting part for us is the position control.
+![[Pasted image 20250414093333.png]]
+
+The control is based on calculation of the positional error and determination of control parameters which enable reduction or suppression of the error. such positional error is reduced for each joint separately which many that there are as many controllers as there are DOFs!
+
+the reference position is obtaied as the difference betwen the previous $q$ and the desired $q_r$, what we actual miss is the computation of the $u$ signal which is done as 
+$$
+u=K_p(q_r-q)-K_d\dot q
+$$
+in this scheme we also use the velocity of the joints in the model along with the difference, $K_p$ is a diagonal matrix of the gains of all the joint controller which is called the *proportional position gain*. using such matrix amplifies the error $\tilde q$. this provokes a movement in the direction of the reduction of the positional error, since it is proportional we could have overshooting which not allowed for our purposes as it could result in collisions. This issue is solved by closing the loop with negative sign i.e. subtratcting $K_d\dot q$ which dampens the system where $\dot q$ is the velocity of of the joints and $K_d$ is the diagonal matrix of velocity gains.
+
+all these serve the purpose of controlling the robot at higher velocities and bring stability into the system.
+
+This dampens the system in the fastest part of the system which is not actually necessary so we can upgraded the PD controller to refrence the velocity signal of the desired position.
+
+$$
+\dot {\tilde q}=\dot{q}_r-\dot{q}
+$$
+and we see below the modified scheme.
+![[Pasted image 20250414095132.png]]
+
+the control lgorithm then becomes 
+
+$$
+u=K_p(q_r-q)+K_d(\dot{q}_r-\dot{q})
+$$
+we use the difference in velocities instead of the total velocity which reduces the damping effect.
+
+It seems obvious that we should set appropriately $K_p$ and $K_d$ :
+- for $K_p$ set high values when you want fast responses
+- for $K_d$ sets the damping and garantuess a fast response without oscillations
+For both K's te parametrs aare set indipendently for each joint.
+
+A robot mechanism is influenced by many forces: Inertial Coriolis, centripetal and gravitational.
+
+Also frictional forces happen in robot joints and must be included in the robot dynamic model, for a simplified model we take ino accout only viscous friction which i s proportional to the joint velocity encoded into $F_v=\text{diagonal matrix of joint friction coefficents}$.
+
+All these forces must be overcome bu robot actuators and we can express this in the following equation
+$$
+\tau = B(q) \ddot q + C(q,\dot q)\dot q + F_v\dot q+g(q)
+$$
+where the terms have the following meaning:
+- $\tau$ is the torque
+- $B$ is the inertia term
+- $C$ is the coriolis term
+- $F_v$ friction of coefficents
+- $g$ is the gravity term
+
+We hae to go term by term here:
+- $B(q)\ddot q$ : this is the inertia term where the more mass / the faster it is accellerating the more more torque we need.
+- $C(q,\dot q)\dot q$: basically these forces are influenced by the rotation of joints that influence other joints that might be attached, usually ignorable in other settings but not for the dynamic ones, the more we are rotating faster the more torque is needed.
+- $F_v \dot q$ is the viscuous friction which is related to internal riction like internal damping or velocity related like air, the more we have the more torque is needed.
+- $g(q)$ which is related to gravity, the more it is te more torque we need.
+
+all these are not included in our regular controller. knowingthe dynamic model we can predict the necessary forces to perform motion and are enerated regardless of the position error signal.
+
+in quasi-static conditions, i.e. robot not moving or moving very slowly, we can assume zero accelerations $\ddot q \sim 0$ and velocities $\ddot q \sim 0$ so we get that the dynamic model is $\tau \sim g(q)$ .
+
+we can add such gravity compensation in the scheme from before
+![[Pasted image 20250414103508.png]]
+
+in the new scheme $\hat g(q)$ we have another force which is the torque , in our case is just the gravity approximation, in this way the PD controller doesn't ave to reduce errors caused by gravity.
+
+## Motion control in the operational space
+
+All the control schemes are based on internal coordinates(joint positions). what we care about in the end is the end-effector posiion instead of robot joints diplacements.
+In the movement from $x_i$ to $x_d$ the robot follow a trajecotyr in the operational space according to a planed time law.
+
+Our robot follows a trajecotyr determined by thefollowing functions
+$$
+(t,p(t),\Phi(t),\dot p(t),\omega(t))
+$$
+we have the time $t$, a position $p(t)$ , a set of joint velocities $\Phi(t)$ a set of accelerations$\dot p(t)$ and the set f currents and voltages to give to the motors to in order to apply to the joints the velocities and accelration calculated.
+
+The velocities and accelrations are calculated usiga jacobian and expressed in cartesian cooridants and also voltages and currents give the motors 
