@@ -1645,4 +1645,151 @@ there are various tecniques of various kinds, each of hem serve a purpose,see th
 operators can work at various levels:
 - point/pixel: the value of point $O(i,j)$ depending on the input images values $I(i,j)$.
 - local/spatial: the output image value in point $O(i,j)$  depends on input image values in a neighborhood of point $I(i,j)$
-- global operators: the output value in piint $O(i,j)$ depends on the whole input image values.
+- global operators: the output value in point $O(i,j)$ depends on the whole input image values.
+
+Monadic operators are operators that do image-processing operations producing as a result an image of the same size as the input and the output is a function of the correpsonding input
+
+$$
+O[u,v]=f(I[u,v]) \text{ }\forall (u,v) \in I
+$$
+we can use a particular clas of monadic operator to change the type of pixel data, a monodic operator  to convert a color to a greyscale image with each input corresponding to the luminance.
+
+### image histograms
+
+We can analyzer the distribution of pixel values to provide useful information about the quality of the image and composition of the scene, the histograms gives us a histogram of how many times a pixel value occurs. We can use them to obtain info like under exposure if the values of the image are closer to the right we get that we have shifted histogram on the left while for over exposure we are shift to the right.
+
+![[Pasted image 20250415215702.png]]
+
+here distribution is not uniform, we have various peaks which are depending on the scale at which we consider data.
+
+An histogram can be coded as a a piar of vecotrs $[n,v]$ where the elements of $n$ are the number of times a pixel occurs with the value of the corresponding element of $v$.
+
+in this case peaks are defined as the points where the number of occurences is greather tha ntheir immediate neighbors in a raidus of neighbours which we have to set.
+
+usually the peaks corrosponde to the histogram corresponding to particular populations of pixels in the image while the lowest ones correspond to ground and roof. middle peak correspons to sky pixels nad highest to white walls.
+
+Of course an histogram is not aware of spatial distribution.
+
+### monadic operations
+
+a common monaidc operation is threhsolding, it is a logical operation that turns values of pix els into two possible values.
+
+other operations to do are converting from color to grey and lightening and darkening.
+
+![[Pasted image 20250415220716.png]]
+
+another possiblity is inverting grey level
+
+![[Pasted image 20250415220742.png]]
+
+another possiblity is a trasnformation to a binary image with black 0 or white 255 values.
+
+$$
+\begin{cases}
+255 \text{ }if\text{ } f(x,y) \gt T\\
+0 \text{ }if\text{ } f(x,y) \le T
+\end{cases}
+$$
+we can have T be variable or constant and can be determined by empirical methods.
+
+### diadic operators
+We have two input images result in one output image all three of the sam size, each output pixel is a function of the corresponding pixels of the two images
+
+$$
+O[u,v]=f(I_1[u,v],I_2[u,v]) \text{ }\forall(u,v) \in I_1
+
+$$
+some examples can be binary arithmetic like addition subratatction multiplication elements wise et.cetc.
+
+One example is chroma keying, we can use it to super impose images of objects, we just put the subject on a blue or green background and use the distribution on the green channelto distringuish between the background and the subject, the the high pick contains the poplation fo the background everything else is the subject in question and then we can create a masjk corresponding to such pixels in the background region by selection anything with green less than a certain theshold which is just before reaching the peak corresponding the the background in our case. after that we can do what we want withit.
+
+
+this is aa very special case but in genral what is background and what is not is illdefined and application specific
+
+One of the most useful processes we can perform is partitioning an iamge into application meaningful regions, we aim to separate pixel represent objects from all other pixels representing other  stuff. 
+
+We can process an image sequence and estiamte backgrounds even when objects are moving in the scene, we use a recursive algorithm to update the estimated background image, we do an estiamte recursively as follows with $\hat{B}$ beign the background estimator
+
+$$
+\hat{B}\langle k+1 \rangle \leftarrow \hat{B} \langle k \rangle + c(I\langle k\rangle - \hat{B}\langle k \rangle)
+$$
+with $k$ beign the time step and $c(\dots)$ the monadic image saturation function 
+
+$$
+\begin{cases}
+\sigma, &x\gt \sigma\\
+x, & -\sigma \le x\le \sigma\\
+-\sigma, &x\lt -\sigma\\
+\end{cases}
+$$
+
+this makes for moving objects to remain a blur while the static background remains still.
+
+### local/spatial operators
+
+in this case each pixel output is a function of all pixels in a region surrounding the corresponding pixel in the input image
+
+$$
+O[u,v]=f(I[u+i,v+j]) \text{    } \forall(i,j)\in W,\forall (u,v) \in I
+$$
+with $W$ being known as the window, usually a $w \times w$ square region with a odd side length $w=2h+1$ and $h \in \mathbb{Z}^{+}$ is the half width. all pixels are included in such window.
+
+![[Pasted image 20250415225728.png]]
+
+spatia loperator are of various kind, a linear spatial operator can be
+
+$$
+O[u,v]=\sum_{(i,j)\in W}I[u+i,v+j]K[i,j],\text{ } \forall (u,v) \in I 
+$$
+$K \in \mathbb{R}^{w \times w}$ is the kernel and all the elements are called filtert coefficents, we just multiply each element in K by the correponding element in the image for each K in the window. we consider the cnedter as the coordinate $(0,0)$ and $(i,j) \in  [-h,h] \subset Z \times Z$ .
+
+we can written such operator as $O=K \otimes I$.
+
+One issue is spatial operations when the window is close to the edge of the input image as shown in figure, basically we have to define what values should usch out of boundary pixels have:
+- pick 0 so that they don't matter
+- we just don't pick such points and get back a result of size $(W-2h)\times(H-2h)$ slithly smaller than the input.
+![[Pasted image 20250415230415.png]]
+
+#### smoothing
+another important necessity is to smooth values a famous kernel to apply is the gaussian kernel.
+
+$$
+G(u,v)=\frac{1}{2\pi\sigma^2}e^{-\frac{u^2+v^2}{2\sigma^2}}
+$$
+we can control blurredness by the sigma value.
+
+another simple idea is just to use an average  of the neighborhooud for the kernel
+$$
+g(x,y)=\frac{1}{P}\sum f(n,m)
+$$
+with $P$ number of pixels in the region.
+
+another point is to take the median of a set of values in the neighborhood:
+$$
+g(x,y)=\text{median of }(x,y)
+$$
+we defiend as mean the value s.t. half values are below and half are above it.
+very useful when you have salt and pepper issues and use it to remove noise.
+
+we have at some point to make a decision between one or the other of course.
+
+
+The method is heavily reliant on scene illumination change or viewpoint change.
+
+image segmentation is considered as three subproblems:
+- classification: we cllassify each pixel to be in one of $C$ classes $c \in \{0,\dots,C-1\}$, when $C=2$ we have a binary classification. always application specific
+- representation: we have adjacent pixel in the same class connect to form sptial assets $S_1,\dots,S_m$ either repsented by a label for each pixel or a list for eahc class contraingt the pixel coordinates defining a boundary on the conected set,
+- all $S_i$ are described in terms of compact scalr of vecrtor valued featyres like size,position and shape.
+
+We start with the classification issue, in particualr we will studi binary classification.
+
+the easiest part is applyinga monadic operator
+$$
+c[u,v]\begin{cases}
+0, if\text{ } I[u,v]< t\\
+1, if\text{ } I[u,v]\ge t
+\end{cases}
+\text{ }
+\forall(u,v) \in I
+$$
+the decision is taken on the value of the pixel $I$ , usually called thesholding witth $t$ being the threshold.
