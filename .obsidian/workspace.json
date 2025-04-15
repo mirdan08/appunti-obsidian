@@ -27,20 +27,6 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DM/lectures notes/Lez. 15-11-2024.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Lez. 15-11-2024"
-            }
-          },
-          {
-            "id": "512082d6e2efff39",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
                 "file": "RB/Robotics.md",
                 "mode": "source",
                 "source": false
@@ -50,7 +36,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -124,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "AS/lectures/lez. 17-10-2024.md",
+                "file": "RB/Robotics.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -134,7 +120,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for lez. 17-10-2024"
+              "title": "Backlinks for Robotics"
             }
           },
           {
@@ -191,7 +177,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 423.5
+    "width": 422.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -203,22 +189,24 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "512082d6e2efff39",
+  "active": "80b9ce4a12dbaace",
   "lastOpenFiles": [
-    "RB/images/Pasted image 20250414103508.png",
-    "RB/images/Pasted image 20250414095132.png",
-    "RB/images/Pasted image 20250414093333.png",
-    "RB/images/Pasted image 20250414091250.png",
-    "RB/images/Pasted image 20250413163617.png",
-    "RB/images/Pasted image 20250413160407.png",
-    "RB/images/Pasted image 20250413145756.png",
-    "RB/images/Pasted image 20250413145735.png",
-    "RB/images/Pasted image 20250413145230.png",
-    "RB/images/Pasted image 20250413144632.png",
-    "RB/images/Pasted image 20250413144423.png",
-    "CL/NeurIPS-2020-bootstrap-your-own-latent-a-new-approach-to-self-supervised-learning-Paper.xopp~",
-    "RB/Lez.  19-2-2025.md",
+    "RB/images/Pasted image 20250415122244.png",
+    "RB/images/Pasted image 20250415122157.png",
+    "RB/images/Pasted image 20250415122055.png",
+    "RB/images/Pasted image 20250415121945.png",
+    "RB/images/Pasted image 20250415121721.png",
+    "RB/images/Pasted image 20250415121413.png",
+    "RB/images/Pasted image 20250415121146.png",
+    "RB/images/Pasted image 20250415120428.png",
+    "RB/images/Pasted image 20250415115416.png",
+    "RB/images/Pasted image 20250415114528.png",
+    "RB/images/Pasted image 20250415114411.png",
+    "DM/lectures notes/Lez. 15-11-2024.md",
     "RB/Robotics.md",
+    "RB/Lez.  19-2-2025.md",
+    "CL/NeurIPS-2020-bootstrap-your-own-latent-a-new-approach-to-self-supervised-learning-Paper.xopp",
+    "CL",
     "RB/images",
     "SPM(2)/SPM-note/SPM notes.md",
     "RB",
@@ -232,7 +220,6 @@
     "DM/notes on paper P9.xopp",
     "images",
     "AS/lectures/Lez..md",
-    "DM/lectures notes/Lez. 15-11-2024.md",
     "DM/lectures notes/Lez. 14-11-2024.md",
     "AS/lectures/Lez. 14-11-2024.md",
     "AS/Lez. 12-11-2024.md",
@@ -249,7 +236,6 @@
     "DM/Data mining.md",
     "AS/lectures/lez. 17-10-2024.md",
     "DM/lectures notes/Lez. 15-10-2024.md",
-    "DM/lectures notes/lez.6 3-10-2024.md",
-    "AS/lectures/images"
+    "DM/lectures notes/lez.6 3-10-2024.md"
   ]
 }

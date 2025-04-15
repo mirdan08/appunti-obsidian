@@ -1463,4 +1463,186 @@ $$
 $$
 we have the time $t$, a position $p(t)$ , a set of joint velocities $\Phi(t)$ a set of accelerations$\dot p(t)$ and the set f currents and voltages to give to the motors to in order to apply to the joints the velocities and accelration calculated.
 
-The velocities and accelrations are calculated usiga jacobian and expressed in cartesian cooridants and also voltages and currents give the motors 
+The velocities and accelrations are calculated usiga jacobian and expressed in cartesian cooridants and also voltages and currents give the motors.
+
+### Motion control based on the jacobian matrix
+
+We can connect the forces acting on the robot end-effector and the joint torques using the jacobian matrix 
+
+$$
+\tau=J^T(q)f
+$$
+with $\tau$ being the joint torques and $f$ the force at the robot end point, our aim is to control the pose of the robot end effector defined by $x_r$.
+This is a different model that is based on the torques baically, it still produces $u$ but uses another method to do so.
+
+![[Pasted image 20250414213733.png]]
+
+
+the $x$ values are still made of the classical 6 vvalues like before, in this case we don't use a sensor to assess our actual position and modify the position w.r.t. the error and it is usually is the case with robots. in this case we can only use equation of the direct kinematic model i.e. $x=K(q)$ to determined the difference from the desired positition.
+$$
+\tilde{x}=x_r-x=x_r-K(q)
+$$
+such error must be reduced to 0, first we use a proportial control system with teh control matrix:
+$$
+f=K_p\tilde{x}
+$$
+this produces the $f$ we use to compute $\tau$ before which will be used to computer the final values fed into the robot i.e.
+$$
+u=J^T(q)f
+$$
+so we calculate the desired joint torques. the reason for the jacobian is easy to understand if you take the assumption that you have a simple mape from q to x as a function, what you want to know is how much it varies if you move a little bit the values in the joint space and what effectos it produces on the task space,the jacobian tells you extacly that and makes it so that you move accordingly when error is high and the jacobian is very different from 0 you move a lot in allora other cases you don't, so this translates into high movements when there is alot of torque available and low ones when it is not and you get near 0 values. Another view is that you move by the the derivative direction of decreasing the difference using $f$ mediated by the actual torque you can do in that point for the joints.
+
+$$J(q)=\frac{\partial k(q)}{\partial q}$$
+$J$ is basically the derivative of the direct kinematic model which makes sense and form that model we can estiamate the difference and use it to give the feedback on how much we can actually exert torque mediated by the vicinity to our error.
+## principles of motor control
+
+Human can showcase very complex movement behaviours, this works as we have various regions taking care of control issues like  disturbance rejections,state-estimation,predictions and internal models about the body and the world as shown in the image below.
+
+![[Pasted image 20250414223639.png]]
+this showcases the thing we just said as we have various mechanisms of thought that take action in the brain and act on the arm/muscles. 
+
+we refer to the part of the central nervous sutem involved in the generation of moevemmtns as the motor system, it recevies sensory inputs from multiople sensory receptors and provides motor outputs to multipled muscles. Thje mammalian motor system is divided into four interacting subsystems each playing a rol in the control of movements.
+
+![[Pasted image 20250414225543.png]]
+
+In articular here we focus on the *Cerebellum* which handle the adaptive aspect of the movement, iut uses similar computations for diferent cognitive and motor functions usually explained by a framework of adaptive filters.
+
+![[Pasted image 20250414225740.png]]
+
+We use a simple feedback based model 
+![[Pasted image 20250414225836.png]]
+
+basically we have the brain pickinig what to do and combined with where to do which is the result of delay in our capacity to observe and the feedbackj form proprioception on our muscles we send omotor commands.
+
+A very problematic issue is using a simple feedback loop to control with proportional feedback gain, basically we see tha following a trejecotyr goes as planned when we can observe some disturbance but there is now delay, the system becomes disturbed
+
+![[Pasted image 20250414230628.png]]
+
+if we are to have some delay we obtain some oscillatory movement in the response
+
+![[Pasted image 20250414230700.png]]
+
+internal models can deal with such delays and disturbances.
+
+![[Pasted image 20250414230726.png]]
+
+The inverse model can take the desired input and produce commands that move accordingly the body, we then add a feedback controller that computes some adjustments based on the senosry system delayed feedback of where you are, this is used to compute an adjustment to move the body.
+
+this is our internal model it can be straightforward or forward and take a copy of the feedback integrate it with the integration module and get back value that subtracted to the original gives the correct movement to the feedback controller.
+In particular a forward model should take a copy of the muscle commands from the feedback controler and generate predictions of the current or future state of the body.
+![[Pasted image 20250414231405.png]]
+
+in the forward model we have an integrator that should continuously integrate the predictions of the internal models with the respective delayed sensory feedback and produce the most likely body state.
+
+this requires the use of some probability
+
+![[Pasted image 20250414231835.png]]
+
+in short the forward model estimates the probability of the original state $y'$ starting from $u$ ,$p(y'|u)$, and then we have a posterior estimate of the original movment plus some information taken from the measurements i.e. $p(y''|y',z)$ .
+
+
+What we aim is emulating the human capability of aapting while moving, to do so we can use the inverse and the direct model to adapt by mean of motor errors, in this case we show first the inverse model approac:
+
+![[Pasted image 20250414232736.png]]
+
+in thi case we just improve using the output of the feedback controller and learn from it in order to combine a feedforward motor command with a feedforward motor command, in training we get that the feedback controller error should become lower and lower as the the inverse model learns to correct the errors by itself.
+
+
+The other approach is using the forward model that use the feedback controller output to store copies of the command and outputs a correction the gets fed into the feedback controllerand we use the combnined desired trajectory, the delayed actual trajecotry and the previous output to correct the feedback controller output and lower again the difference between the desired trajectory and the actual trajectory. basically we have a recurrent connection from the cerebellum to the pre-motor region.
+![[Pasted image 20250415113103.png]]
+
+Another biologic system we can study is the vestivular system, it is made of two components:
+1. the semicircular canal system, detecting rotational movements
+2. otolithic organs which detect linear accelerations
+![[Pasted image 20250415114238.png]]
+
+these two informations are tinegrated with the retinal motion information to allow correct representation of head position thus it contributes to our balance and sense of spatial orientation.
+![[Pasted image 20250415114248.png]]
+
+the actual neural mechanism for the perceptio from the eayes is done bu the Vestibul Ocualr Reflex neural mechanism wihich allows the movements of the eyes.
+
+![[Pasted image 20250415114411.png]]
+
+this can actually be emulated thorugh a network
+
+![[Pasted image 20250415114528.png]]
+
+# robot vision
+
+The main pipeline of a compute vision process goes as follows
+
+![[Pasted image 20250415115416.png]]
+
+we start with capturing illumations and material properties which generate reflections i.e. light on the scene, such light allows for image formation which is captured by a sensor getting the light, transduction from such sensor gives back a digital image which we can process on aperforme feature extraction for various applications.
+
+## Light and color
+
+In general light is a mixture of many wave lengths represented as a function of the wave length $\lambda$ which is a function $E(\lambda)$ which is the intensity.
+
+This is a mathematical model our own perception is in term of subjective quantities like brightness and color, the light we ccan actually see lies between 400nm and 700nm of wavelength as shown in the image below.
+
+![[Pasted image 20250415120428.png]]
+
+For the retina of the human eye we use a *foveal* region which is 0.6mm in diameter,witha 5 degree field of view and contains most 6 million cone cells:
+1. 65% sense red
+2. 33% sense green
+3. 2% sense blue
+unconsciously scan our high resolution fovea over to world to build a large scale mental image of our surrounds in addition withg 120 million rod cells that are motion sensitive and distributed over the retina.
+
+A digital camera sensor is analogous to the retina,but we have an array of lightr-sensitive photosites on a silicon chip, each one of the order of 1-10um sqyare abd givesa signal proportional to the intensity of the light falling over its area.
+
+for a camera photosites are covored by color filters which pass either red, green or blue to the photosites. such photosites should be arranged on a singular grid to do so a common way of disposing them is the Bayer pattern which uses 2x2 filters:
+- twop green filters
+- one red
+- one blue
+
+below an example
+
+![[Pasted image 20250415121146.png]]
+
+
+## image formation
+
+we treat an image as a function $f(x,y)$ where $(x,y)$ are the spatial coordinates and $f(x,y)$ is the grey level/light value.
+
+for a colored image the value is actually a set of three values 
+$$
+f(x,y)=\{f_{red}(x,y),f_{green}(x,y),f_{blue}(x,y)\}
+$$
+The actual image formation happens with the following pipeline more or less
+
+![[Pasted image 20250415121413.png]]
+
+
+what we get is the image digitized through the technqiue we have said before and get light levels plus the colors using the color formation methods.
+
+a digital image is sampled by discretizing spatial coordinates, then we quantize light by discretizing grey level s and finally we get a pixel which is the digital image element.
+
+For an image we have the classical informations:
+- resolution which is the number of pixels
+- image depth which is the number of colours for the pixels
+![[Pasted image 20250415121721.png]]
+
+Color images are actually made of three channel usually the most common are forme by a RGB triplet
+![[Pasted image 20250415121945.png]]
+
+the more a channel has bits the more we have detail, we can have binaryu image base of 1 bit i.e. 1 or 0, we can have grey levels which are 8 bits or 24 bits which is the true color.
+also we can vary the resolution of the images
+
+![[Pasted image 20250415122055.png]]
+
+for our purposes we just focus ono the image processing part.
+
+## image processing
+
+we wish to turn one or more images $f(x,y)$ into an image $g(x,y)$ with various methods
+![[Pasted image 20250415122157.png]]
+
+there are various tecniques of various kinds, each of hem serve a purpose,see the scheme below
+![[Pasted image 20250415122244.png]]
+### image processing operators
+
+operators can work at various levels:
+- point/pixel: the value of point $O(i,j)$ depending on the input images values $I(i,j)$.
+- local/spatial: the output image value in point $O(i,j)$  depends on input image values in a neighborhood of point $I(i,j)$
+- global operators: the output value in piint $O(i,j)$ depends on the whole input image values.
