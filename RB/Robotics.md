@@ -500,6 +500,85 @@ In the picture above:
 - The distance $d_i$ = distance between normal lines along the $(i-1)$-th joint axis, called **LINK OFFSET**
 - $\theta_i$ = angle between two normal lines on a pan of the normal axis, called **JOINT ANGLE**.
 
+In the D-H representation for a 6DOF arm wehave 7 coordinate frames:
+- $z_{i-1}$= motion axis of joint i
+- $z_i$=motion axis of joint i+1
+- $x_i$=normal to axis $z_{i-1}$ and $z_i$ 
+- $y_i$=completes the frame with the right hand rule
+we can express the end effecotr position in the end effector frame can be expèressed in the base frame with a sequence of transformations.
+THe algorithm to do so goes as follows
+1. fix a base coordinate frame
+2. for each joint sets
+	- joint axis
+	- origina of coordinate frame
+	- the x axis
+	- the y axis
+3. fix end effector coordinate frame
+4. for each joint and each link set
+	- joint parameters
+	- link parameters
+
+we can see an example
+![[Pasted image 20250416123541.png]]
+
+we can now build an homogenous transformation matrix describing relations between adjacent frames.
+The matrix is built through rotations and traslations:
+- rotate $x_i$ around  angle $\alpha_i$  to align the z-axes
+- translate $\alpha_i$ along $x_i$ 
+- translate $d_i$ along $z_{i-1}$ to overlap the 2 origins
+- rotate around $z_{i-1}$ for and angle $\theta_i$ to align the $x$ axes
+
+the D-H transformation can be expressed with a homogenous trasnformation matrix
+
+$$
+^{i-1}A_i=R_{\theta}T_{z,d}T_{x,a}R_{x,\alpha}
+$$
+we use 4 parameters one for each link which describe completely all joints wehter they are revolute or prismatic:
+- for a revolute joint: $d_i,a_i,\alpha_i$ are joint parameters and only $\theta_i$ varies
+- for a prismatic joint: $\theta_i,a_i,\alpha_i$ are fixed and only $d_i$ varies.
+the resulting matrix encodes:
+- rotation of $z_{i-1}$ by $\theta_i$
+- translation along $x_i$ by $a_i$
+- rotation about $x_i$ by $\alpha_i$
+$$
+r_{i-1} = {}^{i-1}A_i p_1 =
+\begin{bmatrix}
+\cos(\vartheta_i) & -\cos(\alpha_i)\sin(\vartheta_i) & \sin(\alpha_i)\sin(\vartheta_i) & a_i \cos(\vartheta_i) \\
+\sin(\vartheta_i) & \cos(\alpha_i)\cos(\vartheta_i) & -\sin(\alpha_i)\cos(\vartheta_i) & a_i \sin(\vartheta_i) \\
+0 & \sin(\alpha_i) & \cos(\alpha_i) & d_i \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
+
+so here the $i$ index refers to the frames, the matrix is thus  transformation from a frame to another frame in the open chain representation.
+$p_1$ is a homogenous coordinate vector expressed in frame $i$ which gest transformed by the matrix to be expressed in fram $r_{i-1}$ i.e. we use the coordinates to reach the same point but changing the frame and calculate the coordinates to reach the same point with a frame that is linked to the previous one.
+
+in this context a homogenous matrix $T$ describes the n-th frame with respect to the base frame is is the product of sequence of transformation matrices $^{i-1}A_i$ is expressed as
+$$
+^0T_n=^0A_1 \text{ }^1\dots^{n-1}A_n
+$$
+
+we can see it in another way
+
+$$
+^0T_n=\begin{bmatrix}
+X_i & Y_i & Z_i & p_i\\
+0 & 0& 0&1
+\end{bmatrix}
+$$
+with $X_i,Y_i,Z_i$ describing the orientation of the n-th frame with respect to the base frame.
+
+then we have $P_i$ being the position vector pointing from the origin of the base frame to the origin of the n-th frame and $R$ being the matrix describing the roll, pitch and yaw angles for the n-th frame
+
+and we can pack everything in a more compact way
+
+$$
+^0T_n=\begin{bmatrix}
+^0R_n & ^0p_n\\
+0&1\\
+\end{bmatrix}
+$$
+
 # Robot behaviour
 
 In industrial robotics you have a structured environment that is easy for robots to interact with then we switched to service robots that could operate in an unstructured environment with the development of techniques and theories for perception & action control.
@@ -1862,3 +1941,28 @@ we can follow the edges to trace such boundaries:
 1. scan image left to right and top to bottom until you get an edge
 2. link the edge with the previous one and search for other edges in its neighbourhood
 3. if there is 1 edge got to 2 , if 2 are present pick one and store the others if no neightbors are present it is a boundary end , if others are stored pick one a and go to 2 again or go to 1.
+
+## ROS
+
+ROS is a meta operating system and works as a middleware, it gives:
+- distributed processing
+- package management
+- public repository and API
+- suport to different languages like python,C++,java and matlab
+We have a ROS master acting as a name serve fora nod to node connection and manages communication between nodes, each node registers at startup with the master and communication without the master is impossible.
+ A node is the smallest unit of processor running in ROS, usually one node for purpose is recommended. the communication happens with XMLRPC communicating with the master and uses XMLRPC/TCPROS of TCP/IP when communicating between nodes.
+
+nodes are organized in packages that are individually compiled ,executed and managed and communicate like we have said before.
+
+a package is the basic unit of ROS, a ROS application is developed on a package basis and the package contains either configuration file to launch other packages or nodes. Each package contains the file snecesary to run it including ROS dependency libraries for running processes,dataseta and configuration files.
+
+a node sends or receives data between nodes via a message and mesages are variable like integer,floating point and boolean. a nested message structure ccontains another messages or an array of messages that can be used in the message.
+
+message delivery happens using TCPROS and UDPROS and topic is used as unidirectiona message delivery while service is used in bidirectional message delivery where request and response are involved.
+
+We use publish-subscribe approach , apublisher publishes information in atopic with the master which send a mossage to the subscriber nodes interested inthe same topic.
+
+analagously the term subscriber reive message to from the topic it is subscribed to and register its iinformation to a topic with the master and recevies information when it is pulbished in the topic.
+
+this is an asynchronous communication method based on these two actoers, usually sensor data is sent.
+
