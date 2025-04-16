@@ -1771,10 +1771,58 @@ $$
 we defiend as mean the value s.t. half values are below and half are above it.
 very useful when you have salt and pepper issues and use it to remove noise.
 
-we have at some point to make a decision between one or the other of course.
+we have at some point to make a decision between one or the other of course, the average based smooting creates new grey level  but all high spatial frequencies do as well and blurs the light/dark discontinuities, median based smootginf does not affect discontinuities but cancel peake with bases small enough w.r.t. the mask size.
 
 
 The method is heavily reliant on scene illumination change or viewpoint change.
+
+
+
+#### edge detection
+
+Anothe interesting task to solve is edge detection i.e. find edges relatively to objects. and edge is a point where grey levels quickly vary(discontinuities) and edge operator is a operato detecting such edge.
+
+![[Pasted image 20250416104045.png]]
+
+here we can see better what we mean, it is better to look at the pixel values in a 1 dimensional profile thorugh the image. 
+
+an informative gain we can have is to look at the imagethoriugh the eyes of a 1D profile though the image, for $v$=360 in the image above we can see that transpsing the grey value on a chart reveals some kind of strucutre, loook at the figure b in the image , in c we just havea closeup of the spike between  560 and 610 and finally image d shows a discrete derivative of such point showing where tinhs go up and then down signal a point.
+the derivative is calculated as 
+$$
+p'[v]=p[v]-p[v-1]
+$$
+
+we can use different ways of doing so e.g.
+$$
+p'[v]=\frac{1}{2}(p[v+1]-p[v-1])
+$$
+its asymmetrical derivativein this case and is equivalent to a convolution with a 1D kernel, such convolution causes the following transformation
+
+![[Pasted image 20250416105017.png]]
+
+in figure a we see that edges are clearly distinguished by very negative or very positive values for the vertical aplication, of we do so horizontally we have what happens in figure b , such two transofrmations can be used to obtained figure d by threating the values as direction/vecors and we can use figure their magnitude and observe strucutre in figure c.
+
+the previous kernel is obtained as 
+$$
+K=(+\frac{1}{2}\text{ }0\text{ }-\frac{1}{2})
+$$
+the notation for such value is
+$$
+I_u=D*I
+$$
+$$
+I_v=D^T*I
+$$
+with D being a derivative kernel, there are many kernels possible one is $K$ from before but it is not the only possibility.
+
+one interesting applications is template matching where we consider the kernel as an image and we widh to find an image that is very similar to that template.
+
+$$
+O[u,v]=s(T,W) \text{ } \forall(u,v) \in I
+$$
+with $T$ and $w \times w$ with the usual $w=2h+1$ length nad $W$ is centered at $(u,v)$. the function $s(I_1,I_2)$ is a sclaar measure describing similarity of two equal sized images $I_1$ and $I_2$.
+
+### image feature extraction
 
 image segmentation is considered as three subproblems:
 - classification: we cllassify each pixel to be in one of $C$ classes $c \in \{0,\dots,C-1\}$, when $C=2$ we have a binary classification. always application specific
@@ -1792,4 +1840,25 @@ c[u,v]\begin{cases}
 \text{ }
 \forall(u,v) \in I
 $$
-the decision is taken on the value of the pixel $I$ , usually called thesholding witth $t$ being the threshold.
+the decision is taken on the value of the pixel $I$ , usually called thesholding witth $t$ being the threshold. it has to be tried with trial and error.
+
+we also analyze the histogram of the image and see that  by pickng values between peaks we can have better discrimination with bimodal distributions.
+
+![[Pasted image 20250416110618.png]]
+
+we now want to form our sptial sets $S_1,\dots,S_m$ bu connecting adjacent pixels of the smae class. a blob is a pstaily contiguous region of pixels of the same class connected to each other.
+
+![[Pasted image 20250416111155.png]]
+
+in this case we have a binary image,we can label each blob with a class and connecte them returing a label matrix wth each element $s \in \{1,\dots,m\}$ corresponding to the input pixel and we can see ther result of giving each one a color.
+
+We can use a graph based impleemnteation and see everything  as a avertex with 8 edges connecting to its nieghtborhood pixel. each edge is weight as the non negative measure of dissimilaritybetween two pixels i.e. the abosulute difference ino color, the algorithm starts as each vertex in its own set at each iteration the edge weights are examined and if the different set have and edge at weight below the thresols we merge them. The threshold is a funtion of the size and set of a globla parameter k which sets the sacle for the segmentation al rger value leads to prefrecne for large valued connected components.
+
+We can do segmentation also by global operators, two elements to do so:
+- boundaries: represent a discontinuity
+- regions:elements of asegmented image based on homogeneity
+
+we can follow the edges to trace such boundaries:
+1. scan image left to right and top to bottom until you get an edge
+2. link the edge with the previous one and search for other edges in its neighbourhood
+3. if there is 1 edge got to 2 , if 2 are present pick one and store the others if no neightbors are present it is a boundary end , if others are stored pick one a and go to 2 again or go to 1.
