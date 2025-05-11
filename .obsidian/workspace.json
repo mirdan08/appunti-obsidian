@@ -4,11 +4,39 @@
     "type": "split",
     "children": [
       {
-        "id": "95ed32fcc7914ac5",
+        "id": "5d402a5556542e84",
         "type": "tabs",
         "children": [
           {
-            "id": "89aed8381dd26e2b",
+            "id": "0d2ae90996781346",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DM/lectures notes/Lez. 14-11-2024.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Lez. 14-11-2024"
+            }
+          },
+          {
+            "id": "80b9ce4a12dbaace",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DM/lectures notes/Lez. 15-11-2024.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Lez. 15-11-2024"
+            }
+          },
+          {
+            "id": "512082d6e2efff39",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -21,7 +49,8 @@
               "title": "Robotics"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -78,8 +107,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "334d59c5a726196e",
@@ -95,7 +123,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "RB/Robotics.md",
+                "file": "AS/lectures/lez. 17-10-2024.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,7 +133,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Robotics"
+              "title": "Backlinks for lez. 17-10-2024"
             }
           },
           {
@@ -162,7 +190,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 422.5
+    "width": 423.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -174,24 +202,22 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "89aed8381dd26e2b",
+  "active": "512082d6e2efff39",
   "lastOpenFiles": [
-    "DM/lectures notes/Lez. 14-11-2024.md",
+    "ricerca AI hat raspberry.md",
     "RB/Robotics.md",
-    "RB/images/Pasted image 20250416123541.png",
-    "RB/images/Pasted image 20250416111155.png",
-    "RB/images/Pasted image 20250416110618.png",
-    "RB/images/Pasted image 20250416105017.png",
-    "RB/images/Pasted image 20250416104045.png",
-    "RB/images/Pasted image 20250415230415.png",
-    "RB/images/Pasted image 20250415225728.png",
-    "RB/images/Pasted image 20250415220742.png",
-    "RB/images/Pasted image 20250415220716.png",
-    "RB/images/Pasted image 20250415215702.png",
-    "DM/lectures notes/Lez. 15-11-2024.md",
+    "RB/images/Pasted image 20250505105456.png",
+    "RB/images/Pasted image 20250505104657.png",
+    "RB/images/Pasted image 20250505104545.png",
+    "RB/images/Pasted image 20250505103634.png",
+    "RB/images/Pasted image 20250505103336.png",
+    "RB/images/Pasted image 20250505103256.png",
+    "RB/images/Pasted image 20250505103152.png",
+    "RB/images/Pasted image 20250505103030.png",
+    "RB/images/Pasted image 20250505102800.png",
+    "RB/images/Pasted image 20250505102627.png",
     "RB/Lez.  19-2-2025.md",
-    "CL/NeurIPS-2020-bootstrap-your-own-latent-a-new-approach-to-self-supervised-learning-Paper.xopp",
-    "CL",
+    "CL/NeurIPS-2020-bootstrap-your-own-latent-a-new-approach-to-self-supervised-learning-Paper.xopp~",
     "RB/images",
     "SPM(2)/SPM-note/SPM notes.md",
     "RB",
@@ -205,6 +231,8 @@
     "DM/notes on paper P9.xopp",
     "images",
     "AS/lectures/Lez..md",
+    "DM/lectures notes/Lez. 15-11-2024.md",
+    "DM/lectures notes/Lez. 14-11-2024.md",
     "AS/lectures/Lez. 14-11-2024.md",
     "AS/Lez. 12-11-2024.md",
     "smart application report for milestone 1.md",
@@ -220,6 +248,7 @@
     "DM/Data mining.md",
     "AS/lectures/lez. 17-10-2024.md",
     "DM/lectures notes/Lez. 15-10-2024.md",
-    "DM/lectures notes/lez.6 3-10-2024.md"
+    "DM/lectures notes/lez.6 3-10-2024.md",
+    "AS/lectures/images"
   ]
 }

@@ -954,6 +954,135 @@ We basically detect an object in a spatial neighborhood with no distance measure
 - active proximity sensors: emit signals and get it back
 
 
+
+### tactile manipulation
+
+For the in hand manipulation the tactile driven robotic handling goes beyond static object grasping, it incldes the abiliy to identify correctly the state of a task and adapt to highly unpredictable situations, in manipulations tasks there are a sequence of action stages demarcated by mechanical events like initiation and termination of contact between an object and a surface of another object. These events are called control points and generate distinct sensory signal that provide critical information on the progression in terms of goals of the task an play a pivotal role in controlling the actions!
+
+When unfamiliar objects are present there planning and control phases are untertwined rather than sequential , it involves two steps:
+1. **local object relocaton**: the object is slightly moved using a single finger while other fingers maintain a stable rasp
+2. **global regrasping phase**: the rearrange the hand configuration to achieve continued local movement.
+Dexterous manipulation capabilities allow for changing the object configuration by means of multiple fingers, tactile signals help to estimate the current object pose and a sliding or rolling feedback within the grasp space a major advancement is the ability of the system to lose its grip in a controlled manner enabling more dexterous manipulation since losing grip allows for additional freedom.
+
+![[Pasted image 20250505095815.png]]
+
+This is the final result 
+
+(GUARDA REGISTRAZIOE NON BASTANO SLIDES!)
+
+### perception in robotics
+
+Perception is defined as the result of techniques allowing robots to make sense of an unstructured real world extracting informaton from noisy sensor signals, a perception should give the robot:
+- task-relevant information
+- progress and result of its own actions, which could lead to failure
+- environment dynamics an other agents
+
+Sensor measuring the same form of energy and process it in similar ways are said to measure hte same *modality*, the modality is referred to the raw input used by the sensors. Robots are equipped with **multi-modal sensorization** i.e. many sensors of different modalities.
+
+The choice for sensing modality depends also on its spatial coverage on the robot. Visual sensing has larger coverage bu needs more than one source of information. Proprioception can be localized at joints if the rigid body hypotesis links holds otherwise in case of deformable robot's links proprioception should be distributed not localized.
+
+Contact sensing aims at measuring contact events along the robots body, despite sparsecontact events the robot would benefit from having sensorized skin that requires ofr high-resolution and distributed ontact spots.
+
+We want to design a NN that can process such raw data in ery different forms and fuse multiple senosry modalities.
+
+![[Pasted image 20250505101000.png]]
+
+This is the main framework we either have our sensors sending data of the same modality in diferent forms to the ML model or different modalities fed to the ML model.
+
+A fundamental problem in robot perception is to learn proper representations of the unstructured world, the representation has to be: **complete**,**spatially** and **temporally coherent**.
+
+We can learn via Supervised learning, we have the labels and use various models architectures to predict inputs depending on what is the task to solve:
+![[Pasted image 20250505101254.png]]
+
+When a labeling of samples is not present we have to reer to Unsupervised Learning
+![[Pasted image 20250505101338.png]]
+
+What differs is that learning with labels is way easier an more flexible in the approach, as you can see from the various kinds of architectures employed,while in an unsupervised setting we can only either recontruct if its something we have already seen or have a generator learn to replicate what we have already seen without noise.
+
+The third approach happens with Reinforcement Learning
+
+![[Pasted image 20250505101635.png]]
+
+Perception can be tought using n **embodied view** that lies on the interactive capability of he robotic agents, a robot must act on the environment to produce their own perception thorugh sel actuated movements otherwise the will perceive the environment pasivelt(they have an explorative behaviours in short).
+
+In perception being able to move and interact is quite important as makes for way better perception(it adds more information), various experiments can confirm so on biological subjcet, in ML the ability to conditions signals with actions is crucial to perception.
+
+### generative models for multi-modal distributed perception
+
+We have training data from which we wish to generate new samples of the same distribution.
+Training data will have a distribution $p_{data}(x)$, the samples being generated have distribution $p_{model}(x)$ and we want the latter to be similar to the former.
+
+two ways of doing so:
+- **explicit density estimation**: define define a $p_{model}(x)$ and solve for it via classical gradient based learning.
+- **implicit density learning**: learn model that can sample from $p_{model}(x)$ but without explicitly defining it.
+The reason for using such models is to have way more samples from the dataset and can be used to generate time series data used for simulation and planning.
+
+Here is a taxonomy of the models
+
+![[Pasted image 20250505102441.png]]
+
+#### Variational autoencoders
+
+A normla autoencoder has the ability to learn and reconstruct an input by constraining the latent activations in order to learn significant parts of the inputs and just the identityt functions
+
+![[Pasted image 20250505102627.png]]
+
+A variational autoencoder extends such model by learning to generate gaussian values condictioned from the encoder network to be meaningful and help the decoder network reconstruct correctly the input from a sampled latent vector
+
+![[Pasted image 20250505102800.png]]
+
+In short VAEs offer end to end classical training, measurable objectives and fast testime time inference with an interpreatble latent space but it suffers from sub optimal variational facots, has limited approximation of the true posterior d can have high variance gradients.
+
+For our purposes we will use a multi modal VAE
+
+![[Pasted image 20250505103030.png]]
+
+This is the model usage where modalities are learned and rconstruced together. Here we adopt early fuson by learning them together but we could also use a second methodolody which is learning the separately and then use separate encoders and decoders later.
+
+![[Pasted image 20250505103152.png]]
+This is late fusion and early predictionmm we aggregate them later in the latent space but predict straight from it.
+
+We can also condition the VAE using external inputs
+
+![[Pasted image 20250505103256.png]]
+
+#### Generative Adversarial Networks
+
+![[Pasted image 20250505103336.png]]
+Here the generative parts relies in the **generator** G which tries to fool a **discriminator** D. The generator learns a rela data distribution to generate fake samples while the disriminator learns a probavility $p$ of the output coming from a real dataset or bein generated by the model. and we combine them in a minimax model:
+- G inreases the prboability of D making a mistake
+- D classifies the real samples with greater confidence
+Gans too can be conditioned on additonal information $y$ 
+
+![[Pasted image 20250505103634.png]]
+
+In the image above we see what we where meaning before.
+
+Such models are good but are instable to trainand requires a good nash equilibrium in the game which might not always happen, we could have G fooling D making very similar looking samples from the data mode(mode collaps), Gans where tought to work only with real valued continuous data slight change in discrete data are still to be researched.
+
+We need to be able to evaluate a generative model capability:
+- samples should not be distinguishable from real samples
+- generated samples should have variety
+Generative models cannot be evaluated solely onthe models loss, alternatively you can use:
+- inception score, works over interclass and intraclass entropy
+- Frechet Incpetion distnace, calculates disntace between real and fake data using a continouous distribution
+
+Imagine a simulation environment where  a rigid robot can move and make the finger interact with the environment. Sensors gathering :
+- finger proprio ception
+- normal contact forces
+- camera recordings
+![[Pasted image 20250505104545.png]]
+
+The way this works is by havinga fusion module and a predictve module which are respectively encoder and decoder of a VAE:
+![[Pasted image 20250505104657.png]]
+What we will work with is trying to predict future sensory information ($\hat{s}_{t+1}$) from the current sensory information ($\bar{s}_{t}$) and we will have a current state representation ($\bar{s}^f_t$)made of mean and variance $\mu,\sigma$ made from the encoder $f$. The decoder $p$ is also conditioned on the current action taken $a_t$. 
+
+Proprioception is predictable but not informative so we cannot know have a strong map between proprioception and force meaning our own actions are difficult to understand from just proprioception. Adding more information for just prediction prorio ception is better than single modality, even without additonal information, so fusing vision with proprio ception enable forces prediction (**cross modal generation**). By plotting a correlation coefficent we see that correlation becomes much better when vision is added
+
+![[Pasted image 20250505105456.png]]
+
+
+
 # Robotic middlewares and ROS
 
 We have a lot of diverse platform components for platforms that compose them depending on the kind of personal device
@@ -1035,6 +1164,8 @@ Ports comunicate with the name server using the "YARP name server protocol"  and
 Here you can see an example of a YARP network
 
 ![[Pasted image 20250315113944.png]]
+
+
 
 # Navigation
 
