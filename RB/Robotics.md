@@ -123,7 +123,7 @@ $$
 $$
 \hat{y}_b= - \cos \alpha \hat{x}_s + \sin \alpha \hat{y}_s 
 $$
-It becomes clearer when you use a raphical explanation of the formulas, take the following intutions :
+It becomes clearer when you use a graphical explanation of the formulas, take the following instructions:
 ![[Pasted image 20250220093426.png]]
 
 The $\cos$ indicates the horizontal component of the unit vectors and $\sin$ indicates the vertical component, their sum allows you to obtain the the respectve unit vectors and you also have their orientation with simple trigonometric formulas where $$\alpha=(\pi -\frac{\pi}{2}-\theta)=\frac{\pi}{2}-\theta$$
