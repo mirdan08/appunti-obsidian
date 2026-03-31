@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tesi/MSG.md",
+                "file": "Tesi/RIPPLE++.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "MSG"
+              "title": "RIPPLE++"
             }
           }
         ]
@@ -177,18 +177,22 @@
   },
   "active": "6c696cf366f2bcc9",
   "lastOpenFiles": [
-    "Tesi/images/Pasted image 20260330154432.png",
-    "Tesi/images/Pasted image 20260330154203.png",
-    "Tesi/images/Pasted image 20260330154040.png",
-    "Tesi/images/Pasted image 20260330153342.png",
-    "Tesi/images/Pasted image 20260330153056.png",
-    "Tesi/images/Pasted image 20260330151037.png",
-    "Tesi/images/Pasted image 20260330140452.png",
-    "Tesi/images/Pasted image 20260330140450.png",
-    "Tesi/images/Pasted image 20260330140449.png",
-    "Tesi/images",
+    "Tesi/images/Pasted image 20260331180009.png",
+    "Tesi/images/Pasted image 20260331175627.png",
+    "Tesi/images/Pasted image 20260331174809.png",
+    "Tesi/images/Pasted image 20260331173936.png",
+    "Tesi/images/Pasted image 20260331172512.png",
+    "Tesi/images/Pasted image 20260331165535.png",
+    "Tesi/images/Pasted image 20260331163208.png",
+    "Tesi/images/Pasted image 20260331162137.png",
+    "Tesi/images/Pasted image 20260331153433.png",
+    "Tesi/images/Pasted image 20260331152458.png",
+    "Tesi/images/Pasted image 20260331152454.png",
     "Tesi/GSM.md",
-    "Tesi/MSG.md",
+    "Tesi/RIPPLE++.md",
+    "Tesi/Senza nome/Presentazione 2 aprile 20126.md",
+    "Tesi/images",
+    "Tesi/Senza nome",
     "SDC/Scalable Distributed Computing.md",
     "Homepage.md",
     "README.md",
@@ -203,8 +207,6 @@
     "DM/lectures notes/Lez. 15-11-2024.md",
     "RB/Robotics.md",
     "SDC",
-    "RB/images/Pasted image 20250505105456.png",
-    "RB/images/Pasted image 20250505104657.png",
     "RB/Lez.  19-2-2025.md",
     "CL/NeurIPS-2020-bootstrap-your-own-latent-a-new-approach-to-self-supervised-learning-Paper.xopp~",
     "RB/images",
@@ -216,12 +218,9 @@
     "SPM(2)/lez.  18-2-2025.md",
     "SPM(2)",
     "SPM/Untitled",
-    "DM/notes on paper P9.xopp",
     "AS/lectures/Lez..md",
     "AS/lectures/Lez. 14-11-2024.md",
     "AS/Lez. 12-11-2024.md",
-    "AS/README.md",
-    "DM/lectures notes/Lez. 5-11-2024.md",
-    "DM/lectures notes/Lez. 7-11-2024.md"
+    "AS/README.md"
   ]
 }
