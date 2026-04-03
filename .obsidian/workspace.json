@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tesi/RIPPLE++.md",
+                "file": "Tesi/Helios.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "RIPPLE++"
+              "title": "Helios"
             }
           }
         ]
@@ -177,22 +177,28 @@
   },
   "active": "6c696cf366f2bcc9",
   "lastOpenFiles": [
+    "Tesi/images/Pasted image 20260403114545.png",
+    "Tesi/images/Pasted image 20260403113822.png",
+    "Tesi/images/Pasted image 20260403101424.png",
+    "Tesi/images/Pasted image 20260402151215.png",
+    "Tesi/images/Pasted image 20260402151140.png",
+    "Senza nome 1.md",
+    "Tesi/Helios.md",
+    "Senza nome.md",
+    "Tesi/Riunioni e note/Riunione 2-03-2026.md",
+    "Tesi/RIPPLE++.md",
+    "Tesi/Riunioni e note",
+    "Tesi/MSG.md",
     "Tesi/images/Pasted image 20260331180009.png",
     "Tesi/images/Pasted image 20260331175627.png",
     "Tesi/images/Pasted image 20260331174809.png",
     "Tesi/images/Pasted image 20260331173936.png",
     "Tesi/images/Pasted image 20260331172512.png",
     "Tesi/images/Pasted image 20260331165535.png",
-    "Tesi/images/Pasted image 20260331163208.png",
-    "Tesi/images/Pasted image 20260331162137.png",
-    "Tesi/images/Pasted image 20260331153433.png",
-    "Tesi/images/Pasted image 20260331152458.png",
-    "Tesi/images/Pasted image 20260331152454.png",
-    "Tesi/GSM.md",
-    "Tesi/RIPPLE++.md",
     "Tesi/Senza nome/Presentazione 2 aprile 20126.md",
-    "Tesi/images",
     "Tesi/Senza nome",
+    "Tesi/images",
+    "Tesi/GSM.md",
     "SDC/Scalable Distributed Computing.md",
     "Homepage.md",
     "README.md",
@@ -216,11 +222,6 @@
     "SPM(2)/SPM-note",
     "DM/lectures notes/Lez. 26-11-2024.md",
     "SPM(2)/lez.  18-2-2025.md",
-    "SPM(2)",
-    "SPM/Untitled",
-    "AS/lectures/Lez..md",
-    "AS/lectures/Lez. 14-11-2024.md",
-    "AS/Lez. 12-11-2024.md",
-    "AS/README.md"
+    "SPM(2)"
   ]
 }

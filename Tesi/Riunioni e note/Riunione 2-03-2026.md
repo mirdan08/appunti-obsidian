@@ -1,0 +1,2 @@
+- Decentralizza parte di routing
+- 
