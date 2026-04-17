@@ -99,7 +99,7 @@ The prediction is whether each surface residue is in contact with the protein a 
 #### CNNs
 SpatalPPi uses protein complexes predicted by AlphaFold Multimer and classifies their interaction with a 3D CNN using rigorous curation processes were used to address class imbalance and eliminat redundancy as a considerable overlap exists between protein pair in both data and soruces. the model was trained on 600 positivi PPi pairs from thebiogrid database and 600 non interactive pairs curated from negatome 2.0 , each pair ws put into AlphaFold multimer to predict the individual strucures optimizing the resulting coplex.
 
-Fro mthe predicted protins we convert the structure into a 3D tensor to representsptialaotmic arrangements three encoding strategies where used: one-hot.volume and distance encoding. The encoded features. A 3D CNN was employed followed by a F layer classifiying it into interacting and non-interacting.
+From the predicted proteins we convert the structure into a 3D tensor to representsptialaotmic arrangements three encoding strategies where used: one-hot.volume and distance encoding. The encoded features. A 3D CNN was employed followed by a FC-layer classifiying it into interacting and non-interacting.
 Two main architectures:
 - Residual Blocks which is a ResNet adapated
 - DenseBlocks which is a DenseNet

@@ -34,23 +34,29 @@
               "icon": "lucide-file",
               "title": "Structure-based approaches for PPI"
             }
-          },
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "da88e90a241e3d5d",
+        "type": "tabs",
+        "children": [
           {
-            "id": "58d18aa4042d3b5a",
+            "id": "2e6bdd94968e6d9f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "conflict-files-obsidian-git.md",
+                "file": "DHL/Struct-ML approaches.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "conflict-files-obsidian-git"
+              "title": "Struct-ML approaches"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -204,9 +210,11 @@
       "bases:Crea nuova Base": false
     }
   },
-  "active": "58d18aa4042d3b5a",
+  "active": "2e6bdd94968e6d9f",
   "lastOpenFiles": [
     "DHL/Structure-based approaches for PPI.md",
+    "DHL/Struct-ML approaches.md",
+    "Senza nome 1.md",
     "conflict-files-obsidian-git.md",
     "Tesi/images/Pasted image 20260407185827.png",
     "Tesi/images/Pasted image 20260407150150.png",
@@ -223,7 +231,6 @@
     "Senza nome.md",
     "Tesi/Helios.md",
     "DHL",
-    "Senza nome 1.md",
     "Tesi/Riunioni e note/Riunione 2-03-2026.md",
     "Tesi/RIPPLE++.md",
     "Tesi/Riunioni e note",
@@ -250,7 +257,6 @@
     "CL/NeurIPS-2020-bootstrap-your-own-latent-a-new-approach-to-self-supervised-learning-Paper.xopp~",
     "RB/images",
     "SPM(2)/SPM-note/SPM notes.md",
-    "RB",
-    "DM/lectures notes/lez. 21-11-2024.md"
+    "RB"
   ]
 }
