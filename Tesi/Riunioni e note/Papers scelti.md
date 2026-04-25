@@ -1,0 +1,5 @@
+- [D3-GNN](https://dl.acm.org/doi/10.14778/3681954.3681961): altro approccio possibile 
+- [Survey caratterizzante le GNN a livello computazionale](https://arxiv.org/abs/2408.01902?utm_source=chatgpt.com): utile per analizzare meglio il problema
+- [TriParts](https://www.vldb.org/pvldb/vol18/p2992-simmhan.pdf):riguarda precisamente il problema degli streaming graphs per come lo hai analizzato con i relatori riguardo al load balancing e la velocità
+- [Survey riguardante processing di grafi dinamici](https://ieeexplore.ieee.org/document/11408872): survey particolarmente recente con molte proposte per gestire molti problemi sul processing di grafi dinaimci fra qui partizionamento località e costi per le operazioni.
+- 

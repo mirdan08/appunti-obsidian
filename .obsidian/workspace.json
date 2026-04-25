@@ -34,29 +34,23 @@
               "icon": "lucide-file",
               "title": "Structure-based approaches for PPI"
             }
-          }
-        ],
-        "currentTab": 1
-      },
-      {
-        "id": "da88e90a241e3d5d",
-        "type": "tabs",
-        "children": [
+          },
           {
-            "id": "2e6bdd94968e6d9f",
+            "id": "40e4204503162544",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DHL/Struct-ML approaches.md",
+                "file": "Tesi/Riunioni e note/Papers scelti.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Struct-ML approaches"
+              "title": "Papers scelti"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -113,8 +107,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "334d59c5a726196e",
@@ -210,10 +203,14 @@
       "bases:Crea nuova Base": false
     }
   },
-  "active": "2e6bdd94968e6d9f",
+  "active": "40e4204503162544",
   "lastOpenFiles": [
-    "DHL/Structure-based approaches for PPI.md",
     "DHL/Struct-ML approaches.md",
+    "Riunione con Sara per DHL 21-04.md",
+    "Tesi/Riunioni e note/Papers scelti.md",
+    "Tesi/RIPPLE++.md",
+    "Senza nome 2.md",
+    "DHL/Structure-based approaches for PPI.md",
     "Senza nome 1.md",
     "conflict-files-obsidian-git.md",
     "Tesi/images/Pasted image 20260407185827.png",
@@ -221,7 +218,6 @@
     "Tesi/images/Pasted image 20260407122823.png",
     "Tesi/images/Pasted image 20260407102045.png",
     "Tesi/images/Pasted image 20260403155737.png",
-    "Tesi/Riunioni e note/Senza nome.md",
     "DHL/images/Pasted image 20260414153254.png",
     "DHL/images/Pasted image 20260414153245.png",
     "DHL/images/Pasted image 20260414152940.png",
@@ -232,7 +228,6 @@
     "Tesi/Helios.md",
     "DHL",
     "Tesi/Riunioni e note/Riunione 2-03-2026.md",
-    "Tesi/RIPPLE++.md",
     "Tesi/Riunioni e note",
     "Tesi/MSG.md",
     "Tesi/Senza nome/Presentazione 2 aprile 20126.md",
@@ -253,10 +248,8 @@
     "DM/lectures notes/Lez. 15-11-2024.md",
     "RB/Robotics.md",
     "SDC",
-    "RB/Lez.  19-2-2025.md",
     "CL/NeurIPS-2020-bootstrap-your-own-latent-a-new-approach-to-self-supervised-learning-Paper.xopp~",
     "RB/images",
-    "SPM(2)/SPM-note/SPM notes.md",
     "RB"
   ]
 }
