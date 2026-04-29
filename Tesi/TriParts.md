@@ -1,0 +1,73 @@
+k-way based partioning algorithms for processing large streaming graphs usually ignore the neighborhood when splitting thegraphs to focus insted on avoiding vertex replication. The paperproposes a novel optimzation goal that aims at maximizing the number of local triangles in the paritions as and additional objectives. 
+Triangle count is an effective metric to measure conservation of community structure, here we see a prposal for a family of heuristics ofr online partioning over and edge stream using three DSAs: Bloom filters, Triangle Maps and High Degree Map.
+
+# Introduction
+Graph partioning can be a vertex-based k-way partioning  placing each vertex on one of k partitions s.t. each has a similar number of ertices to achieve load balancing and edge-cuts between vertices in different partitions are minimized. On the other hand edge-based partioning places each edge on one of the partitions to balanche the edges per partition and minimize the vertex replicas across partitions. For power-law graphs edge-based is more effective as it is seen in rel-world graphs and is the focus of this article.
+
+Optimal graph partioning is NP-complete and many heuristics hae ben proposed for static graps, but modern day graphs are streamed and dynamical. Streaming partioners always assume a central machine  which decides the partition on which to place the graph element and worker machine receive updates from the leader and add to their local respective partition.
+
+Each arriving edge is represented as vertex-pair from the update stream and is placed in one partition and a vertex is replicated when its incident edges go to different partitions to those partitions. Below we have a figure repesenting the situatuion better:
+![[Pasted image 20260429113359.png]]
+
+
+
+Formully our objetive is to achieve edge-balancing by getting to more or less $\frac{|E|}{k}$ edges per partitions and mnimize replicated vertices with a **vertex replication factor** stated as 
+$$
+\rho=\frac{(\sum_1^Vr(v))}{|V|}
+$$
+with  $1 \leq r(v) \leq k$ is the number of replicas per vertex (up to k).
+
+Blancing edges per partitons helps load balance the compute and memory load on workers when executing distributed graph analysis ove the partione fraph and reducing vertex replication mitigates duplicate elements across partitions and reuces messaging between them during distributed execution .
+
+The leader might use local in-memory state to make the decision of edge placement but given the large graph iszes it is important to have a state s.t. it is bounded to $O(|V|)$ and also $<< O(|E|)$  this is the formalization of a good and balanced partition graph. We should preserve the local community structure too within each partition as this is very good for GNN computation graphs.
+
+The most common case is real-world graphs typically exhibit a power-law degree distribution and small-world properties with few highly connect hub vertices forming dense communities and sparse inter-community links. Community quality is measure with Local Clustering Coefficient (LCC) and measures how close a vertex's neighbors are to forming a clique helping identifying small-world networks.
+
+Several edge-based streaming partitions with edge load balancing and min vertx replica objectives exist but do not care for the community structure being preserved.
+
+In the paper the proposal is to:
+1. Formalize the problem ofedge-based streaming partioning to enhance the local community struture and discuss the benefit of using triangle preservation to retain community structure and define a novel objective functon forthe same 
+2. A multithreaded partioning fraework *TriParts* is developed to use compact data structures matinated at the leader to make partioning decisions
+3. Four heuristics that incremntally leverage these states topartiton the incoming edge stream  tomeet our qualitative objectives
+4. Copare Triparts to othe SOTA baseline for large real-world graphs  and five synthetic graphs and five syntethic graphs 
+Static graph partioning is not interesting if not as a starting scenario lets swtich to streaming graph partioning, first we  distinguish into stateless partion algorithms,using hash functions, and stateful ones that have an internal incremental state that is updated each time.
+The steram can be random or according to a BFS/DFS.
+
+In **Vertex based partioning** these systems process a stream of vertices with their adjcency list.
+- LDG penalizes large parttions by placing vertex where partitons have the most neighbors
+- FENNEL balances neighbor co-location with non-neighbor separation 
+- CUTTANA reduces replcation by buffering the graph to retain global context before partioning
+In **Edge based partioning** :
+- PowerGraph proposesa  greedy algorithm to place an incoming edge onthe partitons where its incidnet vertces a been placed earlier it ofers a distributed implementation and maintains a $O(|V|)$  size for the state for decsion making at the leader, the most simple heuristic is using bloom filters to approimate this taking $O(c \times k)$ space complexity for a k-way partioning where $c$ is large constant representing bloom filter bits and $c < |V|$
+- Grid and PDS are stateless hash-based heuristics with an upperbound on vertex replices but do not care for graph topology
+- ADWISe proposes a window based algorithm that trades-off quality and latency
+- CuSP partitions graphs maintained in distributed memory of large HPC systems.
+- Degree Based Hashing and High Degree Replicated First are SOTA edge-based streaming partitioners are SOTA edge-based streaming partioners
+	- DBH maintains the degree of both vertices for each edge using a hash table of size $O(|V|)$ 
+	- HDRF replicates high-degree vertices to reduce replication and balances load using a scoring function but communication all partitions pe edge leading to a high overhead
+The proposals use a larger state at the leader than HDF but smaller then DBH, the leader comunicates wit hthe partitions periodically toupdate its state,time and space complexities fall in betwen the twotechqnieus , DBH doesn't consider graph structures at all while HDRF is optmized only to reduce the replication factor ignorin graph topology.
+
+Hybrid tehcniques exist in the literature:
+- PowerLyra combines both edges and vertices to et hybrid cuts for partioning based on the vertex degree
+- Leopard performs vertex duplication with edge cuts and dynamic rebalcning of the partitions when elements are deleted
+Note: here they consider an append only graph
+
+
+Suppose the classical graph fomrulation $G= \langle V ,E \rangle$ , $|V|=n$ and $|E|=m$ , the stream is a series of undirected edges arriving at the leader machine $S=[e_1,\dots,e_m]$ each edge appears exactly once with an arbitrary arival order. 
+
+## Problem formulation
+
+the formal goal is todivide the edge stream $S$ into k subgraphs $\mathbb{S}=\{S_1,\dots,S_k\}$ each formed from a subset of the streams as the edges arrive, an arriving edge is placed on exactly one of the worker machine $W_i$ that holds the partition $S_i$ i.e. $\forall i,S_i \subset E, \cup S_i = S$ and $\forall i,j. S_i \cap S_j = \emptyset$   so partitions never overlap with a given a priori static $k$.
+
+The first goal we have to achieve high quality streaming is is *edge balancing* meaning that $\forall i.|S_i|\approx \frac{m}{k}$ to allow balanced loading on the partitions each worker handle an evenly split load as the partition size grow built by scaling up CMs, when dierent edges incident on the same vertex $v$ are sent to different partitions if the number of replicas ofr a vertex $v$ is $r(v)$ and its consequent replication factor $1 \leq \rho = \frac{\sum_{v \in V}r(v)}{|V|} \leq k$   , $\rho$ is to be minimized as a secondary goal.
+
+## preserving communities
+
+With *Local triangles* we mean 3-cycles of edges that are fully present within a partition, for the *i*-th partition $\tau_i$ is the number of such structures. The *global triangle count* $\bar{\tau}$ is the set containing all the triangles in the unpartitioned graphi.e. $\tau \leq \bar{\tau}$ , we understand that partitioning eliminates triangles the toal umber of triangles then is $\tau = \sum_{i \in k}\tau_i$ and the ratio of triangles is also preserved $\hat{\tau}=\tau / \bar{\tau}$  .
+We can present the hypotesis of traingles preserving the communities
+### The community preserving hypotesis for triangles
+
+Vertices within a comminitu re more connected with vertices inside and less with nodes outside, an edge is between two vertces is in the same community with probability $p$ and proability $q$ of the same edge to connect different communities. By definition $p >> q$ the expected number for a comunity $C$ with $n$ vertices is $(T_{in}^C)=(^nC_3)\times p^3$ .
+the probability of a triangle existin across commuinties is either:
+- $(T_{out})=(^nC_3)\times pq^2$  if two edges are in one community and the third in a different one  
+- $(T_{out})=(^nC_3)\times q^3$ if three edges are spread across three communities.

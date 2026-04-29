@@ -48,9 +48,37 @@
               "icon": "lucide-file",
               "title": "Papers scelti"
             }
+          },
+          {
+            "id": "a0999a0ae64e465b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Tesi/Riunioni e note/Papers scelti.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Papers scelti"
+            }
+          },
+          {
+            "id": "a095921d1c4d01b6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Tesi/TriParts.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "TriParts"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -107,7 +135,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "334d59c5a726196e",
@@ -203,14 +232,19 @@
       "bases:Crea nuova Base": false
     }
   },
-  "active": "40e4204503162544",
+  "active": "a095921d1c4d01b6",
   "lastOpenFiles": [
+    "Tesi/images/Pasted image 20260429144242.png",
+    "Tesi/Riunioni e note/Papers scelti.md",
+    "DHL/Structure-based approaches for PPI.md",
+    "Tesi/Helios.md",
+    "Tesi/TriParts.md",
+    "Tesi/images/Pasted image 20260429113359.png",
+    "Thesis modeling.md",
     "DHL/Struct-ML approaches.md",
     "Riunione con Sara per DHL 21-04.md",
-    "Tesi/Riunioni e note/Papers scelti.md",
     "Tesi/RIPPLE++.md",
     "Senza nome 2.md",
-    "DHL/Structure-based approaches for PPI.md",
     "Senza nome 1.md",
     "conflict-files-obsidian-git.md",
     "Tesi/images/Pasted image 20260407185827.png",
@@ -222,10 +256,8 @@
     "DHL/images/Pasted image 20260414153245.png",
     "DHL/images/Pasted image 20260414152940.png",
     "DHL/images/Pasted image 20260414152926.png",
-    "DHL/images/Pasted image 20260414152803.png",
     "DHL/images",
     "Senza nome.md",
-    "Tesi/Helios.md",
     "DHL",
     "Tesi/Riunioni e note/Riunione 2-03-2026.md",
     "Tesi/Riunioni e note",
@@ -244,9 +276,6 @@
     "ricerca AI hat raspberry.md",
     "Exams plan for a full time.md",
     "Tesi",
-    "DM/lectures notes/Lez. 14-11-2024.md",
-    "DM/lectures notes/Lez. 15-11-2024.md",
-    "RB/Robotics.md",
     "SDC",
     "CL/NeurIPS-2020-bootstrap-your-own-latent-a-new-approach-to-self-supervised-learning-Paper.xopp~",
     "RB/images",
