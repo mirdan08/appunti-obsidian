@@ -1,4 +1,4 @@
-k-way based partioning algorithms for processing large streaming graphs usually ignore the neighborhood when splitting thegraphs to focus insted on avoiding vertex replication. The paperproposes a novel optimzation goal that aims at maximizing the number of local triangles in the paritions as and additional objectives. 
++k-way based partioning algorithms for processing large streaming graphs usually ignore the neighborhood when splitting thegraphs to focus insted on avoiding vertex replication. The paperproposes a novel optimzation goal that aims at maximizing the number of local triangles in the paritions as and additional objectives. 
 Triangle count is an effective metric to measure conservation of community structure, here we see a prposal for a family of heuristics ofr online partioning over and edge stream using three DSAs: Bloom filters, Triangle Maps and High Degree Map.
 
 # Introduction
@@ -67,7 +67,18 @@ With *Local triangles* we mean 3-cycles of edges that are fully present within a
 We can present the hypotesis of traingles preserving the communities
 ### The community preserving hypotesis for triangles
 
-Vertices within a comminitu re more connected with vertices inside and less with nodes outside, an edge is between two vertces is in the same community with probability $p$ and proability $q$ of the same edge to connect different communities. By definition $p >> q$ the expected number for a comunity $C$ with $n$ vertices is $(T_{in}^C)=(^nC_3)\times p^3$ .
+Vertices within a comminity are more connected with vertices inside and less with nodes outside, an edge is between two vertces is in the same community with probability $p$ and proability $q$ of an edge to connect different communities. By definition $p >> q$ the expected number for a comunity $C$ with $n$ vertices is $(T_{in}^C)=(^nC_3)\times p^3$ .
 the probability of a triangle existin across commuinties is either:
 - $(T_{out})=(^nC_3)\times pq^2$  if two edges are in one community and the third in a different one  
 - $(T_{out})=(^nC_3)\times q^3$ if three edges are spread across three communities.
+Since $q << p$ and $P(T_{in})>> P(T_{out})$ , i.e. the chance of triangles forming a community is pretty high thus preserving suc ch structure helps creating communities.
+
+Triangle counting is the basic building block of many community detection algorithms and is well studied and is also improtant to form complex networks with an underlying commuinity structure,
+### Vertex replication hypotesis
+If two partioning methods have similar vertex replication $\rho$ and edge balancing the one preserving more triangles $\tau$ and will have a high Local Clustering Coeffiicient(LCC).
+
+For $\tau(u)=\text{\# triangles for which }u \text{ is part of in partition } i \leq k$ and $d(u)$ its degree, The LCC of vertex $u$ in partition $i$ is $lcc_i(u)=\frac{2.\tau_i(u)}{d(u)(d(u)-1)}$ and the average clustering coefficient is then $\bar{lcc}_i=\frac{\sum_{u \in V_i} lcc_i(u)}{|V_i|}$ .
+
+Both partioning methods are edge-balanced each partiton will have then $\approx \frac{|E|}{k}$ edges and since both have the same vertex replication factor, the number of vertices for each partition will be more or less $\approx \frac{\rho|V|}{k}$, amd tje average degree of each partition wil also be the same hence if the tirangles preerved  in one partition $\tau_i$ increase also $lcc_i$ increases assuming a similar degree distribution $d(\dots)$ for vertices in the partioned graph under both methods.
+
+If $\rho$ decreases this will cause LCC to decrease since trhe average degree in a partition will increase.
