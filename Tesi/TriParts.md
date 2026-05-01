@@ -83,10 +83,6 @@ For $\tau(u)=\text{\# triangles for which }u \text{ is part of in partition } i 
 Both partioning methods are edge-balanced each partiton will have then $\approx \frac{|E|}{k}$ edges and since both have the same vertex replication factor, the number of vertices for each partition will be more or less $\approx \frac{\rho|V|}{k}$, amd tje average degree of each partition wil also be the same hence if the tirangles preerved  in one partition $\tau_i$ increase also $lcc_i$ increases assuming a similar degree distribution $d(\dots)$ for vertices in the partioned graph under both methods.
 
 If $\rho$ decreases this will cause LCC to decrease since trhe average degree in a partition will increase.
-=======
-
-
-
 ### Tirangle preservation hypotesis
 
 We define the transitivity of a graph as $$Trans=\frac{3\tau}{|triplets|}$$ where $|triplets|$ is a set of three vertices connect by two or more edges.
@@ -163,5 +159,3 @@ Each worker will have a thread pool to handle the stream of edges asigned to it 
 ## Processing workflow
 
 The reader queue is unbounded populated from the incoming edge stream, it is a thread safe java `ConcurrentQueue` and uses atomic operations allowing all the computer threads to concurrently remove the eges from the queue , eah thread indepednely esecutes the partioning heurstic using the local state information to assign the edge ot one of k partitions. 
-
->>>>>>> Stashed changes
