@@ -135,8 +135,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "334d59c5a726196e",
@@ -232,8 +231,9 @@
       "bases:Crea nuova Base": false
     }
   },
-  "active": "a095921d1c4d01b6",
+  "active": "fdf1eec148f323a1",
   "lastOpenFiles": [
+    "Tesi/images/Pasted image 20260430154726.png",
     "Tesi/images/Pasted image 20260429144242.png",
     "Tesi/Riunioni e note/Papers scelti.md",
     "DHL/Structure-based approaches for PPI.md",
@@ -255,7 +255,6 @@
     "DHL/images/Pasted image 20260414153254.png",
     "DHL/images/Pasted image 20260414153245.png",
     "DHL/images/Pasted image 20260414152940.png",
-    "DHL/images/Pasted image 20260414152926.png",
     "DHL/images",
     "Senza nome.md",
     "DHL",

@@ -71,6 +71,7 @@ Vertices within a comminity are more connected with vertices inside and less wit
 the probability of a triangle existin across commuinties is either:
 - $(T_{out})=(^nC_3)\times pq^2$  if two edges are in one community and the third in a different one  
 - $(T_{out})=(^nC_3)\times q^3$ if three edges are spread across three communities.
+<<<<<<< Updated upstream
 Since $q << p$ and $P(T_{in})>> P(T_{out})$ , i.e. the chance of triangles forming a community is pretty high thus preserving suc ch structure helps creating communities.
 
 Triangle counting is the basic building block of many community detection algorithms and is well studied and is also improtant to form complex networks with an underlying commuinity structure,
@@ -82,3 +83,85 @@ For $\tau(u)=\text{\# triangles for which }u \text{ is part of in partition } i 
 Both partioning methods are edge-balanced each partiton will have then $\approx \frac{|E|}{k}$ edges and since both have the same vertex replication factor, the number of vertices for each partition will be more or less $\approx \frac{\rho|V|}{k}$, amd tje average degree of each partition wil also be the same hence if the tirangles preerved  in one partition $\tau_i$ increase also $lcc_i$ increases assuming a similar degree distribution $d(\dots)$ for vertices in the partioned graph under both methods.
 
 If $\rho$ decreases this will cause LCC to decrease since trhe average degree in a partition will increase.
+=======
+
+
+
+### Tirangle preservation hypotesis
+
+We define the transitivity of a graph as $$Trans=\frac{3\tau}{|triplets|}$$ where $|triplets|$ is a set of three vertices connect by two or more edges.
+
+Triangles contribute 3 times to the size we multiply by three the actual number.
+
+A secondary definition is 
+$$
+Trans_=\frac{3\tau}{3\tau+|o\_triplets|}
+$$
+where $|o\_triplets|$ is the set of open triplets having a path but not ofrmin a triangle.
+
+Suppose to have a partionare $M$ preserving hte number of triangles with sensitivity $$
+Trans_i=\frac{3 \tau_i}{3 \tau_i + |o\_triplets_i|}
+$$
+For a single partitition $i$.
+
+Suppose to have an alternative partioner $M'$ for that same graph giving the same number of ertices and edges in a partition but not preserve as many triangles, its transitivity is then defined as 
+
+$$
+Trans'_i=\frac{3\tau'_i}{3\tau'_i+|o\_triplets'_i|}
+$$
+for a partition i, with $\tau \ge \tau'_i$. Now we get also that $Trans_i \ge Trans'_i$ , suppose $T(u,v,w)$ be a triangle preserved in partition $S_i$ of $M$ but not in partition $S'_i$  of $M'$  then for $T$ we can distinguish two cases:
+1. two edges of $T(u,v,w)$ are present in partition $S'_i$  so the denominator of $Trans'_i$ increases by 1 due to T and the numerator remains the same so $Trans'_i$ decreases 
+2. only one edge is present in $S'_i$ , the transitibity of the partition is not affected by $T$.
+Every missing triangle might decrease or mae the transitivity of $S'_i$ remain the same , in a fraction if the numerator and denominator are increased by the same quantity the fraction increases. Since $\tau > \tau'$ $S_i$ and $S'_i$ have the same number of edges and ertices we have $Trans_i \ge Trans'_i$ .
+
+## Optimization problem
+
+Preserving these structures is essential,we define this as an optimization problem with also our objective.
+
+We want to partion the community coming from a stream $S$ of edgs into $k$ partitions s.t.:
+1. Balance across edges is within a load-balancing factor $\epsilon$ $$\forall i. |S_i|\in[(1-\epsilon)\frac{m}{k},(1+\epsilon)\frac{m}{k}]$$
+2. Minimize the vertex replication factor $\rho$
+3. maximize the tirangle count ratio $\hat{\tau}$ 
+For an input graph $G=\langle G,E \rangle$ generated "uniformly randomly" where we have probability $q$ of generating an ege we assume the largest clique in the graph to be of size $\tilde{n}$ .
+
+When using an edge-based partioner for $\rho > 1$ some triangles will be missed $\hat{\tau} < 1$ an edge that is part of a clique and is replicated can break one or more triangles in the clique. 
+For $K \in G=\langle V,E \rangle$ being a clique of size $\tilde{n}$ and $\tilde{V}$ its set of vertices, $K$ has ${\tilde{n}(\tilde{n}-1)}/{2}$  edges, the number of unique traingle is $^{\tilde n}C_3$ and each edge is part of $(\tilde{n}-2)$ triangles per clique.
+When a edge misses we might have up to $(\tilde{n}-2)$ triangles, replicate a vertex within $K$ results in a missing triangle in a missing triangle with probability $\sigma$ over the entire stream, for a replication factor fo $\rho$ we get $\rho -1$ extra copies of a vertex and we get up to $\sigma (\rho -1)(\tilde{n}-2)$ triangles from the clique, if an edge $e(v_i,v_j) \not \in K$ s.t. $v_i \in K$ and $v_j \not \in K$ is assigned to partition $S_{k \not = l}$ it will not result in a missig triangle.
+
+For a replication factor $\rho > 1$ a fractionfo triangles are boun to be missed in k-way partitioning of the graph irrespective of the partioning strategy. The factor $\sigma$ is not central to the argument and gets ignored.
+
+## vertex replication factor
+
+A high vertex replication factor will cause higher number of triangle to be missed, since the clique has $\tilde n$ nodes and edge is adjacent to 2 vertices , the loss in total triangles due tro vertex replication is bouded by $((\rho -1)(\tilde{n}-2)(n/2))$ triangles at most i.e. $O((\rho -1)\tilde{n}^2)$ triangles are lost.
+Suppose $N(\tilde n)$ is the number of cliqus of size $\tilde n$ in thegraph, since the probability of anedge being present in the graph is $q$ and the cliques must contain all the edges all $O(\tilde{n}^2)$ must be presnt, the probability ofa clique of size $\tilde n$ is $q^{\tilde n^2}$  so the number ofcliques of size $\tilde n$ is $N(\tilde n) \approx O(|V|^{\tilde n} q^{\tilde n^2})$  and $O((\rho - 1)\tilde{n}^2N(\tilde n))$ triangles will be missied for al cliques of size $\tilde{n}$ due to k-way graph partioning with a replication factor $\rho$, the expected umber of total triangles missing in the graph $T_{miss}$ is then
+$$
+T_{miss}=\begin{equation}
+O(\sum_{s=3}^{\tilde n}((\rho -1)S^2N(s)))\approx O(\sum_{s=3}^{\tilde n}((\rho -1)s^2|V|^s{q^s}^2))\approx\frac{(\rho -1)|V|q}{q^4(1-q^2)^3}
+\end{equation}
+$$
+The total number of expected triangles is then 
+$$
+T_{tot}=\sum_{s=3}^{\tilde n}(^sC_3N(s))\approx O(\sum_{s=3}^{\tilde n}s^3N(s)) \approx \sum_{s=3}^{\tilde n}(^sC_3|V|^s {q^s}^2) \approx O(\frac{|V|q}{q^6(1-q^2)^4})
+$$
+Finnaly we can derive the fraction of missing triangles for $q << 1$
+$$
+\frac{T_{miss}}{T_{tot}}=O((\rho -1)q^2(1-q^2)) \approx O((\rho -1)q^2)
+$$
+The fraction of missing triangles is higher of a high replication factor in edge-balanced partioners, further a given replicationfactor thefraction of missing trinagles is more the graph is dense. The theory of grah partioning i.e. the retained comunities, can be improved due to the number of ranles preserved by improvinghte replication factor, so miniimzing replication factor and increasing triangle counts are not contradictory. but optimzing a vertex replication factor does not yield automatically the increased triangle count.
+
+# System architecture
+
+We use a leader machine and k-workers for a k-way partioning  wit the architecture below
+![[Pasted image 20260430154726.png]]
+
+While by default each worker is on a separate machine we can confiure multiple workers per machine. The lader receives an input stream of edges from an external source which is accessed thorugh a FIFO `ReaderQueue` from an external source which is accessed thorugh a FIFO reader queue by the leader. The leader partioning logic decides the partitionto which each edge should be assgine to and then sends that ege to the worker hosting such partition, the leader exploits concurrency usinga compute thread pool whose threads can access the read queue and in parallel decide on the placement of edges with high throughput.
+
+This can have some impact on the quality of partioning but this amortized across thelong stream of edges except adversarial scenarios, it also has k transport queues on per worker to send edges assigned to them asynchronously  the leaer than uses three datstructures a Bloom filter per partition, a Triangle map and a high degree map.
+
+Each worker will have a thread pool to handle the stream of edges asigned to it by the ader it addste received edges assigned to it by the leader it adds the recived edge ot the local partition maintained in-memory as an adjcency list, it also maintains a local triangle map data strucutre the number of threads in the leader computer and the owrker thread pools are configurable.
+
+## Processing workflow
+
+The reader queue is unbounded populated from the incoming edge stream, it is a thread safe java `ConcurrentQueue` and uses atomic operations allowing all the computer threads to concurrently remove the eges from the queue , eah thread indepednely esecutes the partioning heurstic using the local state information to assign the edge ot one of k partitions. 
+
+>>>>>>> Stashed changes
