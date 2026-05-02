@@ -158,4 +158,67 @@ Each worker will have a thread pool to handle the stream of edges asigned to it 
 
 ## Processing workflow
 
-The reader queue is unbounded populated from the incoming edge stream, it is a thread safe java `ConcurrentQueue` and uses atomic operations allowing all the computer threads to concurrently remove the eges from the queue , eah thread indepednely esecutes the partioning heurstic using the local state information to assign the edge ot one of k partitions. 
+The reader queue is unbounded populated from the incoming edge stream, it is a thread safe java `ConcurrentQueue` and uses atomic operations allowing all the computer threads to concurrently remove the eges from the queue , eah thread indepednely esecutes the partioning heurstic using the local state information to assign the edge ot one of k partitions. Once decided it might update the thread-safe state data deppending on the heuristic, the edge is insrted intothe resperctive transport queue for the partition and the compuyte thread moves on to read the next edge from the reader queue, multiple compute threads may be inserting into the same transport queue again requiring a concurrent queue. The transport thread removes an edge from its queue for its partition and sends it ot the works using an asynchronous RPC call, Apache thright's was used in fire and forget mode maintainnig an implicit receive queue.
+
+A thread in the worker pool is invoked when an edge arrives, and acquires the lock to update the local adjacency list for the partition it also calculates and updates the local triangle map for each edge maintaining the4 numnber of local tirangles that the edge participates in. The leader peridocially synchronoizes and upèdates its state information from the workers at aconfigurable interval of $\sigma_e$ edges. After processing $\sigma_e$ edges from the reader queue on of the compute thread serves as a coordinator for the sync, it pauses all compute threads after they finnish handling their current edge and inserts a sync message into the transport queue for all partitions, when the worker receives the sync message it pauses all the threads calculate the high-degree map for the local partition on-demand as the definiton of high-degree changes over time decided by the leader. The pre-computed triangle map and the high degree map aree sent ot the coordinator thread at the leader, once all workers respond the coordinator updates thea leader's triangle and h igh degree maps resumes all threads.
+
+These threads concurrent DSA and locks are dsegined sleected and socped to be fine-grained to minimized overhead an maximize concurrency that can benefit from many-core cpus. The choices help exploit data parallelism across edges at the leader across workers for different partitions and across edges wihtin a worker. The solution also leverages pipelining of the partioning logic,states updates and edge transfer with executon time per edge to $O(10 \micro s)$ and achieves high scalability.
+
+## Leader's states
+network communication overhad should be minimal for online stream processing, the leader takes decision using a local state but it also has liited memory so having the complete graph is no feasible and full traversal would also be too costly. There are many choices to maintain speed and quality
+### Bloom filters
+the vertex replication factor is a quality metric, whe n anew edge arrives to incident vertices may already be present in some partitions knowing which partitions helps the heuristic prioritize when deciding where to place the new edge and avoid additional replicas. Using a hash map takes $O(k|V|)$ but with bloom filters we can maintain one filter per partition and use it to check the presence of each vertex of an incoming edge, bloom filters ha ve a cosntatn time insertion and look up speeds their lookups have zero false negatives but a small false positive rate. For a given false positive rate and ocunt of entries in the filter the space requires is smaller htan the number of items stored for $n$ vertices inserted in a bloom filters and $f$ is the false positive rate then the size of a filter is $\frac{-n\ln(f)}{\ln(2)^2}$ bits. The filters are used as a map data structuers that given a vertex retrunes the set of workjers on whjich replicas may be present. Even using the heuristic under false positives partioning correctness is not violated.
+### Triangle map
+
+First we understand that sending an edge $e(v_i,v_j)$ $v_i$ and $v_j$ already form triangles the preserved tirangle count increases. Since the triangle is the smallest clioque possible and is present in all larger cliques if a vertex $v_i$  is part of one or more tirangles in a partiton $S_x$ it indicates a closely knit neighborhood around $v_i$ increasing the chance of community presence in its locality, if the vertex $v_i$ is part of a local community it will have more neighbors in the community rather than outside due to strong locality properties of dense communities and $v_j$ might belong ti that same community iwth high probability, thus sending $e(v_i,v_j)$ to partition $S_X$ can enhance its commmunity structure an cinrease chance ofg forming new local triangles.
+ 
+This is used to implement a "triangle map" data structure at the leader mapping vertices to list of parttition in which they form triangles. This forms a triangle in both these partitions the leader cannot determine if an input edge forms a triangle when placed on a partition it periodically syncs with the workers to get this, each worker updates its local trinagle map incoming for and edge  $e=\langle v_i,v_j \rangle$ 
+![[Pasted image 20260502142636.png]]
+In the figure we can see better the worker updateing its local triangle map, and notices the leader which itself hosts the global triangle map that cannot compute by itself.
+
+The worker threads perform set intesercation of the neighbors for $v_i$ and $v_j$ to check if the new triangles are formed taking $O(\min(deg(v_i),deg(v_j)))$ a single edgre can form multiple local triangles, so when the leader send a tirangle map sync request edges each worker returns only the newly added entries to tis triangle map and the leader updates its map. 
+
+### High degree map
+Power law graphs have a small fraction of vertices with very high degrees, so sending and edge $e(v_i,v_j)$ with $v_i$ having an high degree to the partition containing $v_i$ increases the total preserved triangle count $\tau$. 
+
+SOTA partioners like HDRF and DBH replicate high degree vertices to achieve better load balalncing on the contrary not replicating high-degree vertices increases $\tau$. 
+Using a high-degree map DSA on the leader mapps high degree vertexes to the partitons on which it has a high-degree and their actual degree, a vertex $v$ is a high-degree in partition if $d(v) > \eta \delta$  with $d(v)$ being the local degree on that partition and $\delta=|E|/|V|$  is the current average degree for all vertices seen at the leader and $\eta >1$ is a constant, usually set at 2. A vertex that weas once a high degree may later not mett this threshold ifthe average degree of the graph increases. While the leader can independtly computer $\delta$ from the input stream it solitics the high degree vertices from each worker during its sync by sending it the current $\delta$ each worker recomputes afresh and returns the HD vertices that meet the threshold along with their actual degree in the runs from the authoer only $4\%$ of vertices are actual HD, aside from the sync interval of $\sigma_e$ the leader sends an additonal HD sync request when $\delta$ chnages by 1.0 in the leader.
+
+## Load balancing
+Adding more edges to a partition incerases the chance of finding more local trinagles and reduces vertex replication but this can also skew the load on a partition and violete th ege balancing load, this is handled by defining a dynamic load threshold for each worker that incrementally grows as edges arrive.
+The $(1\pm \epsilon)$ imbalance factor allowed on the final partion capacity of $m/k$ to trade off partiton quality and load balancing, the leader has a simple count of the edges sent to each worker it also maintains the current *load threshold* 
+$$
+\lambda_l,\lambda_h \in (0,(1+\epsilon)\frac{m}{k}]
+$$
+with $\lambda_h \geq \lambda_l$  with $\lambda_l$ being a pessimistic lower limit and $\lambda_h$ being the optimistic limit for the worker. A worker's laod count must stay below the pesimisting limit while assigning a new edge to a worker which does not contain any of tis incident verticces, this avoids skewing the partition load if the qualitative benefit of placing the edge on a partition is low. We allow the higher limit $\lambda_h$ when eithe or both teh vertices of an input edge are already present on it. Thus we use a relaxes threshold if it improves the chances of finding local triangles by selecting the best partiton despite a skew. both $\lambda_l$ and $\lambda_h$ are increased by a step size of $\xi_l$ and $\xi_h$ by the leader for all partitions when all have exhausted their thresholds.
+
+## Partioning heuristics
+
+There are heuristics using the various state data structures, the leader uses Bloom filters, traingle maps and high degree map to make a partioning decision when $e(v_1,v_2)$ arrivesm each of its two incident vertices may have an entry in the threee maps meaing $BF(v_1)$,$BF(v_2)$,$T(v_1)$,$T(v_2)$, $H(v_1)$ and $H(v_2)$ .
+
+- When $BF(v_1) \cap BF(v_2) \not = \emptyset$ the partitions that two vertices are presetn on may overlap and we can aboid creating new replicas by colocating them
+- if $T(v_1) \cap T(v_2) \not = \emptyset$ and/or $H(v_1) \cap H(v_2)=\emptyset$ verttices are also part of a trinagle or have a high degree in the overlapping partitions this can improve their triangle conservation.
+The used states also form a basis for each heuristic, the priorites are:
+1. enhacing the community strucutre
+2. avoiding replication of vertices
+3. balancing of edges across partitions
+Partitions overlap in the T-map are prefred over H-map as it indicates future potential to form triangles.
+
+The core heuristic is the one using all of them called $BTH$ and is represented in algorithm below
+![[Pasted image 20260502161901.png]]
+it uses six decision point for a given edge $\langle v_1,v_2 \rangle$:
+- test if the T-maps intersects and retrun the least loaded
+- if they form triangles but partitions don't overlap check if the triangle partitions of a vertex intersect with the high-degree partitions of the other.
+	- if multiple partitions match prioritize those also having a high-degree vertex giving preference to the partitions with a higher sum-of-degrees for the vertices
+	- Ties are broken marking the first partition a vertex forms a triangle on as its home partition as is used as default to improve co-location
+- If tirangle partitions are not present select from overlapping high-degree partitions for the vertices 
+- if this also fails we pick common partitions in their $BF$ to avoid replication
+- if the $BF$ partitions don't intersect we pick the least loaded of the partitions having either of the vertices which may cause the other vertex to replicate 
+- If all tests fail send the edge to the least loaded partition
+Anyway when a partition high and low thresholds are reached the partition is removed rom consideration.
+
+For a verteix $v_i$ an entry in a T-map or H-map contains a subet of partition IDs, so $T(v_i)$ and $H(v_i)$ can contain at most k-values, partioning heuristics calculate union an intersections on the subject to hoose one partition the time complexity per edge is $O(k)$ .
+
+For the Bloom filter & T-map approach is the same but we include the T-map of the leader's state but not the H-map  and uses only T-map using H-map as if empty.
+
+Bloom filter only uses only only $BF$ and offers a simple baseline, it only avoids vertex replication by colocating edges on partitions that may already have replicas of both vertices present in $BF(v_1) \cap BF(v_2)$ the least loaded partition these is chosen it just offers fast decisions using a compact state  like PowerGraph.
