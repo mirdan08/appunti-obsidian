@@ -69,12 +69,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tesi/TriParts.md",
+                "file": "Tesi/RIPPLE++.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TriParts"
+              "title": "RIPPLE++"
             }
           }
         ],
@@ -135,7 +135,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "334d59c5a726196e",
@@ -231,14 +232,14 @@
       "bases:Crea nuova Base": false
     }
   },
-  "active": "fdf1eec148f323a1",
+  "active": "a095921d1c4d01b6",
   "lastOpenFiles": [
+    "Tesi/TriParts.md",
     "Tesi/images/Pasted image 20260430154726.png",
     "Tesi/images/Pasted image 20260429144242.png",
     "Tesi/Riunioni e note/Papers scelti.md",
     "DHL/Structure-based approaches for PPI.md",
     "Tesi/Helios.md",
-    "Tesi/TriParts.md",
     "Tesi/images/Pasted image 20260429113359.png",
     "Thesis modeling.md",
     "DHL/Struct-ML approaches.md",
@@ -254,7 +255,6 @@
     "Tesi/images/Pasted image 20260403155737.png",
     "DHL/images/Pasted image 20260414153254.png",
     "DHL/images/Pasted image 20260414153245.png",
-    "DHL/images/Pasted image 20260414152940.png",
     "DHL/images",
     "Senza nome.md",
     "DHL",

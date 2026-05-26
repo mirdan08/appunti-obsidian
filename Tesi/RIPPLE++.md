@@ -73,9 +73,9 @@ All these results are encompassed and analyzed using all the aggregations functi
 # System Design
 RIPPLE++ supports trigger-based applications that need to be notified of changes to predictions of any graph entity upon receiving updates, as soon as possible. It uses incremental computation over a batch of updates with a smart delta of prior embeddings to avoid redundant computations. It works in both  single-machine and distributed execution settings to accomodate larger and smaller sizes of graphs.
 
-The system starts from iitially calculate embeddings for all graph entities prior to new updates streaming in, specifically:
+The system starts from initially calculating embeddings for all graph entities prior to new updates streaming in, specifically:
 - for each vertex $u \in V$ its root level features $h_u^0$ and intermediate features $h_u^l.l=1,\dots,L$  
-- we have the initial embeddings matrices $H_{T_0}^l$ at layer $l$ are generated using the model itslef and the current labels of all vertices can be extracted from the last layer embeddings i.e. $H_{T_0}^L$ and servesd as a starting point.
+- we have the initial embeddings matrices $H_{T_0}^l$ at layer $l$ are generated using the model itself and the current labels of all vertices can be extracted from the last layer embeddings i.e. $H_{T_0}^L$ and served as a starting point.
 
 The system operates in two ways completely incremental and hybrid incremental.
 
@@ -102,7 +102,7 @@ In the image we see it bery well, adding a simple edge $(C,A)$ entails a cascade
 In this case the various operations behave differently
 - Edge addition alters aggregated embedding of the target vertex and as we have seen causing the cascade of computations.
 - Edge delition will affect the embeddings as the addition does, the same computation happens as before with one less neighbor.
-- Vertex addition does not trigger any updates aside from its own embeddings, it doesn't any edge connection so no other nodes aside from itself are affectd. 
+- Vertex addition does not trigger any updates aside from its own embeddings, it doesn't have any edge connection so no other nodes aside from itself are affectd. 
 	- Vertices can be created as a part of an edge addition, thus if $(u,v)$ is added and the sink exists then we trigger  again all the cases from before if instead the sink does not exist then there no edges to hop to and only the sink itself updates its own embeddings, no cascade of updates.
 - Vertex delition makes all edges connected to it disappear all the deleted out neighborhood is affected up to L hops, the neighborhoods might be very large so this can become the most expensive operation.
 - Vertex feature update affters the out-neighborhood similarly to vertex delition, it impacts all out neighbors of $u$ when $h_u^0$ changes creating a casce of $L$-hops.
@@ -153,6 +153,8 @@ $$
 \alpha_{uv}^l=\frac{\exp(z_{ub}^l)}{\sum_{u \in N_{in}(v)} \exp(z_{uv}^l)}, z_{uv}^l=a^l \cdot (W^lh_u^l||W^lh_v^l)
 $$
 where $a^l$ and $W^l$ , the coeffient $\alpha_{uv}^i$ depends jointly on embeddings of both source and sink vertices, changes to $h_v^l$ will trigger changes to downstream embeddings $h_v^{l+1}$ and reduces to recomputing thus losing some efficiency. However for all out-neighbors of $v$ at hop $(l+1)$ not yet been updated embeddings can be updated incrementally.
+
+Note: if $h_v^l$ changes it means that all it's neigbors at hop $l+1$ will change i.e. all its neighborhood has to be recomputed hence the reduction to full recomputing.
 ![[Pasted image 20260331151447.png]]
 Here we see it better  whatr have said, the number of recomputations is higher for GAT w.r.t GCN-MAX, here we can analyze better how the incremental recalculation is done here $D$ changes thus we see how the change spreads across layers, if we adapt the updating rule here for $D$ we get
 $h_D^{l+1}=(\alpha_{AD}^lh_A^l+\alpha_{CD}^lh_C^l)=\frac{\sum_u \exp(z_{uD}^l)h_u^l}{\sum_u \exp(z_{uD}^l)}$ . Now if you look at what happens when updating $h_C^{0-}$ to $h_C^{0}$  in $h_D^1$ only $\exp(z_{CD})h_C^0$ and $\exp(z_{CD}^0)$ are affected we just exclude them by sending two informations instead of one, for numerator and denominator
@@ -163,9 +165,20 @@ m_{CD}^1=\langle (\exp(z_{CD}^{0-})h_C^{0-}-\exp(z_{CD}^{0})h_C^{0}),
 $$
 This is an hybrid-incremental approach for GAT, any vertex $u$ that appears at hop $l$ of the propagation tree performs recomputation from hop $(l+1)$ onward, for vertices that are not yet updated we use incremental, like in the image above.
 
+For commodity we derive the general update rule using the definitons of $h_v^{l+1},\alpha^l_{uv}$ and $z^l_{uv}$ 
+$$
+h_v^{l+1}=\sum_{u \in N(v)} \alpha_{uv}^lh_u^l= \sum_{u \in N(v)}(\frac{\exp(z_{uv}^l)}{\sum_{u \in N(v)} \exp(z_{uv}^l) })h_u^l=\frac{ \sum _{u \in N(v)}\exp(z_{uv}^l)h_u^l}{\sum_{u \in N(v)}\exp(z_{uv}^l)}
+$$
+of course then we the partial update message for such a summation is sent we just need to cancel out the stale embeddings from both summation so the generic partial update message is defined as 
+$$
+m_{uv}^{l+1}=\langle (\exp(z_{uv}^{l-})h_u^{l-}-\exp(z_{uv}^{l})h_u^{l}) , (\exp(z_{uv}^{l-})-\exp(z_{uv}^{l})) \rangle
+$$
+for each embedding we keep the separated summations and add these deltas to make  a partial update.
+
+
 ### Monotonic aggregations
 
-Monotonic aggregations like $\max,\min$ cannot be updated with deltas.
+Monotonic aggregations like $\max,\min$ cannot be updated with deltas, as the update using local deltas is only apparent when it reaches the current hop as in the example below.  
 ![[Pasted image 20260331153433.png]]
 Here we see an example, a change here is apparant only when the current hop is reached and recomputation is needed only if an update invalidates the current extrema's contribution. The hybrid incremental approach is extended here for this kind of function, a message sent from $u$ to $v$ , so $m_{uv}^{l+1}$ at hop $l+1$ contains both the new $l$-hop embedding and the old embedding of $u$ meaning $m_{uv}^{l+1}=\langle h_u^{l-},h_u^l \rangle$ is what $v$ receives.
 A sink vertex at hop $l+1$ upon receiving such message will do one of three things:
@@ -258,11 +271,24 @@ so we have
 - GinConv with sum $(GI-S)$
 
 
-a random 20% of the vertices and edges are removed, the remaining 80%serves as the initial snapshot of the graph. on this 80% the models are trained and embeddings extracted that are the intial state of inference. The graph is partioned using METIS into the rquired number of parts and load the local subgraph their vertifes and halko vertices in memory.
+They used the Arxiv,Products and Papers100M from the ogbn benchmarks. While reddit is present in the torch_geometric library from the original Graph attention Networks paper.
+Note that Papers100M is too big and is used only in the distributed setting.
+From each graph 20% of vertices and edges are randomly removed the remaining 80% is used as the intitial graph snapshot to extract the embeddings and form the initial state, for the distributed setup the split happens with METIS to create the needed subgraphs. The probability of finding one of the 5 update types happens like in the facebook workload:
+
+- a link is added with probability $\sim 9\%$ , and removed with probability $\sim 3\%$, and updated with probability $\sim 8\%$ and requested with probability $\sim 0.5\%$ and a list of link is request with probability $\sim 50 \%$
+- a node is requested with probability $\sim 13 \%$, it's added with probability $\sim 2.6\%$, updated with probability $\sim 7.3\%$ , and removed with probability $\sim 1\%$
+
+For the single-machine they generated:
+- 200k updates for Arxiv
+- 20M events for Products Reddit
+In the distributed setting:
+- 5M for papers.
+Note that given the probabilities additions exceed deletions thusthe the graph size grows or is unchanged.
 
 In the paper they use DGL 
 - vert-wise infernce on CPU called $\text{DNC}$ and CPU+GPU $\text{DNG}$ 
 - its layer-wise recompute strategy $\text{DRC}$ and CPU+GPu $\text{DRG}$, we have that $\text{DRC}$ and $\text{RC}$running on CPU are the most competitive baselines.
+
 ### Single machine performance
 ![[Pasted image 20260331173936.png]]
 ![[Pasted image 20260331174809.png]]
