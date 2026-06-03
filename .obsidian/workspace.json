@@ -20,8 +20,23 @@
               "icon": "lucide-file",
               "title": "RIPPLE++"
             }
+          },
+          {
+            "id": "5dff5b7733cf71d6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Tesi/RIPPLE++.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "RIPPLE++"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -176,8 +191,10 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "bf498376d1469ac8",
+  "active": "5dff5b7733cf71d6",
   "lastOpenFiles": [
+    "conflict-files-obsidian-git.md",
+    "Tesi/RIPPLE++.md",
     "Tesi/The current landscape of scalable distributed dynamic graph processing.md",
     "Tesi/Survey su Dynamical graph processing.md",
     "Tesi/Drawing 2026-06-01 18.13.59.excalidraw.md",
@@ -185,7 +202,6 @@
     "2026-06-01.md",
     "Senza nome.base",
     "Senza nome.canvas",
-    "Tesi/RIPPLE++.md",
     "Tesi/Thesis modeling.md",
     "README.md",
     "Homepage.md",
@@ -213,7 +229,6 @@
     "Tesi/Riunioni e note/Senza nome.md",
     "DHL/Structure-based approaches for PPI.md",
     "Tesi/Riunioni e note/Riunione 02-04-2026.md",
-    "conflict-files-obsidian-git.md",
     "DHL/images",
     "DHL",
     "Tesi/Riunioni e note",
