@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "44cb5e237b1b47d6",
+        "id": "ff43f944878294d1",
         "type": "tabs",
         "children": [
           {
-            "id": "411f72ffc850c4c2",
+            "id": "bf498376d1469ac8",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tesi/TriParts.md",
+                "file": "Tesi/RIPPLE++.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TriParts"
+              "title": "RIPPLE++"
             }
           }
         ]
@@ -172,56 +172,58 @@
       "daily-notes:Apri nota del giorno": false,
       "templates:Inserisci modello": false,
       "command-palette:Apri riquadro comandi": false,
-      "bases:Crea nuova Base": false
+      "bases:Crea nuova Base": false,
+      "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "411f72ffc850c4c2",
+  "active": "bf498376d1469ac8",
   "lastOpenFiles": [
+    "Tesi/The current landscape of scalable distributed dynamic graph processing.md",
+    "Tesi/Survey su Dynamical graph processing.md",
+    "Tesi/Drawing 2026-06-01 18.13.59.excalidraw.md",
+    "Tesi/Canvas.canvas",
+    "2026-06-01.md",
+    "Senza nome.base",
+    "Senza nome.canvas",
+    "Tesi/RIPPLE++.md",
+    "Tesi/Thesis modeling.md",
+    "README.md",
+    "Homepage.md",
+    "DHL/Riunione con Sara per DHL 21-04.md",
+    "Senza nome 1.md",
+    "Senza nome.md",
+    "Tesi/TriParts.md",
+    "Tesi/images/Pasted image 20260516155003.png",
+    "Tesi/images/Pasted image 20260516144932.png",
+    "Tesi/images/Pasted image 20260516120154.png",
+    "Tesi/images/Pasted image 20260516120151.png",
+    "Tesi/images/Pasted image 20260516120147.png",
+    "Tesi/images/Pasted image 20260516110415.png",
+    "Tesi/Helios.md",
+    "Tesi/GSM.md",
+    "Tesi/Riunioni e note/Papers scelti.md",
+    "Tesi/Riunioni e note/Riunione 2-03-2026.md",
+    "Tesi/Senza nome/Presentazione 2 aprile 20126.md",
+    "Senza nome 2.md",
     "Tesi/images/Pasted image 20260502161901.png",
     "Tesi/images/Pasted image 20260502142636.png",
     "Tesi/images/Pasted image 20260430154726.png",
-    "Tesi/Riunioni e note/Papers scelti.md",
-    "Thesis modeling.md",
     "Tesi/images/Pasted image 20260429144242.png",
-    "Tesi/images/Pasted image 20260429113359.png",
-    "Tesi/TriParts.md",
-    "Riunione con Sara per DHL 21-04.md",
-    "Tesi/Riunioni e note/Riunione 2-03-2026.md",
     "DHL/Struct-ML approaches.md",
-    "Tesi/Senza nome/Presentazione 2 aprile 20126.md",
-    "DHL/Riunione con Sara per DHL 21-04.md",
-    "Senza nome 2.md",
     "Tesi/Riunioni e note/Senza nome.md",
     "DHL/Structure-based approaches for PPI.md",
     "Tesi/Riunioni e note/Riunione 02-04-2026.md",
     "conflict-files-obsidian-git.md",
-    "Senza nome.md",
-    "Senza nome 1.md",
-    "DHL/images/Pasted image 20260414153254.png",
-    "DHL/images/Pasted image 20260414153245.png",
-    "DHL/images/Pasted image 20260414152940.png",
-    "DHL/images/Pasted image 20260414152751.png",
-    "DHL/images/Pasted image 20260414152926.png",
-    "DHL/images/Pasted image 20260414152803.png",
     "DHL/images",
     "DHL",
-    "Tesi/Helios.md",
-    "Tesi/GSM.md",
     "Tesi/Riunioni e note",
-    "Tesi/RIPPLE++.md",
     "Tesi/images",
     "Tesi/Senza nome",
     "SDC/Scalable Distributed Computing.md",
-    "Homepage.md",
-    "README.md",
     "DM/Paper presentation.md",
-    "Untitled.md",
-    "smart application report for milestone 1.md",
-    "SDC - temporaneo.md",
     "Tesi",
     "SDC",
     "CL/NeurIPS-2020-bootstrap-your-own-latent-a-new-approach-to-self-supervised-learning-Paper.xopp~",
-    "RB/images",
-    "RB"
+    "RB/images"
   ]
 }
