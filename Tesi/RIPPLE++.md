@@ -1,5 +1,9 @@
-Real world graphs are dynamic with frequent updates to structures and features. for GNNs this is very problematic, existing *vertex-wise* and *layer-wise* approaches are redundant, with large neighborhood travesarls and with high communication costs especially in the distributed setting. Here approximated neighborhoods by sampling are not considered we want deterministic embeddings, which can limit low latency inference.
-RIPPLE++ tries to address this by creating a model that incrementally propagates into affected neighborhoods using GNNs semantics. It accomodoates all common graph updates like addition/deletion of edge\ and addition/deletion/update of vertexes. Both on single machines and distributed deployments.
+Real world graphs are dynamic with frequent updates to structures and features. for GNNs this is very problematic, existing *vertex-wise* and *layer-wise* approaches are redundant, with large neighborhood traversals and with high communication costs especially in the distributed setting. Here approximated neighborhoods by sampling are not considered we want deterministic embeddings, which can limit low latency inference.
+RIPPLE++ tries to address this by creating a model that incrementally propagates changes into affected neighborhoods using GNNs semantics. It accomodoates all common graph updates like addition/deletion of edges and addition/deletion/update of vertexes. Both on single machines and distributed deployments.
+
+On single machines it achieves 56K updates/sec for Arxiv which is sparse (169K vertices and 1.2M edges) and 7.6K updates/sec on denser graphs like Products (2.5M vertices and 123.7 M edges) latency of 0.06 ms to 960 ms and outperforms the SOTA by 2.2x to 24x on throughput. 
+
+On distributed settings we get 25x higher throughput and 20x lower communication costs w.r.t. full recomputation baselines.
 # GNNs inference on static to dynamical graphs
 GNNs are very expressive when working on large-scale graphs with million to billions of vertices and edges.  In this case inference for a single node, say $D$ in the image below, requires calculated the L-hop neighborhood of the target vertex, called the "computatioal graph", to generate L-layer embeddings which are what we care about. 
 ![[Pasted image 20260331092157.png]]
@@ -240,7 +244,7 @@ For edge events we discuss a locality aware strategy, first we see the algorithm
 - If only one vertex exists, $v_2$ m the other $v_1$ is new and is thus an addition. If the incident vertices of $v_{12}$ hav a high in-degree co-locating the edge with the vertex enhanced locality and reduces inter-worker communication for the propagation tree. We maintain a High in degree set, noted $HD$, at the server for this. iv $v_2 \in HD$ then we place $v_{12}$ in its partition otherwise we pick the partition with the least load
 - if non of them exist we assign them to the least loaded partition to balance the vertex load
 
-The HD set contains vertices with a degree greater than $2 \times (\textbf{average graph degree})$,.
+The HD set contains vertices with a degree greater than $2 \times (\textbf{average graph degree})$, moreover the hash-based routing has constant $O(1)$ lookup time while the HD set has a complexity of $O(V)$ to refresh the HD set and $O(V)$ space to track vertex membership
 ### Update processing
 upon receiving a batch of updates a worker applies the topology and featrues to its local partition and embeddings, depending on the update it prepares message of the hop-1 vertices,for halo vertices the mesasges ar combined in a local mailbox for the halo across all propagation trees at hop-0 once all vertices in this hop are processed by the worker the combined message are sent to matching vertices on remote workers before the next hop starts.
 

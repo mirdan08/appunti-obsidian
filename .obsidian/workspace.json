@@ -61,9 +61,23 @@
               "icon": "git-pull-request",
               "title": "Diff View (RIPPLE++)"
             }
+          },
+          {
+            "id": "42efb9d123638d6d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "conflict-files-obsidian-git.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "conflict-files-obsidian-git"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -216,31 +230,39 @@
       "bases:Crea nuova Base": false
     }
   },
-  "active": "a0999a0ae64e465b",
+  "active": "42efb9d123638d6d",
   "lastOpenFiles": [
+    "conflict-files-obsidian-git.md",
+    "Tesi/images/Pasted image 20260516155003.png",
+    "Tesi/images/Pasted image 20260516144932.png",
+    "Tesi/images/Pasted image 20260516120154.png",
+    "Tesi/images/Pasted image 20260516120151.png",
+    "Tesi/images/Pasted image 20260516120147.png",
+    "Tesi/images/Pasted image 20260516110415.png",
+    "Tesi/Thesis modeling.md",
+    "Tesi/The current landscape of scalable distributed dynamic graph processing.md",
+    "Tesi/Survey su Dynamical graph processing.md",
+    "Tesi/Drawing 2026-06-01 18.13.59.excalidraw.md",
+    "Tesi/Canvas.canvas",
+    "Senza nome.canvas",
+    "Senza nome.base",
+    "DHL/Riunione con Sara per DHL 21-04.md",
     "Tesi/Riunioni e note/Papers scelti.md",
     "Tesi/Riunioni e note/Dataset  comparison.md",
     "Tesi/Riunioni e note/images/Pasted image 20260527140817.png",
     "Tesi/Riunioni e note/images",
     "Tesi/RIPPLE++.md",
     "Tesi/images/Pasted image 20260527111843.png",
-    "conflict-files-obsidian-git.md",
     "Tesi/images/Pasted image 20260502161901.png",
     "Tesi/images/Pasted image 20260502142636.png",
     "Tesi/TriParts.md",
-    "Tesi/images/Pasted image 20260430154726.png",
-    "Tesi/images/Pasted image 20260429144242.png",
     "DHL/Structure-based approaches for PPI.md",
     "Tesi/Helios.md",
-    "Tesi/images/Pasted image 20260429113359.png",
     "Thesis modeling.md",
     "DHL/Struct-ML approaches.md",
     "Riunione con Sara per DHL 21-04.md",
     "Senza nome 2.md",
     "Senza nome 1.md",
-    "Tesi/images/Pasted image 20260407185827.png",
-    "Tesi/images/Pasted image 20260407150150.png",
-    "Tesi/images/Pasted image 20260407122823.png",
     "DHL/images",
     "Senza nome.md",
     "DHL",
@@ -254,14 +276,8 @@
     "SDC/Scalable Distributed Computing.md",
     "Homepage.md",
     "README.md",
-    "DM/Paper presentation.md",
-    "Untitled.md",
-    "smart application report for milestone 1.md",
-    "SDC - temporaneo.md",
-    "ricerca AI hat raspberry.md",
     "Tesi",
     "SDC",
-    "CL/NeurIPS-2020-bootstrap-your-own-latent-a-new-approach-to-self-supervised-learning-Paper.xopp~",
-    "RB/images"
+    "CL/NeurIPS-2020-bootstrap-your-own-latent-a-new-approach-to-self-supervised-learning-Paper.xopp~"
   ]
 }
