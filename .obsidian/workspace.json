@@ -4,20 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "ff43f944878294d1",
+        "id": "a1d8fa46a1192878",
         "type": "tabs",
         "children": [
           {
-            "id": "bf498376d1469ac8",
+            "id": "aa363c6f548b9ce5",
             "type": "leaf",
             "state": {
-              "type": "diff-view",
+              "type": "markdown",
               "state": {
-                "file": ".obsidian/workspace.json",
-                "staged": false
+                "file": "Tesi/Survey on distributed graph algorithms on massive graphs.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "git-pull-request",
-              "title": "Diff View (workspace.json)"
+              "icon": "lucide-file",
+              "title": "Survey on distributed graph algorithms on massive graphs"
             }
           }
         ]
@@ -52,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": " ",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -60,7 +61,7 @@
                 "sortOrder": "alphabetical"
               },
               "icon": "lucide-search",
-              "title": "Search"
+              "title": "Ricerca"
             }
           },
           {
@@ -73,7 +74,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -175,17 +177,18 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "bf498376d1469ac8",
+  "active": "aa363c6f548b9ce5",
   "lastOpenFiles": [
+    "Tesi/Survey su Dynamical graph processing.md",
+    "Tesi/Survey on distributed graph algorithms on massive graphs.md",
+    "Senza nome.canvas",
+    "Senza nome.base",
+    "Tesi/Drawing 2026-06-01 18.13.59.excalidraw.md",
+    "Tesi/Canvas.canvas",
     "conflict-files-obsidian-git.md",
     "Tesi/RIPPLE++.md",
     "Tesi/The current landscape of scalable distributed dynamic graph processing.md",
-    "Tesi/Survey su Dynamical graph processing.md",
-    "Tesi/Drawing 2026-06-01 18.13.59.excalidraw.md",
-    "Tesi/Canvas.canvas",
     "2026-06-01.md",
-    "Senza nome.base",
-    "Senza nome.canvas",
     "Tesi/Thesis modeling.md",
     "README.md",
     "Homepage.md",
