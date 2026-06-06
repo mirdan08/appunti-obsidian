@@ -291,19 +291,27 @@ Note that given the probabilities additions exceed deletions thusthe the graph s
 
 In the paper they use DGL 
 - vert-wise infernce on CPU called $\text{DNC}$ and CPU+GPU $\text{DNG}$ 
-- its layer-wise recompute strategy $\text{DRC}$ and CPU+GPu $\text{DRG}$, we have that $\text{DRC}$ and $\text{RC}$running on CPU are the most competitive baselines.
+- its layer-wise recompute strategy $\text{DRC}$ and CPU+GPU $\text{DRG}$, we have that $\text{DRC}$ and $\text{RC}$running on CPU are the most competitive baselines.
 
 ### Single machine performance
 ![[Pasted image 20260331173936.png]]
 ![[Pasted image 20260331174809.png]]
 RIPPLE++ consistently beats the baseline and DGL's version.
-- increasing $bs$ gves minimal performance beenfits for $\text{DRC}$
+- increasing $bs$ gives minimal performance benefits for $\text{DRC}$
 - $(GC-W)$ has lower performance compared to pure incermenatal workloads
 - The throughput speedup of RIPPLE over $\text{RC}$ decreases as $bs$ increases.
-// todo
-
+- GA-A is very bad w.r.t. its counterparts
+- for GC-X we can't say the same thing and performs well
+![[Pasted image 20260527111843.png]]
+- Increasing depth makes inference worse exponentially
+- GC-w goes exponentially worse as the number of layers ncreases but for $100 \ge bs$ it gets better agains
+- DRC is almost always the lowest but doesn't suffer too much changes in performance
+- RP gets closer to RC for larer $bs$ 
 ### Distributed performance
 Here RIPPLE++ is compared against $\text{RC}$ , DistDGL does not allow online updates and Inkstream does not support distributed execution.
 ![[Pasted image 20260331175627.png]]
-Scalability study w.r.t number oif partitions
+Scalability study w.r.t number of partitions for ripple
+
 ![[Pasted image 20260331180009.png]]
+
+
