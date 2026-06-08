@@ -102,4 +102,35 @@ To minimize communication overhead the subgraph centric approach is widely adopt
 
 using an approximate k-core decomposition algorithm impsing an iteration limit it is demonstrated that for $\gamma >2$ we only need $\lceil \log{n}/{\log(\gamma / 2)} \rceil$   iterations to reach an appeoximate core value for all vertices at most $\gamma \times \text{(actual value)}$ , in each iterations it uses multiuple thresholds to expedite the process and removes verttices whose deggree falls below the highest thresholds morevoer each vertex falls below the highest threshold. each vertex communicates only weith a specific subset $\Lambda$ which reduces the communication volume to $\log_2 |\Lambda|$ .
 
-The k-truss is a subgraph where each edge is part of at least $(k-2)$ triangles , as fore k-core iteratively we delete edges that are part of fewer than $(k-1)$ triangles
+The k-truss is a subgraph where each edge is part of at least $(k-2)$ triangles , as fore k-core iteratively we delete edges that are part of fewer than $(k-1)$ triangles until convergence is reached listing triangles takes at most $O(m^{1.5})$. Also this algorithm is very difficult to parallelize so instead we split it into two phases deleting and updating to parallelize them. ANother approach uses a triangle complete subgraph for each vertex to enchnace the k-truss algorithm afficiency within its partition to minimize communication during triangle counting.
+
+For this problem we also dwelve into load balancing KTMiner first places all vertiices and their neighbor list it reorganizes and redistributes all the vertices to enhance efficiency by precomputing neighbor lists for each vertex an its neighbors so that triangles can be calculated locally.
+
+## Maximal cliqye
+Eacg vertex is connected to others and cannot be expanded by adding another vertex. enumerating the amximal cluqes is a local task and allowing each vertex to independelty particpate without requiring intermediater results from oterhs. This feature makes it suitable for parallel processing, the complexity in time is at most $O(3^{n/3})$ in the worst case with $n$ vertices.
+
+subproblem sizes are non uniform introducing a skew in the workload balance. For workload balancing we can initiate the process by sorting vertices using : degeneracy ordering,degree ordering and number ordering. Following this the algorithm distributes the neighbor lists for each vertex, specifically a vertex $v$ and its neighbors list are allocated to the machine repsonsible for processing $v$ , if $u$ appears after $v$ in the ordering then the information about $v$ is also transmitted to the machine that processes $u$.
+
+# Traversal
+
+This is a very broad topic to uncover structural information of the graph, each traversal algorithm serves specific purposes with global update and synchronization.
+## BFS
+
+Here a vertex becomes active only upon activation and matinatning load balance is quite difficult, BFS-4K uses a dynamic thread schedule strategy for child kernels to effectrively balance the workload, a delegate based approach involves assigning delegates to high-degree vertfcies in different machines this method ensures that access to these vertices primarily involves local communication .
+ and reduce reliance on global communication. 
+To address the communication overhead, the solution is to mask the vertices and mask them from future iterations. BFS can be optimized based on its stages to further reduce the overhead. When few vertices are visited use a poush model then when we have much more use a pull model.
+
+## Single Source Source Past
+aims to find the shortes path from a source vertex to all others, the literature focuses on weighted graphs. While ther Bellman-Ford and Dijkstra algorithms are hard to paralleliza there four majhor methodologies to implement SSSP in distributed envionemtns:
+- Subgraph SSSP: apply dijkstra on subgraphs within a distributed framework and exchagne distance message between aprtitions
+- $\Delta$-stepping: operarttes by selccting vertcies within a specific distance range denoted by $[k\Delta ,(k+1)\Delta)$ this prioritizes the relaxation of shorter edgefs falling below the threolds $\Delta$ until reaching convergence
+- Skeleton: these algorithms offer faster processing with approximation by constructing a skeleton graph to compute hopstes and expedite finding the shortest paths adding as shortcuts into the original graph.
+- Transshipment: generalize a SSSP task modeled as linear programming or linear oblivious oruting to apprximation distances
+Skeleton based ones reach higher parallelism, in these algorithms the parllelism depends on the hopsset quality and approximate hopset with a shorters hopdistance can be used. in CFR algorithms we can have a tradeoff parameters to balance hopset distance. a two-level skeleton approach which constructs an additonal skeleton atop the orignal achieves even greate efificency closing theroitical limits. In the context of optimizing load imbalance delat stepping algorithms killfully integrate bellman ford dijkstra  for distributed enrivonments. But they are higly susceptible to load imbalances especially for high-degree vertices processed simultaneously keadubg ti excessive communications. A practical solution is to distributed edges across different machines to update long edges instead of transmitting sparse pairs of delayed distance messages a more efficient approach is to aggregate these as a dense distance vector
+
+# Pattern matching
+## Triangle counting
+two categories of algorithms:
+1. List-based which use traversing on adjcency lists of two vertices to identify common neighbors
+2. Map-based use auxiliary data structures to maintain each vertex adjacency with vertex checking if it's neighbors appear in auxiliay structures of other niegghbors
+Load balancing is problematic 
